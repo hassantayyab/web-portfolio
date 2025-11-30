@@ -1,36 +1,126 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio Website
+
+A modern, dark-themed portfolio website built with Next.js 15, Tailwind CSS v4, and Shadcn UI.
+
+## Features
+
+- **Bento Grid Home Page**: A visually striking 100vh/100vw bento grid layout
+- **Dark Mode**: Elegant dark theme with custom color palette
+- **Responsive Design**: Fully responsive across all devices
+- **Animations**: Smooth animations using Framer Motion
+- **Command Palette**: Quick navigation with Cmd+K
+- **Contact Form**: Integrated contact form with Resend email
+- **SEO Optimized**: Full metadata, sitemap, and structured data
+- **Cursor Effects**: Subtle cursor glow effect on desktop
+
+## Tech Stack
+
+- **Framework**: Next.js 15 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS v4
+- **UI Components**: Shadcn UI
+- **Animations**: Framer Motion
+- **Forms**: React Hook Form + Zod
+- **Email**: Resend
+- **Icons**: Lucide React
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
+- Node.js 18+
+- npm or pnpm
+
+### Installation
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <your-repo-url>
+cd web-portfolio
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Set up environment variables:
+```bash
+# Create a .env.local file with:
+RESEND_API_KEY=re_xxxxxxxxxxxx
+CONTACT_EMAIL=your@email.com
+NEXT_PUBLIC_SITE_URL=https://yourdomain.com
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Run the development server:
+```bash
+npm run dev
+```
 
-## Learn More
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-To learn more about Next.js, take a look at the following resources:
+## Customization
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Personal Information
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Edit `src/lib/data.ts` to update:
+- Personal info (name, bio, email, location)
+- Social links
+- Skills
+- Projects
+- Experience
+- Education
 
-## Deploy on Vercel
+### Styling
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Colors and theme: `src/app/globals.css`
+- Tailwind config is inline with Tailwind v4
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Images
+
+Add your images to the `public` directory:
+- `/avatar.jpg` - Profile photo
+- `/resume.pdf` - Downloadable resume
+- `/projects/*.jpg` - Project screenshots
+
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── layout.tsx          # Root layout with metadata
+│   ├── page.tsx            # Home - Bento Grid
+│   ├── loading.tsx         # Loading skeleton
+│   ├── not-found.tsx       # 404 page
+│   ├── sitemap.ts          # Sitemap generation
+│   ├── robots.ts           # Robots.txt
+│   ├── about/              # About page
+│   ├── projects/           # Projects page
+│   └── api/contact/        # Contact form API
+├── components/
+│   ├── ui/                 # Shadcn components
+│   ├── bento/              # Bento grid cells
+│   ├── navigation/         # Navbar, command palette
+│   ├── projects/           # Project cards, modal
+│   └── shared/             # Shared components
+├── lib/
+│   ├── data.ts             # Site data
+│   ├── types.ts            # TypeScript types
+│   ├── metadata.ts         # SEO metadata
+│   └── utils.ts            # Utilities
+└── emails/
+    └── contact.tsx         # Email template
+```
+
+## Deployment
+
+This project is optimized for deployment on Vercel:
+
+1. Push your code to GitHub
+2. Import the project in Vercel
+3. Add environment variables
+4. Deploy
+
+## License
+
+MIT

@@ -1,0 +1,53 @@
+"use client";
+
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { personalInfo } from "@/lib/data";
+
+export function PhotoCell() {
+  return (
+    <motion.div 
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5, delay: 0.2 }}
+      className="relative h-full w-full overflow-hidden"
+    >
+      {/* Full-size photo container */}
+      <div className="absolute inset-0 bg-gradient-to-br from-muted/80 to-muted/40">
+        {/* Placeholder gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/20" />
+        
+        {/* Image - uncomment when you have an actual avatar */}
+        {/* <Image
+          src={personalInfo.avatarUrl}
+          alt={personalInfo.name}
+          fill
+          className="object-cover object-center grayscale"
+          priority
+        /> */}
+        
+        {/* Placeholder silhouette/initials when no image */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          {/* Stylized placeholder */}
+          <div className="relative w-full h-full flex items-end justify-center pb-8">
+            <div className="text-6xl md:text-7xl lg:text-8xl font-bold text-foreground/10 tracking-tighter">
+              {personalInfo.name.split(" ").map(n => n[0]).join("")}
+            </div>
+          </div>
+        </div>
+
+        {/* Subtle vignette effect */}
+        <div className="absolute inset-0 bg-gradient-to-t from-card/50 via-transparent to-transparent" />
+      </div>
+
+      {/* Decorative corner accent */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.4, delay: 0.5 }}
+        className="absolute top-4 right-4 w-3 h-3 rounded-full bg-primary/60"
+      />
+    </motion.div>
+  );
+}
+
