@@ -58,7 +58,7 @@ export function SkillsCell() {
       </motion.div>
 
       {/* Skills grid */}
-      <div className='flex-1 grid grid-cols-4 gap-2 md:gap-3 content-start'>
+      <div className='flex-1 grid grid-cols-4 grid-rows-3 gap-2 md:gap-3 h-full'>
         {displaySkills.map((skill, index) => {
           const IconComponent = techIcons[skill.icon] || techIcons.default;
 
@@ -69,7 +69,7 @@ export function SkillsCell() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3, delay: index * 0.05 }}
               whileHover={{ scale: 1.05, y: -2 }}
-              className='group relative flex flex-col items-center justify-center gap-1.5'
+              className='group relative flex flex-col items-center justify-center gap-1.5 h-full'
             >
               <div
                 className={cn(

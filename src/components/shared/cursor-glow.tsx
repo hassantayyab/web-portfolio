@@ -53,7 +53,7 @@ export function CursorGlow() {
           translateX: "-50%",
           translateY: "-50%",
           background:
-            "radial-gradient(circle, oklch(0.75 0.15 100 / 0.08) 0%, transparent 70%)",
+            "radial-gradient(circle, oklch(0.75 0.15 100 / 0.03) 0%, transparent 70%)",
         }}
       />
     </motion.div>

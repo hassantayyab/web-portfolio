@@ -40,13 +40,6 @@ export function PhotoCell() {
         <div className="absolute inset-0 bg-gradient-to-t from-card/50 via-transparent to-transparent" />
       </div>
 
-      {/* Decorative corner accent */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.4, delay: 0.5 }}
-        className="absolute top-4 right-4 w-3 h-3 rounded-full bg-primary/60"
-      />
     </motion.div>
   );
 }
