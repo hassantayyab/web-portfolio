@@ -59,3 +59,16 @@ export interface PersonalInfo {
   avatarUrl: string;
 }
 
+export interface Blog {
+  id: string;
+  title: string;
+  description: string;
+  content?: string;
+  image?: string;
+  category: string;
+  tags: string[];
+  publishedAt: string;
+  readTime: string;
+  featured?: boolean;
+}
+

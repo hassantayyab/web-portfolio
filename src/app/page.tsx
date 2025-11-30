@@ -3,11 +3,11 @@
 import {
   BentoCell,
   BentoGrid,
+  BlogsAccordionCell,
   ContactCell,
   HeroCell,
   PhotoCell,
-  ProjectsAccordionCell,
-  SkillsCell,
+  ProjectsCell,
   SocialCell,
 } from '@/components/bento';
 import { ClientLayout } from '@/components/shared/client-layout';
@@ -22,7 +22,7 @@ export default function HomePage() {
 
         {/* Bento Grid */}
         <BentoGrid className='h-full pt-24 md:pt-24'>
-          {/* Row 1-2: Hero (left) + Photo (center-right) + Projects (right) */}
+          {/* Row 1-2: Hero (left) + Photo (center-right) + Blogs (right) */}
           {/* Hero - 5 cols (2.5 in 6-col = 5 in 12-col), 2 rows */}
           <BentoCell colSpan={5} rowSpan={2}>
             <HeroCell />
@@ -33,15 +33,15 @@ export default function HomePage() {
             <PhotoCell />
           </BentoCell>
 
-          {/* Projects Accordion - 4 cols (2 in 6-col = 4 in 12-col), 3 rows */}
+          {/* Blogs Accordion - 4 cols (2 in 6-col = 4 in 12-col), 3 rows */}
           <BentoCell colSpan={4} rowSpan={3}>
-            <ProjectsAccordionCell />
+            <BlogsAccordionCell />
           </BentoCell>
 
-          {/* Row 3-4: Skills + Contact (both now 2 rows tall) */}
-          {/* Skills - 4 cols (2 in 6-col = 4 in 12-col), 2 rows */}
+          {/* Row 3-4: Projects + Contact (both now 2 rows tall) */}
+          {/* Projects - 4 cols (2 in 6-col = 4 in 12-col), 2 rows */}
           <BentoCell colSpan={4} rowSpan={2}>
-            <SkillsCell />
+            <ProjectsCell />
           </BentoCell>
 
           {/* Contact CTA - 4 cols (2 in 6-col = 4 in 12-col), 2 rows */}
@@ -49,7 +49,7 @@ export default function HomePage() {
             <ContactCell />
           </BentoCell>
 
-          {/* Row 4: Social Links (under projects) */}
+          {/* Row 4: Social Links (under blogs) */}
           {/* Social Links - 4 cols (2 in 6-col = 4 in 12-col), 1 row */}
           <BentoCell colSpan={4} rowSpan={1}>
             <SocialCell />
