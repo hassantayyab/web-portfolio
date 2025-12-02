@@ -1,14 +1,18 @@
 'use client';
 
+import { ANIMATION_DURATIONS, PROJECT_LIMITS } from '@/lib/constants';
 import { projects } from '@/lib/data';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowUpRight, Calendar, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 export function ProjectsCell() {
-  const featuredProjects = projects.filter((p) => p.featured).slice(0, 4);
+  const featuredProjects = useMemo(
+    () => projects.filter((p) => p.featured).slice(0, PROJECT_LIMITS.FEATURED_ON_HOME),
+    [],
+  );
   const [expandedId, setExpandedId] = useState<string | null>(featuredProjects[0]?.id || null);
 
   const toggleProject = (id: string) => {
@@ -27,9 +31,16 @@ export function ProjectsCell() {
         <h3 className='text-sm font-medium text-muted-foreground uppercase tracking-wider'>
           Featured Projects
         </h3>
-        <Link href='/projects' className='flex items-center gap-1 text-sm text-primary group'>
+        <Link
+          href='/projects'
+          className='flex items-center gap-1 text-sm text-primary group'
+          aria-label='View all projects'
+        >
           <span className='hidden md:inline'>View All</span>
-          <ArrowUpRight className='w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform' />
+          <ArrowUpRight
+            className='w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform'
+            aria-hidden='true'
+          />
         </Link>
       </motion.div>
 
@@ -56,6 +67,8 @@ export function ProjectsCell() {
                   'w-full flex items-center justify-between py-3 text-left group transition-colors',
                   isExpanded ? 'text-foreground' : 'text-muted-foreground hover:text-foreground',
                 )}
+                aria-expanded={isExpanded}
+                aria-controls={`project-content-${project.id}`}
               >
                 <span
                   className={cn(
@@ -70,6 +83,7 @@ export function ProjectsCell() {
                     'w-4 h-4 transition-transform duration-300 shrink-0',
                     isExpanded && 'rotate-180',
                   )}
+                  aria-hidden='true'
                 />
               </button>
 
@@ -77,10 +91,11 @@ export function ProjectsCell() {
               <AnimatePresence mode='wait'>
                 {isExpanded && (
                   <motion.div
+                    id={`project-content-${project.id}`}
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                    transition={{ duration: ANIMATION_DURATIONS.NORMAL, ease: 'easeInOut' }}
                     className='overflow-hidden'
                   >
                     <div className='pb-4 space-y-3'>
@@ -101,17 +116,19 @@ export function ProjectsCell() {
 
                         {/* Technologies */}
                         <div className='flex flex-wrap gap-1 mt-3'>
-                          {project.technologies.slice(0, 4).map((tech) => (
-                            <span
-                              key={tech}
-                              className='text-sm px-2 py-0.5 rounded-full bg-white/5 text-muted-foreground/70 border border-white/5'
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                          {project.technologies.length > 4 && (
+                          {project.technologies
+                            .slice(0, PROJECT_LIMITS.TECH_PREVIEW)
+                            .map((tech) => (
+                              <span
+                                key={tech}
+                                className='text-sm px-2 py-0.5 rounded-full bg-white/5 text-muted-foreground/70 border border-white/5'
+                              >
+                                {tech}
+                              </span>
+                            ))}
+                          {project.technologies.length > PROJECT_LIMITS.TECH_PREVIEW && (
                             <span className='text-sm px-2 py-0.5 rounded-full bg-primary/10 text-primary/80 border border-primary/20'>
-                              +{project.technologies.length - 4}
+                              +{project.technologies.length - PROJECT_LIMITS.TECH_PREVIEW}
                             </span>
                           )}
                         </div>

@@ -47,9 +47,10 @@ export function ProjectCard({ project, index, onClick }: ProjectCardProps) {
               onClick={(e) => e.stopPropagation()}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className='w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-colors'
+              className='w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
+              aria-label={`View ${project.title} live demo`}
             >
-              <ExternalLink className='w-5 h-5' />
+              <ExternalLink className='w-5 h-5' aria-hidden="true" />
             </motion.a>
           )}
           {project.githubUrl && (
@@ -60,9 +61,10 @@ export function ProjectCard({ project, index, onClick }: ProjectCardProps) {
               onClick={(e) => e.stopPropagation()}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className='w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-colors'
+              className='w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
+              aria-label={`View ${project.title} source code on GitHub`}
             >
-              <Github className='w-5 h-5' />
+              <Github className='w-5 h-5' aria-hidden="true" />
             </motion.a>
           )}
         </div>

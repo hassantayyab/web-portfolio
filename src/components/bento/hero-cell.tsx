@@ -1,13 +1,15 @@
 'use client';
 
+import { ANIMATION_DELAYS, ANIMATION_DURATIONS, SKILL_LIMITS } from '@/lib/constants';
 import { personalInfo, skills } from '@/lib/data';
 import { getSkillIcon } from '@/lib/skill-icons';
 import { motion } from 'framer-motion';
+import { useMemo } from 'react';
 
 export function HeroCell() {
-  const words = personalInfo.title.split(' ');
+  const words = useMemo(() => personalInfo.title.split(' '), []);
   // Get first 6 skills for display in hero
-  const displaySkills = skills.slice(0, 6);
+  const displaySkills = useMemo(() => skills.slice(0, SKILL_LIMITS.HERO_DISPLAY), []);
 
   return (
     <div className='relative h-full flex flex-col justify-between p-6 md:p-8 overflow-hidden'>
@@ -22,7 +24,7 @@ export function HeroCell() {
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
+          transition={{ duration: ANIMATION_DURATIONS.SLOW, delay: ANIMATION_DELAYS.INITIAL }}
           className='text-sm md:text-base text-primary font-medium mb-2'
         >
           Hello, I&apos;m
@@ -32,7 +34,7 @@ export function HeroCell() {
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ duration: ANIMATION_DURATIONS.SLOW, delay: ANIMATION_DELAYS.SHORT }}
           className='text-3xl md:text-4xl lg:text-5xl font-bold mb-3 tracking-tight'
         >
           {personalInfo.name}
@@ -42,7 +44,7 @@ export function HeroCell() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
+          transition={{ duration: ANIMATION_DURATIONS.SLOW, delay: ANIMATION_DELAYS.MEDIUM }}
           className='flex flex-wrap gap-2 text-lg md:text-xl lg:text-2xl text-muted-foreground'
         >
           {words.map((word, index) => (
@@ -50,7 +52,10 @@ export function HeroCell() {
               key={index}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.4 + index * 0.1 }}
+              transition={{
+                duration: ANIMATION_DURATIONS.NORMAL,
+                delay: ANIMATION_DELAYS.LONG + index * ANIMATION_DELAYS.STAGGER,
+              }}
               className='inline-block'
             >
               {word}
@@ -62,7 +67,7 @@ export function HeroCell() {
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.7 }}
+          transition={{ duration: ANIMATION_DURATIONS.SLOW, delay: 0.7 }}
           className='mt-4 text-sm md:text-base text-muted-foreground/80 max-w-md'
         >
           {personalInfo.shortBio}
@@ -73,7 +78,7 @@ export function HeroCell() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.9 }}
+        transition={{ duration: ANIMATION_DURATIONS.SLOW, delay: 0.9 }}
         className='relative z-10 flex items-center gap-3 md:gap-4 flex-wrap'
       >
         {displaySkills.map((skill, index) => {
@@ -84,11 +89,17 @@ export function HeroCell() {
               key={skill.name}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3, delay: 1 + index * 0.05 }}
+              transition={{
+                duration: ANIMATION_DURATIONS.NORMAL,
+                delay: 1 + index * ANIMATION_DELAYS.STAGGER,
+              }}
               whileHover={{ scale: 1.05, y: -2 }}
               className='group flex items-center gap-1.5 px-2.5 py-1.5 md:px-3 md:py-2 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300'
             >
-              <IconComponent className='w-4 h-4 md:w-5 md:h-5 text-muted-foreground group-hover:text-foreground transition-colors flex-shrink-0' />
+              <IconComponent
+                className='w-4 h-4 md:w-5 md:h-5 text-muted-foreground group-hover:text-foreground transition-colors flex-shrink-0'
+                aria-hidden='true'
+              />
               <span className='text-sm md:text-sm text-muted-foreground/80 group-hover:text-foreground transition-colors font-medium'>
                 {skill.name}
               </span>

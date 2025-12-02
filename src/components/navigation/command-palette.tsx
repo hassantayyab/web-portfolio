@@ -85,6 +85,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
             <Command
               className='rounded-2xl border border-white/10 bg-background/95 backdrop-blur-xl shadow-2xl overflow-hidden'
               loop
+              aria-label='Command palette'
             >
               <div className='flex items-center border-b border-white/10 px-4'>
                 <Command.Input
@@ -92,6 +93,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
                   onValueChange={setSearch}
                   placeholder='Type a command or search...'
                   className='flex h-14 w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground'
+                  aria-label='Search commands'
                 />
                 <kbd className='pointer-events-none h-5 select-none items-center gap-1 rounded border border-white/10 bg-white/5 px-1.5 font-mono text-sm font-medium text-muted-foreground hidden sm:inline-flex'>
                   ESC
@@ -126,8 +128,9 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
                       runCommand(() => window.open(`mailto:${personalInfo.email}`, '_blank'))
                     }
                     className='flex items-center gap-3 px-3 py-2.5 text-sm rounded-lg cursor-pointer text-muted-foreground data-[selected=true]:bg-white/10 data-[selected=true]:text-foreground transition-colors'
+                    aria-label={`Send email to ${personalInfo.email}`}
                   >
-                    <Mail className='w-4 h-4' />
+                    <Mail className='w-4 h-4' aria-hidden='true' />
                     <span>Send Email</span>
                   </Command.Item>
                   {personalInfo.resumeUrl && (
@@ -137,8 +140,9 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
                         runCommand(() => window.open(personalInfo.resumeUrl, '_blank'))
                       }
                       className='flex items-center gap-3 px-3 py-2.5 text-sm rounded-lg cursor-pointer text-muted-foreground data-[selected=true]:bg-white/10 data-[selected=true]:text-foreground transition-colors'
+                      aria-label='Download resume'
                     >
-                      <FileText className='w-4 h-4' />
+                      <FileText className='w-4 h-4' aria-hidden='true' />
                       <span>Download Resume</span>
                     </Command.Item>
                   )}
@@ -154,10 +158,11 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
                         value={link.name}
                         onSelect={() => runCommand(() => window.open(link.url, '_blank'))}
                         className='flex items-center gap-3 px-3 py-2.5 text-sm rounded-lg cursor-pointer text-muted-foreground data-[selected=true]:bg-white/10 data-[selected=true]:text-foreground transition-colors'
+                        aria-label={`Open ${link.name} in new tab`}
                       >
                         {getIcon(link.icon)}
                         <span>{link.name}</span>
-                        <ExternalLink className='w-3 h-3 ml-auto opacity-50' />
+                        <ExternalLink className='w-3 h-3 ml-auto opacity-50' aria-hidden='true' />
                       </Command.Item>
                     ))}
                 </Command.Group>

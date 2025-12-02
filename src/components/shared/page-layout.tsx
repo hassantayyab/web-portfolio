@@ -31,7 +31,7 @@ export function PageLayout({
   className,
 }: PageLayoutProps) {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen" id="main-content">
       {/* Background effects */}
       <div className="fixed inset-0 bg-gradient-to-br from-background via-background to-primary/5 pointer-events-none" />
       <div className="fixed inset-0 dot-pattern opacity-30 pointer-events-none" />

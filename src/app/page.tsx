@@ -15,7 +15,7 @@ import { ClientLayout } from '@/components/shared/client-layout';
 export default function HomePage() {
   return (
     <ClientLayout>
-      <main className='h-screen w-screen overflow-hidden no-scrollbar'>
+      <main className='h-screen w-screen overflow-hidden no-scrollbar' id="main-content">
         {/* Background effects */}
         <div className='fixed inset-0 bg-linear-to-br from-background via-background to-primary/5 pointer-events-none' />
         <div className='fixed inset-0 dot-pattern opacity-30 pointer-events-none' />

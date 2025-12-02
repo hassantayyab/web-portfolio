@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { ReactNode } from "react";
+import { BENTO_SPANS } from "@/lib/constants";
 
 interface BentoGridProps {
   children: ReactNode;
@@ -23,11 +24,14 @@ export function BentoGrid({ children, className }: BentoGridProps) {
   );
 }
 
+type ColSpan = typeof BENTO_SPANS.COL[number];
+type RowSpan = typeof BENTO_SPANS.ROW[number];
+
 interface BentoCellProps {
   children: ReactNode;
   className?: string;
-  colSpan?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
-  rowSpan?: 1 | 2 | 3 | 4;
+  colSpan?: ColSpan;
+  rowSpan?: RowSpan;
 }
 
 export function BentoCell({

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Send, Loader2, CheckCircle } from "lucide-react";
+import { FORM_CONSTANTS } from "@/lib/constants";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -34,7 +35,7 @@ export function ContactForm() {
     resolver: zodResolver(contactSchema),
   });
 
-  const onSubmit = async (data: ContactFormData) => {
+  const onSubmit = useCallback(async (data: ContactFormData) => {
     setIsSubmitting(true);
 
     try {
@@ -49,23 +50,32 @@ export function ContactForm() {
       const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(result.error || "Failed to send message");
+        const errorMessage = result.error || "Failed to send message";
+        const retryAfter = result.retryAfter 
+          ? ` Please try again in ${Math.ceil(result.retryAfter / 60)} minutes.`
+          : "";
+        throw new Error(errorMessage + retryAfter);
       }
 
       setIsSuccess(true);
-      toast.success("Message sent successfully! I'll get back to you soon.");
+      toast.success("Message sent successfully! I'll get back to you soon.", {
+        duration: FORM_CONSTANTS.SUCCESS_TIMEOUT_MS,
+      });
       reset();
 
       // Reset success state after animation
-      setTimeout(() => setIsSuccess(false), 3000);
+      setTimeout(() => setIsSuccess(false), FORM_CONSTANTS.SUCCESS_TIMEOUT_MS);
     } catch (error) {
-      toast.error(
-        error instanceof Error ? error.message : "Failed to send message. Please try again."
-      );
+      const errorMessage = error instanceof Error 
+        ? error.message 
+        : "Failed to send message. Please try again.";
+      toast.error(errorMessage, {
+        duration: 5000,
+      });
     } finally {
       setIsSubmitting(false);
     }
-  };
+  }, [reset]);
 
   return (
     <motion.form
@@ -140,21 +150,22 @@ export function ContactForm() {
         type="submit"
         disabled={isSubmitting || isSuccess}
         className="w-full md:w-auto px-8 py-3 h-auto"
+        aria-label={isSubmitting ? "Sending message" : isSuccess ? "Message sent" : "Send message"}
       >
         {isSubmitting ? (
           <>
-            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-            Sending...
+            <Loader2 className="w-4 h-4 mr-2 animate-spin" aria-hidden="true" />
+            <span>Sending...</span>
           </>
         ) : isSuccess ? (
           <>
-            <CheckCircle className="w-4 h-4 mr-2" />
-            Sent!
+            <CheckCircle className="w-4 h-4 mr-2" aria-hidden="true" />
+            <span>Sent!</span>
           </>
         ) : (
           <>
-            <Send className="w-4 h-4 mr-2" />
-            Send Message
+            <Send className="w-4 h-4 mr-2" aria-hidden="true" />
+            <span>Send Message</span>
           </>
         )}
       </Button>

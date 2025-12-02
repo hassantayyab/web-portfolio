@@ -1,14 +1,18 @@
 'use client';
 
+import { ANIMATION_DURATIONS, PROJECT_LIMITS } from '@/lib/constants';
 import { projects } from '@/lib/data';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowUpRight, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 export function ProjectsAccordionCell() {
-  const featuredProjects = projects.filter((p) => p.featured).slice(0, 6);
+  const featuredProjects = useMemo(
+    () => projects.filter((p) => p.featured).slice(0, PROJECT_LIMITS.FEATURED_IN_ACCORDION),
+    [],
+  );
   const [expandedId, setExpandedId] = useState<string | null>(featuredProjects[0]?.id || null);
 
   const toggleProject = (id: string) => {
@@ -30,8 +34,12 @@ export function ProjectsAccordionCell() {
         <Link
           href='/projects'
           className='flex items-center gap-1 text-sm text-primary hover:gap-2 transition-all group'
+          aria-label='View all projects'
         >
-          <ArrowUpRight className='w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform' />
+          <ArrowUpRight
+            className='w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform'
+            aria-hidden='true'
+          />
         </Link>
       </motion.div>
 
@@ -58,6 +66,8 @@ export function ProjectsAccordionCell() {
                   'w-full flex items-center justify-between py-3 text-left group transition-colors',
                   isExpanded ? 'text-foreground' : 'text-muted-foreground hover:text-foreground',
                 )}
+                aria-expanded={isExpanded}
+                aria-controls={`project-accordion-content-${project.id}`}
               >
                 <span
                   className={cn(
@@ -72,6 +82,7 @@ export function ProjectsAccordionCell() {
                     'w-4 h-4 transition-transform duration-300',
                     isExpanded && 'rotate-180',
                   )}
+                  aria-hidden='true'
                 />
               </button>
 
@@ -79,10 +90,11 @@ export function ProjectsAccordionCell() {
               <AnimatePresence mode='wait'>
                 {isExpanded && (
                   <motion.div
+                    id={`project-accordion-content-${project.id}`}
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                    transition={{ duration: ANIMATION_DURATIONS.NORMAL, ease: 'easeInOut' }}
                     className='overflow-hidden'
                   >
                     <div className='pb-4 space-y-3'>

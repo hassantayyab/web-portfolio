@@ -15,11 +15,19 @@ export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 20);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -44,6 +52,7 @@ export function Navbar() {
             'mx-4 md:mx-6 flex items-center justify-between px-4 md:px-6 py-3 rounded-2xl border border-white/10 backdrop-blur-xl transition-all duration-300',
             isScrolled ? 'bg-background/80 shadow-lg shadow-black/20' : 'bg-background/50',
           )}
+          aria-label='Main navigation'
         >
           {/* Logo/Name - Left Side */}
           <Link href='/' className='flex items-center gap-1 group'>
@@ -88,8 +97,15 @@ export function Navbar() {
               size='icon'
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className='h-9 w-9 rounded-full'
+              aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls='mobile-menu'
             >
-              {isMobileMenuOpen ? <X className='w-4 h-4' /> : <Menu className='w-4 h-4' />}
+              {isMobileMenuOpen ? (
+                <X className='w-4 h-4' aria-hidden='true' />
+              ) : (
+                <Menu className='w-4 h-4' aria-hidden='true' />
+              )}
             </Button>
           </div>
         </nav>
@@ -97,12 +113,14 @@ export function Navbar() {
         {/* Mobile Menu */}
         <AnimatePresence>
           {isMobileMenuOpen && (
-            <motion.div
+            <motion.nav
+              id='mobile-menu'
               initial={{ opacity: 0, y: -10, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.95 }}
               transition={{ duration: 0.2 }}
               className='mx-4 mt-2 py-2 rounded-2xl border border-white/10 bg-background/90 backdrop-blur-xl shadow-xl md:hidden'
+              aria-label='Mobile navigation'
             >
               {navigationItems.map((item) => {
                 const isActive = pathname === item.href;
@@ -122,7 +140,7 @@ export function Navbar() {
                   </Link>
                 );
               })}
-            </motion.div>
+            </motion.nav>
           )}
         </AnimatePresence>
       </motion.header>
