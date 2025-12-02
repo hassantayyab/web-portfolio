@@ -22,17 +22,20 @@ export function ProjectCard({ project, index, onClick }: ProjectCardProps) {
       onClick={onClick}
       className={cn(
         'group relative flex flex-col rounded-2xl overflow-hidden cursor-pointer',
-        'bg-card/50 border border-white/10 backdrop-blur-sm',
-        'hover:border-white/20 hover:bg-card/70 transition-all duration-300',
+        'bg-card/50 border border-white/15 backdrop-blur-sm',
+        'hover:border-white/25 hover:bg-card/70 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300',
       )}
     >
       {/* Project image/placeholder */}
       <div className='relative h-48 overflow-hidden'>
         <div className='absolute inset-0 bg-gradient-to-br from-primary/30 via-primary/20 to-primary/10' />
+        
+        {/* Subtle pattern overlay */}
+        <div className='absolute inset-0 opacity-20 grid-pattern' />
 
         {/* Project initial as placeholder */}
         <div className='absolute inset-0 flex items-center justify-center'>
-          <span className='text-6xl font-bold text-primary/30 group-hover:scale-110 transition-transform duration-300'>
+          <span className='text-6xl font-bold text-primary/40 group-hover:scale-110 group-hover:text-primary/50 transition-all duration-300'>
             {project.title[0]}
           </span>
         </div>
@@ -83,7 +86,7 @@ export function ProjectCard({ project, index, onClick }: ProjectCardProps) {
 
         {/* Year badge */}
         <div className='absolute top-3 right-3'>
-          <Badge variant='outline' className='bg-black/30 backdrop-blur-sm border-white/10 text-sm'>
+          <Badge variant='outline' className='bg-black/30 backdrop-blur-sm border-white/15 text-sm'>
             <Calendar className='w-3 h-3 mr-1' />
             {project.year}
           </Badge>
@@ -106,13 +109,13 @@ export function ProjectCard({ project, index, onClick }: ProjectCardProps) {
             <Badge
               key={tech}
               variant='outline'
-              className='text-sm bg-white/5 border-white/10 hover:bg-white/10'
+              className='text-sm bg-white/5 border-white/15 hover:bg-white/10 hover:border-white/20'
             >
               {tech}
             </Badge>
           ))}
           {project.technologies.length > 4 && (
-            <Badge variant='outline' className='text-sm bg-white/5 border-white/10'>
+            <Badge variant='outline' className='text-sm bg-white/5 border-white/15'>
               +{project.technologies.length - 4}
             </Badge>
           )}

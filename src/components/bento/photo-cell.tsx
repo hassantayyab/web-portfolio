@@ -30,8 +30,13 @@ export function PhotoCell() {
         <div className="absolute inset-0 flex items-center justify-center">
           {/* Stylized placeholder */}
           <div className="relative w-full h-full flex items-end justify-center pb-8">
-            <div className="text-6xl md:text-7xl lg:text-8xl font-bold text-foreground/10 tracking-tighter">
-              {personalInfo.name.split(" ").map(n => n[0]).join("")}
+            <div className="relative">
+              <div className="text-6xl md:text-7xl lg:text-8xl font-bold text-foreground/15 tracking-tighter">
+                {personalInfo.name.split(" ").map(n => n[0]).join("")}
+              </div>
+              {/* Decorative circle */}
+              <div className="absolute -top-4 -right-4 w-16 h-16 md:w-20 md:h-20 rounded-full bg-primary/10 blur-xl" />
+              <div className="absolute -bottom-4 -left-4 w-12 h-12 md:w-16 md:h-16 rounded-full bg-primary/10 blur-xl" />
             </div>
           </div>
         </div>

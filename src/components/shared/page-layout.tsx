@@ -47,11 +47,11 @@ export function PageLayout({
             transition={{ duration: 0.5 }}
             className="mb-12"
           >
-            <h1 className="text-[48px] font-bold mb-4 leading-tight">
+            <h1 className="text-h1 mb-4">
               {title}
             </h1>
             {description && (
-              <p className="text-lg text-muted-foreground max-w-2xl">
+              <p className="text-body-lg text-muted-foreground max-w-2xl">
                 {description}
               </p>
             )}

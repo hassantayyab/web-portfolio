@@ -40,11 +40,11 @@ export function SkillsCell() {
               <div
                 className={cn(
                   'w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center',
-                  'bg-white/5 border border-white/10 transition-all duration-300',
-                  'group-hover:bg-white/10 group-hover:border-white/20 group-hover:shadow-lg',
+                  'bg-white/5 border border-white/15 transition-all duration-300',
+                  'group-hover:bg-white/10 group-hover:border-white/25 group-hover:shadow-lg group-hover:shadow-primary/10',
                 )}
               >
-                <IconComponent className='w-5 h-5 md:w-6 md:h-6 text-muted-foreground group-hover:text-foreground transition-colors' />
+                <IconComponent className='w-5 h-5 md:w-6 md:h-6 text-muted-foreground group-hover:text-primary transition-colors' />
               </div>
 
               {/* Skill name - always visible */}

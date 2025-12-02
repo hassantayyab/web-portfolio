@@ -41,7 +41,7 @@ export function FeaturedProjectsCell() {
             whileHover={{ x: 4 }}
             className={cn(
               'flex-1 flex items-center gap-3 px-3 py-2 rounded-xl',
-              'bg-white/5 border border-white/10 transition-all duration-300',
+              'bg-white/5 border border-white/15 transition-all duration-300',
               'hover:bg-white/10 hover:border-white/20 group cursor-pointer',
             )}
           >

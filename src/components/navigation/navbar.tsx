@@ -49,7 +49,7 @@ export function Navbar() {
       >
         <nav
           className={cn(
-            'mx-4 md:mx-6 flex items-center justify-between px-4 md:px-6 py-3 rounded-2xl border border-white/10 backdrop-blur-xl transition-all duration-300',
+            'mx-4 md:mx-6 flex items-center justify-between px-4 md:px-6 py-3 rounded-2xl border border-white/15 backdrop-blur-xl transition-all duration-300',
             isScrolled ? 'bg-background/80 shadow-lg shadow-black/20' : 'bg-background/50',
           )}
           aria-label='Main navigation'
@@ -73,14 +73,14 @@ export function Navbar() {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    'relative px-4 py-2 text-sm font-medium rounded-full transition-colors',
+                    'relative px-4 py-2 text-sm font-medium rounded-full transition-colors min-h-[44px] flex items-center',
                     isActive ? 'text-foreground' : 'text-muted-foreground hover:text-foreground',
                   )}
                 >
                   {isActive && (
                     <motion.span
                       layoutId='navbar-active'
-                      className='absolute inset-0 bg-white/10 rounded-full'
+                      className='absolute inset-0 bg-white/15 rounded-full'
                       transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
                     />
                   )}
@@ -119,7 +119,7 @@ export function Navbar() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.95 }}
               transition={{ duration: 0.2 }}
-              className='mx-4 mt-2 py-2 rounded-2xl border border-white/10 bg-background/90 backdrop-blur-xl shadow-xl md:hidden'
+              className='mx-4 mt-2 py-2 rounded-2xl border border-white/15 bg-background/90 backdrop-blur-xl shadow-xl md:hidden'
               aria-label='Mobile navigation'
             >
               {navigationItems.map((item) => {
@@ -130,9 +130,9 @@ export function Navbar() {
                     href={item.href}
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={cn(
-                      'block px-4 py-3 text-sm transition-colors',
+                      'flex items-center px-4 py-3.5 text-sm transition-colors min-h-[44px]',
                       isActive
-                        ? 'text-foreground bg-white/5'
+                        ? 'text-foreground bg-white/10'
                         : 'text-muted-foreground hover:text-foreground hover:bg-white/5',
                     )}
                   >

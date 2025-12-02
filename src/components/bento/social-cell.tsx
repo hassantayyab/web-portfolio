@@ -16,7 +16,7 @@ export function SocialCell() {
   return (
     <div className='relative h-full flex flex-col justify-center p-6 md:p-8 overflow-hidden'>
       {/* Social links - Horizontal layout */}
-      <div className='flex items-center gap-4 flex-wrap'>
+      <div className='flex items-center gap-3 md:gap-4 flex-wrap'>
         {socialLinks.map((link, index) => {
           const Icon = iconMap[link.icon] || ExternalLink;
 
@@ -29,11 +29,11 @@ export function SocialCell() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: index * 0.05 }}
-              whileHover={{ y: -2 }}
+              whileHover={{ y: -2, scale: 1.02 }}
               className={cn(
-                'flex items-center gap-2.5 px-6 py-3.5 rounded-xl',
-                'bg-white/5 border border-white/10 transition-all duration-300',
-                'hover:bg-white/10 hover:border-white/20 group',
+                'flex items-center gap-2.5 px-5 md:px-6 py-3 md:py-3.5 rounded-xl min-h-[44px]',
+                'bg-white/5 border border-white/15 transition-all duration-300',
+                'hover:bg-white/10 hover:border-white/25 hover:shadow-lg group',
               )}
             >
               <Icon className='w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors' />

@@ -12,9 +12,9 @@
  */
 export const ANIMATION_DELAYS = {
   INITIAL: 0.1,
-  STAGGER: 0.05,
+  STAGGER: 0.06,
   SHORT: 0.2,
-  MEDIUM: 0.3,
+  MEDIUM: 0.35,
   LONG: 0.5,
 } as const;
 
@@ -22,9 +22,9 @@ export const ANIMATION_DELAYS = {
  * Animation duration constants (in seconds)
  */
 export const ANIMATION_DURATIONS = {
-  FAST: 0.15,
-  NORMAL: 0.3,
-  SLOW: 0.5,
+  FAST: 0.2,
+  NORMAL: 0.35,
+  SLOW: 0.6,
 } as const;
 
 /**

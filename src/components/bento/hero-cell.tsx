@@ -35,7 +35,7 @@ export function HeroCell() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: ANIMATION_DURATIONS.SLOW, delay: ANIMATION_DELAYS.SHORT }}
-          className='text-3xl md:text-4xl lg:text-5xl font-bold mb-3 tracking-tight'
+          className='text-display font-bold mb-3 tracking-tight'
         >
           {personalInfo.name}
         </motion.h1>
@@ -45,7 +45,7 @@ export function HeroCell() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: ANIMATION_DURATIONS.SLOW, delay: ANIMATION_DELAYS.MEDIUM }}
-          className='flex flex-wrap gap-2 text-lg md:text-xl lg:text-2xl text-muted-foreground'
+          className='flex flex-wrap gap-2 text-body-lg md:text-xl lg:text-2xl text-muted-foreground'
         >
           {words.map((word, index) => (
             <motion.span
@@ -68,7 +68,7 @@ export function HeroCell() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: ANIMATION_DURATIONS.SLOW, delay: 0.7 }}
-          className='mt-4 text-sm md:text-base text-muted-foreground/80 max-w-md'
+          className='mt-4 text-body text-muted-foreground/80 max-w-md'
         >
           {personalInfo.shortBio}
         </motion.p>
@@ -94,7 +94,7 @@ export function HeroCell() {
                 delay: 1 + index * ANIMATION_DELAYS.STAGGER,
               }}
               whileHover={{ scale: 1.05, y: -2 }}
-              className='group flex items-center gap-1.5 px-2.5 py-1.5 md:px-3 md:py-2 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300'
+              className='group flex items-center gap-1.5 px-2.5 py-1.5 md:px-3 md:py-2 rounded-lg bg-white/5 border border-white/15 hover:bg-white/10 hover:border-white/25 hover:shadow-md transition-all duration-300 min-h-[36px]'
             >
               <IconComponent
                 className='w-4 h-4 md:w-5 md:h-5 text-muted-foreground group-hover:text-foreground transition-colors flex-shrink-0'

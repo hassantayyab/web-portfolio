@@ -34,10 +34,10 @@ export default function AboutPageClient() {
           transition={{ duration: ANIMATION_DURATIONS.SLOW, delay: ANIMATION_DELAYS.INITIAL }}
           className='mb-16'
         >
-          <h2 className='text-2xl font-semibold mb-6'>Who I Am</h2>
+          <h2 className='text-h2 font-semibold mb-6'>Who I Am</h2>
 
           <div className='prose prose-invert prose-lg max-w-none'>
-            <p className='text-muted-foreground leading-relaxed'>{personalInfo.bio}</p>
+            <p className='text-body-lg text-muted-foreground leading-relaxed'>{personalInfo.bio}</p>
           </div>
 
           <div className='mt-6 flex flex-wrap items-center gap-4 text-sm text-muted-foreground'>
@@ -59,7 +59,7 @@ export default function AboutPageClient() {
           transition={{ duration: ANIMATION_DURATIONS.SLOW, delay: ANIMATION_DELAYS.SHORT }}
           className='mb-16'
         >
-          <h2 className='text-2xl font-semibold mb-6'>Skills & Technologies</h2>
+          <h2 className='text-h2 font-semibold mb-6'>Skills & Technologies</h2>
 
           <div className='space-y-6'>
             {/* Frontend */}
@@ -125,7 +125,7 @@ export default function AboutPageClient() {
           transition={{ duration: ANIMATION_DURATIONS.SLOW, delay: ANIMATION_DELAYS.MEDIUM }}
           className='mb-16'
         >
-          <h2 className='text-2xl font-semibold mb-8'>Experience</h2>
+          <h2 className='text-h2 font-semibold mb-8'>Experience</h2>
 
           <Timeline experiences={experiences} />
         </motion.section>
@@ -136,7 +136,7 @@ export default function AboutPageClient() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: ANIMATION_DURATIONS.SLOW, delay: ANIMATION_DELAYS.LONG }}
         >
-          <h2 className='text-2xl font-semibold mb-6'>Education</h2>
+          <h2 className='text-h2 font-semibold mb-6'>Education</h2>
 
           <div className='space-y-6'>
             {education.map((edu) => (

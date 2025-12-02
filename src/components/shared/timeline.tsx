@@ -79,7 +79,7 @@ export function Timeline({ experiences }: TimelineProps) {
                     <Badge
                       key={tech}
                       variant='outline'
-                      className='text-sm bg-white/5 border-white/10'
+                      className='text-sm bg-white/5 border-white/15'
                     >
                       {tech}
                     </Badge>

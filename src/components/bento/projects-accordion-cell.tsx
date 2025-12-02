@@ -55,7 +55,7 @@ export function ProjectsAccordionCell() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: index * 0.05 }}
               className={cn(
-                'border-b border-white/10 last:border-b-0',
+                'border-b border-white/15 last:border-b-0',
                 isExpanded ? 'flex-1 min-h-0' : 'flex-none',
               )}
             >
@@ -99,7 +99,7 @@ export function ProjectsAccordionCell() {
                   >
                     <div className='pb-4 space-y-3'>
                       {/* Project Image */}
-                      <div className='relative aspect-[16/9] rounded-xl overflow-hidden bg-gradient-to-br from-primary/20 via-primary/10 to-transparent border border-white/10'>
+                      <div className='relative aspect-[16/9] rounded-xl overflow-hidden bg-gradient-to-br from-primary/20 via-primary/10 to-transparent border border-white/15'>
                         {/* Placeholder image effect */}
                         <div className='absolute inset-0 flex items-center justify-center'>
                           <span className='text-4xl font-bold text-primary/30'>

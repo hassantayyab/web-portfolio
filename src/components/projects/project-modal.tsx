@@ -102,7 +102,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
           >
             <div 
               ref={modalRef}
-              className="relative w-full max-w-3xl max-h-full overflow-hidden rounded-2xl bg-card border border-white/10 shadow-2xl"
+              className="relative w-full max-w-3xl max-h-full overflow-hidden rounded-2xl bg-card border border-white/15 shadow-2xl"
             >
               {/* Close button */}
               <button

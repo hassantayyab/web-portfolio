@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import { ReactNode } from "react";
+import { motion } from 'framer-motion';
+import { ReactNode } from 'react';
 
 interface PageTransitionProps {
   children: ReactNode;
@@ -17,8 +17,8 @@ const pageVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.4,
-      ease: [0.25, 0.4, 0.25, 1],
+      duration: 0.5,
+      ease: [0.25, 0.4, 0.25, 1] as const,
     },
   },
   exit: {
@@ -26,7 +26,7 @@ const pageVariants = {
     y: -20,
     transition: {
       duration: 0.3,
-      ease: [0.25, 0.4, 0.25, 1],
+      ease: [0.25, 0.4, 0.25, 1] as const,
     },
   },
 };
@@ -34,11 +34,15 @@ const pageVariants = {
 export function PageTransition({ children, className }: PageTransitionProps) {
   return (
     <motion.div
-      initial="initial"
-      animate="animate"
-      exit="exit"
+      initial='initial'
+      animate='animate'
+      exit='exit'
       variants={pageVariants}
       className={className}
+      transition={{
+        duration: 0.5,
+        ease: [0.25, 0.4, 0.25, 1] as const,
+      }}
     >
       {children}
     </motion.div>
@@ -52,15 +56,11 @@ interface StaggerContainerProps {
   delay?: number;
 }
 
-export function StaggerContainer({
-  children,
-  className,
-  delay = 0,
-}: StaggerContainerProps) {
+export function StaggerContainer({ children, className, delay = 0 }: StaggerContainerProps) {
   return (
     <motion.div
-      initial="initial"
-      animate="animate"
+      initial='initial'
+      animate='animate'
       variants={{
         initial: {},
         animate: {
@@ -93,7 +93,7 @@ export function StaggerItem({ children, className }: StaggerItemProps) {
           y: 0,
           transition: {
             duration: 0.4,
-            ease: [0.25, 0.4, 0.25, 1],
+            ease: [0.25, 0.4, 0.25, 1] as const,
           },
         },
       }}
@@ -110,7 +110,7 @@ interface FadeInProps {
   className?: string;
   delay?: number;
   duration?: number;
-  direction?: "up" | "down" | "left" | "right";
+  direction?: 'up' | 'down' | 'left' | 'right';
 }
 
 export function FadeIn({
@@ -118,7 +118,7 @@ export function FadeIn({
   className,
   delay = 0,
   duration = 0.5,
-  direction = "up",
+  direction = 'up',
 }: FadeInProps) {
   const directions = {
     up: { y: 20, x: 0 },
@@ -134,7 +134,7 @@ export function FadeIn({
       transition={{
         duration,
         delay,
-        ease: [0.25, 0.4, 0.25, 1],
+        ease: [0.25, 0.4, 0.25, 1] as const,
       }}
       className={className}
     >
@@ -150,19 +150,14 @@ interface ScaleOnHoverProps {
   scale?: number;
 }
 
-export function ScaleOnHover({
-  children,
-  className,
-  scale = 1.02,
-}: ScaleOnHoverProps) {
+export function ScaleOnHover({ children, className, scale = 1.02 }: ScaleOnHoverProps) {
   return (
     <motion.div
       whileHover={{ scale }}
-      transition={{ type: "spring", stiffness: 400, damping: 25 }}
+      transition={{ type: 'spring', stiffness: 400, damping: 25 }}
       className={className}
     >
       {children}
     </motion.div>
   );
 }
-

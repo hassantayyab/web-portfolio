@@ -11,6 +11,7 @@ export function Skeleton({ className }: SkeletonProps) {
     <div
       className={cn(
         "animate-pulse rounded-md bg-white/5",
+        "motion-reduce:animate-none motion-reduce:bg-white/10",
         className
       )}
     />
@@ -19,7 +20,7 @@ export function Skeleton({ className }: SkeletonProps) {
 
 export function SkeletonCard() {
   return (
-    <div className="rounded-2xl border border-white/10 bg-card/50 overflow-hidden">
+    <div className="rounded-2xl border border-white/15 bg-card/50 overflow-hidden">
       {/* Image skeleton */}
       <Skeleton className="h-48 w-full rounded-none" />
       
@@ -44,23 +45,23 @@ export function SkeletonBentoGrid() {
   return (
     <div className="grid gap-4 p-4 md:p-6 w-full h-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 auto-rows-fr">
       {/* Large hero cell */}
-      <div className="col-span-2 md:col-span-3 row-span-2 rounded-2xl border border-white/10 bg-card/50">
+      <div className="col-span-2 md:col-span-3 row-span-2 rounded-2xl border border-white/15 bg-card/50">
         <Skeleton className="h-full w-full rounded-2xl" />
       </div>
       
       {/* Photo cell */}
-      <div className="col-span-1 row-span-2 rounded-2xl border border-white/10 bg-card/50">
+      <div className="col-span-1 row-span-2 rounded-2xl border border-white/15 bg-card/50">
         <Skeleton className="h-full w-full rounded-2xl" />
       </div>
       
       {/* Skills cell */}
-      <div className="col-span-2 row-span-1 rounded-2xl border border-white/10 bg-card/50">
+      <div className="col-span-2 row-span-1 rounded-2xl border border-white/15 bg-card/50">
         <Skeleton className="h-full w-full rounded-2xl" />
       </div>
       
       {/* Other cells */}
       {Array.from({ length: 5 }).map((_, i) => (
-        <div key={i} className="col-span-1 row-span-1 rounded-2xl border border-white/10 bg-card/50">
+        <div key={i} className="col-span-1 row-span-1 rounded-2xl border border-white/15 bg-card/50">
           <Skeleton className="h-full w-full rounded-2xl" />
         </div>
       ))}

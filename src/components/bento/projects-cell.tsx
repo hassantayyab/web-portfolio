@@ -19,6 +19,16 @@ export function ProjectsCell() {
     setExpandedId(expandedId === id ? null : id);
   };
 
+  if (featuredProjects.length === 0) {
+    return (
+      <div className='relative h-full flex flex-col items-center justify-center p-6 overflow-hidden'>
+        <p className='text-body text-muted-foreground text-center'>
+          No featured projects available at the moment.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className='relative h-full flex flex-col overflow-hidden'>
       {/* Header */}
@@ -45,7 +55,7 @@ export function ProjectsCell() {
       </motion.div>
 
       {/* Projects Accordion */}
-      <div className='flex-1 flex flex-col p-4 md:p-5 pt-3 overflow-hidden'>
+      <div className='flex-1 flex flex-col p-4 md:p-6 pt-3 overflow-hidden'>
         {featuredProjects.map((project, index) => {
           const isExpanded = expandedId === project.id;
 
@@ -56,7 +66,7 @@ export function ProjectsCell() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: index * 0.05 }}
               className={cn(
-                'border-b border-white/10 last:border-b-0',
+                'border-b border-white/15 last:border-b-0',
                 isExpanded ? 'flex-1 min-h-0' : 'flex-none',
               )}
             >
@@ -64,7 +74,7 @@ export function ProjectsCell() {
               <button
                 onClick={() => toggleProject(project.id)}
                 className={cn(
-                  'w-full flex items-center justify-between py-3 text-left group transition-colors',
+                  'w-full flex items-center justify-between py-4 md:py-3 text-left group transition-colors min-h-[44px]',
                   isExpanded ? 'text-foreground' : 'text-muted-foreground hover:text-foreground',
                 )}
                 aria-expanded={isExpanded}
@@ -80,7 +90,7 @@ export function ProjectsCell() {
                 </span>
                 <ChevronDown
                   className={cn(
-                    'w-4 h-4 transition-transform duration-300 shrink-0',
+                    'w-4 h-4 transition-transform duration-300 ease-in-out shrink-0',
                     isExpanded && 'rotate-180',
                   )}
                   aria-hidden='true'
@@ -100,7 +110,7 @@ export function ProjectsCell() {
                   >
                     <div className='pb-4 space-y-3'>
                       {/* Project Card */}
-                      <div className='relative rounded-xl overflow-hidden bg-linear-to-br from-primary/10 via-primary/5 to-transparent border border-white/10 p-4'>
+                      <div className='relative rounded-xl overflow-hidden bg-linear-to-br from-primary/10 via-primary/5 to-transparent border border-white/15 p-4 md:p-5'>
                         {/* Year Badge */}
                         <div className='mb-2'>
                           <div className='flex items-center gap-1.5'>
@@ -115,19 +125,19 @@ export function ProjectsCell() {
                         </p>
 
                         {/* Technologies */}
-                        <div className='flex flex-wrap gap-1 mt-3'>
+                        <div className='flex flex-wrap gap-1.5 mt-3'>
                           {project.technologies
                             .slice(0, PROJECT_LIMITS.TECH_PREVIEW)
                             .map((tech) => (
                               <span
                                 key={tech}
-                                className='text-sm px-2 py-0.5 rounded-full bg-white/5 text-muted-foreground/70 border border-white/5'
+                                className='text-sm px-2.5 py-1 rounded-full bg-white/5 text-muted-foreground/80 border border-white/10 hover:bg-white/10 hover:border-white/15 transition-colors'
                               >
                                 {tech}
                               </span>
                             ))}
                           {project.technologies.length > PROJECT_LIMITS.TECH_PREVIEW && (
-                            <span className='text-sm px-2 py-0.5 rounded-full bg-primary/10 text-primary/80 border border-primary/20'>
+                            <span className='text-sm px-2.5 py-1 rounded-full bg-primary/10 text-primary/90 border border-primary/25'>
                               +{project.technologies.length - PROJECT_LIMITS.TECH_PREVIEW}
                             </span>
                           )}

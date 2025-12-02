@@ -50,11 +50,19 @@ export function ContactForm() {
       const result = await response.json();
 
       if (!response.ok) {
-        const errorMessage = result.error || "Failed to send message";
-        const retryAfter = result.retryAfter 
-          ? ` Please try again in ${Math.ceil(result.retryAfter / 60)} minutes.`
-          : "";
-        throw new Error(errorMessage + retryAfter);
+        let errorMessage = result.error || "Failed to send message";
+        
+        // User-friendly error messages
+        if (response.status === 429) {
+          const retryAfter = result.retryAfter 
+            ? ` Please try again in ${Math.ceil(result.retryAfter / 60)} minute${Math.ceil(result.retryAfter / 60) > 1 ? 's' : ''}.`
+            : " Please try again later.";
+          errorMessage = "You've sent too many messages recently." + retryAfter;
+        } else if (response.status >= 500) {
+          errorMessage = "Our server is experiencing issues. Please try again in a few moments.";
+        }
+        
+        throw new Error(errorMessage);
       }
 
       setIsSuccess(true);
@@ -87,61 +95,61 @@ export function ContactForm() {
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Name */}
-        <div className="space-y-2">
+        <div className="space-y-2.5">
           <Label htmlFor="name">Name</Label>
           <Input
             id="name"
             placeholder="John Doe"
             {...register("name")}
-            className="bg-white/5 border-white/10 focus:border-primary"
+            className="bg-white/5 border-white/15 focus:border-primary min-h-[44px]"
           />
           {errors.name && (
-            <p className="text-sm text-red-400">{errors.name.message}</p>
+            <p className="text-sm text-destructive font-medium">{errors.name.message}</p>
           )}
         </div>
 
         {/* Email */}
-        <div className="space-y-2">
+        <div className="space-y-2.5">
           <Label htmlFor="email">Email</Label>
           <Input
             id="email"
             type="email"
             placeholder="john@example.com"
             {...register("email")}
-            className="bg-white/5 border-white/10 focus:border-primary"
+            className="bg-white/5 border-white/15 focus:border-primary min-h-[44px]"
           />
           {errors.email && (
-            <p className="text-sm text-red-400">{errors.email.message}</p>
+            <p className="text-sm text-destructive font-medium">{errors.email.message}</p>
           )}
         </div>
       </div>
 
       {/* Subject */}
-      <div className="space-y-2">
+      <div className="space-y-2.5">
         <Label htmlFor="subject">Subject</Label>
         <Input
           id="subject"
           placeholder="What's this about?"
           {...register("subject")}
-          className="bg-white/5 border-white/10 focus:border-primary"
+          className="bg-white/5 border-white/15 focus:border-primary min-h-[44px]"
         />
         {errors.subject && (
-          <p className="text-sm text-red-400">{errors.subject.message}</p>
+          <p className="text-sm text-destructive font-medium">{errors.subject.message}</p>
         )}
       </div>
 
       {/* Message */}
-      <div className="space-y-2">
+      <div className="space-y-2.5">
         <Label htmlFor="message">Message</Label>
         <Textarea
           id="message"
           placeholder="Tell me about your project or just say hello..."
           rows={6}
           {...register("message")}
-          className="bg-white/5 border-white/10 focus:border-primary resize-none"
+          className="bg-white/5 border-white/15 focus:border-primary resize-none"
         />
         {errors.message && (
-          <p className="text-sm text-red-400">{errors.message.message}</p>
+          <p className="text-sm text-destructive font-medium">{errors.message.message}</p>
         )}
       </div>
 
@@ -149,7 +157,7 @@ export function ContactForm() {
       <Button
         type="submit"
         disabled={isSubmitting || isSuccess}
-        className="w-full md:w-auto px-8 py-3 h-auto"
+        className="w-full md:w-auto px-8 py-3 h-auto min-h-[44px]"
         aria-label={isSubmitting ? "Sending message" : isSuccess ? "Message sent" : "Send message"}
       >
         {isSubmitting ? (

@@ -107,7 +107,9 @@ export function validateData() {
         console.log("✅ All data validated successfully");
       } catch (error) {
         if (error instanceof z.ZodError) {
-          console.error("❌ Data validation failed:", error.errors);
+          console.error("❌ Data validation failed:", error.issues);
+        } else {
+          console.error("❌ Unexpected error during validation:", error);
         }
       }
     });

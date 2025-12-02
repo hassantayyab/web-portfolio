@@ -31,7 +31,7 @@ export function ResumeCell() {
           initial={{ scale: 0, rotate: -10 }}
           animate={{ scale: 1, rotate: 0 }}
           transition={{ duration: 0.3, delay: 0.1, type: 'spring' }}
-          className='w-12 h-12 mx-auto mb-3 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-white/10 transition-colors'
+          className='w-12 h-12 mx-auto mb-3 rounded-xl bg-white/5 border border-white/15 flex items-center justify-center group-hover:bg-white/10 transition-colors'
         >
           <FileText className='w-6 h-6 text-muted-foreground group-hover:text-foreground transition-colors' />
         </motion.div>
