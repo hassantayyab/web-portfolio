@@ -15,7 +15,7 @@ import {
   User,
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 interface CommandPaletteProps {
   open: boolean;
@@ -28,17 +28,23 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
 
   const runCommand = useCallback(
     (command: () => void) => {
+      setSearch('');
       onOpenChange(false);
       command();
     },
     [onOpenChange],
   );
 
-  useEffect(() => {
-    if (!open) {
-      setSearch('');
-    }
-  }, [open]);
+  // Reset search when closing the command palette
+  const handleOpenChange = useCallback(
+    (newOpen: boolean) => {
+      if (!newOpen) {
+        setSearch('');
+      }
+      onOpenChange(newOpen);
+    },
+    [onOpenChange],
+  );
 
   const getIcon = (name: string) => {
     switch (name.toLowerCase()) {
@@ -70,7 +76,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => onOpenChange(false)}
+            onClick={() => handleOpenChange(false)}
             className='fixed inset-0 z-50 bg-black/50 backdrop-blur-sm'
           />
 
@@ -86,11 +92,11 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
               className='rounded-2xl border border-white/15 bg-background/95 backdrop-blur-xl shadow-2xl overflow-hidden'
               loop
               aria-label='Command palette'
+              value={search}
+              onValueChange={setSearch}
             >
               <div className='flex items-center border-b border-white/15 px-4'>
                 <Command.Input
-                  value={search}
-                  onValueChange={setSearch}
                   placeholder='Type a command or search...'
                   className='flex h-14 w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground'
                   aria-label='Search commands'

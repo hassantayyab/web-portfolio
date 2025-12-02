@@ -1,12 +1,12 @@
-import { NextRequest, NextResponse } from "next/server";
-import { Resend } from "resend";
-import { z } from "zod";
-import { ContactEmail } from "@/emails/contact";
-import { render } from "@react-email/render";
-import { env } from "@/lib/env";
-import { RATE_LIMIT, REQUEST_SECURITY } from "@/lib/constants";
-import { logger } from "@/lib/logger";
-import { checkRateLimit } from "@/lib/rate-limit";
+import { ContactEmail } from '@/emails/contact';
+import { REQUEST_SECURITY } from '@/lib/constants';
+import { env } from '@/lib/env';
+import { logger } from '@/lib/logger';
+import { checkRateLimit } from '@/lib/rate-limit';
+import { render } from '@react-email/render';
+import { NextRequest, NextResponse } from 'next/server';
+import { Resend } from 'resend';
+import { z } from 'zod';
 
 /**
  * Contact form API route handler
@@ -18,22 +18,31 @@ const resend = new Resend(env.RESEND_API_KEY);
 const contactSchema = z.object({
   name: z
     .string()
-    .min(2, "Name must be at least 2 characters")
-    .max(REQUEST_SECURITY.MAX_NAME_LENGTH, `Name must be at most ${REQUEST_SECURITY.MAX_NAME_LENGTH} characters`)
-    .regex(/^[a-zA-Z0-9\s\-'.,]+$/, "Name contains invalid characters"),
+    .min(2, 'Name must be at least 2 characters')
+    .max(
+      REQUEST_SECURITY.MAX_NAME_LENGTH,
+      `Name must be at most ${REQUEST_SECURITY.MAX_NAME_LENGTH} characters`,
+    )
+    .regex(/^[a-zA-Z0-9\s\-'.,]+$/, 'Name contains invalid characters'),
   email: z
     .string()
-    .email("Invalid email address")
-    .max(255, "Email address is too long")
+    .email('Invalid email address')
+    .max(255, 'Email address is too long')
     .toLowerCase(),
   subject: z
     .string()
-    .min(5, "Subject must be at least 5 characters")
-    .max(REQUEST_SECURITY.MAX_SUBJECT_LENGTH, `Subject must be at most ${REQUEST_SECURITY.MAX_SUBJECT_LENGTH} characters`),
+    .min(5, 'Subject must be at least 5 characters')
+    .max(
+      REQUEST_SECURITY.MAX_SUBJECT_LENGTH,
+      `Subject must be at most ${REQUEST_SECURITY.MAX_SUBJECT_LENGTH} characters`,
+    ),
   message: z
     .string()
-    .min(20, "Message must be at least 20 characters")
-    .max(REQUEST_SECURITY.MAX_MESSAGE_LENGTH, `Message must be at most ${REQUEST_SECURITY.MAX_MESSAGE_LENGTH} characters`),
+    .min(20, 'Message must be at least 20 characters')
+    .max(
+      REQUEST_SECURITY.MAX_MESSAGE_LENGTH,
+      `Message must be at most ${REQUEST_SECURITY.MAX_MESSAGE_LENGTH} characters`,
+    ),
 });
 
 /**
@@ -46,7 +55,7 @@ function isValidIP(ip: string): boolean {
   const ipv6Regex = /^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$|^::1$|^::$/;
   // IPv6 compressed format
   const ipv6CompressedRegex = /^([0-9a-fA-F]{0,4}:){1,7}[0-9a-fA-F]{0,4}$/;
-  
+
   return ipv4Regex.test(ip) || ipv6Regex.test(ip) || ipv6CompressedRegex.test(ip);
 }
 
@@ -55,11 +64,11 @@ function isValidIP(ip: string): boolean {
  */
 function sanitizeInput(input: string): string {
   return input
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#x27;")
-    .replace(/\//g, "&#x2F;");
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;')
+    .replace(/\//g, '&#x2F;');
 }
 
 /**
@@ -69,22 +78,24 @@ function sanitizeInput(input: string): string {
 async function readRequestBody(request: NextRequest): Promise<string> {
   // Clone the request to avoid consuming the original body
   const clonedRequest = request.clone();
-  
+
   try {
     const bodyText = await clonedRequest.text();
-    
+
     // Check size
     const bodySize = new TextEncoder().encode(bodyText).length;
     if (bodySize > REQUEST_SECURITY.MAX_BODY_SIZE) {
-      throw new Error(`Request body exceeds maximum size of ${REQUEST_SECURITY.MAX_BODY_SIZE} bytes`);
+      throw new Error(
+        `Request body exceeds maximum size of ${REQUEST_SECURITY.MAX_BODY_SIZE} bytes`,
+      );
     }
-    
+
     return bodyText;
   } catch (error) {
-    if (error instanceof Error && error.message.includes("exceeds maximum size")) {
+    if (error instanceof Error && error.message.includes('exceeds maximum size')) {
       throw error;
     }
-    throw new Error("Failed to read request body");
+    throw new Error('Failed to read request body');
   }
 }
 
@@ -95,29 +106,19 @@ export async function POST(request: NextRequest) {
   // Set up timeout
   const timeoutPromise = new Promise<NextResponse>((resolve) => {
     setTimeout(() => {
-      resolve(
-        NextResponse.json(
-          { error: "Request timeout. Please try again." },
-          { status: 408 }
-        )
-      );
+      resolve(NextResponse.json({ error: 'Request timeout. Please try again.' }, { status: 408 }));
     }, REQUEST_SECURITY.TIMEOUT_MS);
   });
 
   try {
     // Get client IP for rate limiting
-    const forwarded = request.headers.get("x-forwarded-for");
-    const realIP = request.headers.get("x-real-ip");
-    const ip = forwarded 
-      ? forwarded.split(",")[0].trim() 
-      : realIP || "unknown";
+    const forwarded = request.headers.get('x-forwarded-for');
+    const realIP = request.headers.get('x-real-ip');
+    const ip = forwarded ? forwarded.split(',')[0].trim() : realIP || 'unknown';
 
     // Validate IP format
-    if (ip === "unknown" || !isValidIP(ip)) {
-      return NextResponse.json(
-        { error: "Invalid request origin" },
-        { status: 400 }
-      );
+    if (ip === 'unknown' || !isValidIP(ip)) {
+      return NextResponse.json({ error: 'Invalid request origin' }, { status: 400 });
     }
 
     // Check rate limit
@@ -125,19 +126,19 @@ export async function POST(request: NextRequest) {
     if (!rateLimitResult.success) {
       const retryAfter = Math.ceil((rateLimitResult.reset - Date.now()) / 1000);
       return NextResponse.json(
-        { 
-          error: "Too many requests. Please try again later.",
+        {
+          error: 'Too many requests. Please try again later.',
           retryAfter,
         },
-        { 
+        {
           status: 429,
           headers: {
-            "Retry-After": String(retryAfter),
-            "X-RateLimit-Limit": String(rateLimitResult.limit),
-            "X-RateLimit-Remaining": String(rateLimitResult.remaining),
-            "X-RateLimit-Reset": String(rateLimitResult.reset),
+            'Retry-After': String(retryAfter),
+            'X-RateLimit-Limit': String(rateLimitResult.limit),
+            'X-RateLimit-Remaining': String(rateLimitResult.remaining),
+            'X-RateLimit-Reset': String(rateLimitResult.reset),
           },
-        }
+        },
       );
     }
 
@@ -145,34 +146,27 @@ export async function POST(request: NextRequest) {
     const bodyText = await Promise.race([
       readRequestBody(request),
       timeoutPromise.then(() => {
-        throw new Error("Request timeout");
+        throw new Error('Request timeout');
       }),
     ]);
-
-    if (bodyText instanceof NextResponse) {
-      return bodyText;
-    }
 
     let body: unknown;
     try {
       body = JSON.parse(bodyText);
-    } catch (parseError) {
-      return NextResponse.json(
-        { error: "Invalid JSON in request body" },
-        { status: 400 }
-      );
+    } catch {
+      return NextResponse.json({ error: 'Invalid JSON in request body' }, { status: 400 });
     }
 
     const result = contactSchema.safeParse(body);
 
     if (!result.success) {
       return NextResponse.json(
-        { 
-          error: "Invalid form data", 
+        {
+          error: 'Invalid form data',
           details: result.error.flatten(),
           requestId,
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -185,16 +179,16 @@ export async function POST(request: NextRequest) {
 
     // Check if Resend API key is configured
     if (!env.RESEND_API_KEY) {
-      logger.info("Contact form submission (Resend not configured)", {
+      logger.info('Contact form submission (Resend not configured)', {
         requestId,
         name: sanitizedName,
         email,
         subject: sanitizedSubject,
       });
-      
+
       return NextResponse.json({
         success: true,
-        message: "Message received (email delivery not configured)",
+        message: 'Message received (email delivery not configured)',
         requestId,
       });
     }
@@ -206,102 +200,104 @@ export async function POST(request: NextRequest) {
         email,
         subject: sanitizedSubject,
         message: sanitizedMessage,
-      })
+      }),
     );
 
     // Send email using Resend
     const { data, error } = await resend.emails.send({
-      from: "Portfolio Contact <onboarding@resend.dev>",
-      to: [env.CONTACT_EMAIL || "hello@example.com"],
+      from: 'Portfolio Contact <onboarding@resend.dev>',
+      to: [env.CONTACT_EMAIL || 'hello@example.com'],
       replyTo: email,
       subject: `Portfolio Contact: ${sanitizedSubject}`,
       html: emailHtml,
     });
 
     if (error) {
-      logger.error("Resend API error", error, {
+      logger.error('Resend API error', error, {
         requestId,
         email,
       });
       return NextResponse.json(
-        { 
-          error: "Failed to send email. Please try again.",
+        {
+          error: 'Failed to send email. Please try again.',
           requestId,
         },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
     const responseTime = Date.now() - startTime;
-    
+
     // Get current rate limit status for headers
     const currentRateLimit = await checkRateLimit(ip);
-    
-    return NextResponse.json({
-      success: true,
-      message: "Email sent successfully",
-      id: data?.id,
-      requestId,
-    }, {
-      headers: {
-        "X-Response-Time": `${responseTime}ms`,
-        "X-RateLimit-Limit": String(currentRateLimit.limit),
-        "X-RateLimit-Remaining": String(currentRateLimit.remaining),
-        "X-RateLimit-Reset": String(currentRateLimit.reset),
+
+    return NextResponse.json(
+      {
+        success: true,
+        message: 'Email sent successfully',
+        id: data?.id,
+        requestId,
       },
-    });
+      {
+        headers: {
+          'X-Response-Time': `${responseTime}ms`,
+          'X-RateLimit-Limit': String(currentRateLimit.limit),
+          'X-RateLimit-Remaining': String(currentRateLimit.remaining),
+          'X-RateLimit-Reset': String(currentRateLimit.reset),
+        },
+      },
+    );
   } catch (error) {
     const responseTime = Date.now() - startTime;
-    
+
     // Handle timeout errors
-    if (error instanceof Error && error.message === "Request timeout") {
+    if (error instanceof Error && error.message === 'Request timeout') {
       return NextResponse.json(
-        { 
-          error: "Request timeout. Please try again.",
+        {
+          error: 'Request timeout. Please try again.',
           requestId,
         },
-        { 
+        {
           status: 408,
           headers: {
-            "X-Response-Time": `${responseTime}ms`,
+            'X-Response-Time': `${responseTime}ms`,
           },
-        }
+        },
       );
     }
 
     // Handle body size errors
-    if (error instanceof Error && error.message.includes("exceeds maximum size")) {
+    if (error instanceof Error && error.message.includes('exceeds maximum size')) {
       return NextResponse.json(
-        { 
-          error: "Request body too large",
+        {
+          error: 'Request body too large',
           requestId,
         },
-        { 
+        {
           status: 413,
           headers: {
-            "X-Response-Time": `${responseTime}ms`,
+            'X-Response-Time': `${responseTime}ms`,
           },
-        }
+        },
       );
     }
 
-    logger.error("Contact API error", error, {
+    logger.error('Contact API error', error, {
       requestId,
       responseTime: `${responseTime}ms`,
     });
-    
+
     return NextResponse.json(
-      { 
-        error: "An unexpected error occurred",
+      {
+        error: 'An unexpected error occurred',
         requestId,
       },
-      { 
+      {
         status: 500,
         headers: {
-          "X-Response-Time": `${responseTime}ms`,
+          'X-Response-Time': `${responseTime}ms`,
         },
-      }
+      },
     );
   }
 }
-
