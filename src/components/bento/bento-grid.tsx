@@ -14,9 +14,9 @@ export const BentoGrid = memo(function BentoGrid({ children, className }: BentoG
   return (
     <div
       className={cn(
-        "grid gap-3 md:gap-4 p-4 md:p-6 w-full h-full",
-        "grid-cols-2 md:grid-cols-4 lg:grid-cols-12",
-        "grid-rows-[repeat(4,1fr)]",
+        "grid gap-3 md:gap-4 p-4 md:p-6 w-full",
+        "grid-cols-1 md:grid-cols-4 lg:grid-cols-12",
+        "auto-rows-auto md:grid-rows-[repeat(4,1fr)]",
         className
       )}
     >
@@ -44,23 +44,23 @@ export const BentoCell = memo(function BentoCell({
   const colSpanClasses: Record<number, string> = {
     1: "col-span-1",
     2: "col-span-1 md:col-span-2",
-    3: "col-span-2 md:col-span-3",
-    4: "col-span-2 md:col-span-4",
-    5: "col-span-2 md:col-span-5",
-    6: "col-span-2 md:col-span-6",
-    7: "col-span-2 md:col-span-7",
-    8: "col-span-2 md:col-span-8",
-    9: "col-span-2 md:col-span-9",
-    10: "col-span-2 md:col-span-10",
-    11: "col-span-2 md:col-span-11",
-    12: "col-span-2 md:col-span-12",
+    3: "col-span-1 md:col-span-3",
+    4: "col-span-1 md:col-span-4",
+    5: "col-span-1 md:col-span-5",
+    6: "col-span-1 md:col-span-6",
+    7: "col-span-1 md:col-span-7",
+    8: "col-span-1 md:col-span-8",
+    9: "col-span-1 md:col-span-9",
+    10: "col-span-1 md:col-span-10",
+    11: "col-span-1 md:col-span-11",
+    12: "col-span-1 md:col-span-12",
   };
 
   const rowSpanClasses: Record<number, string> = {
     1: "row-span-1",
     2: "row-span-1 md:row-span-2",
-    3: "row-span-2 md:row-span-3",
-    4: "row-span-2 md:row-span-4",
+    3: "row-span-1 md:row-span-3",
+    4: "row-span-1 md:row-span-4",
   };
 
   return (

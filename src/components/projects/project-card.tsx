@@ -28,7 +28,7 @@ export const ProjectCard = memo(function ProjectCard({ project, index, onClick }
       )}
     >
       {/* Project image/placeholder */}
-      <div className='relative h-48 overflow-hidden'>
+      <div className='relative h-40 sm:h-48 overflow-hidden'>
         <div className='absolute inset-0 bg-gradient-to-br from-primary/30 via-primary/20 to-primary/10' />
         
         {/* Subtle pattern overlay */}
@@ -36,7 +36,7 @@ export const ProjectCard = memo(function ProjectCard({ project, index, onClick }
 
         {/* Project initial as placeholder */}
         <div className='absolute inset-0 flex items-center justify-center'>
-          <span className='text-6xl font-bold text-primary/40 group-hover:scale-110 group-hover:text-primary/50 transition-all duration-300'>
+          <span className='text-5xl sm:text-6xl font-bold text-primary/40 group-hover:scale-110 group-hover:text-primary/50 transition-all duration-300'>
             {project.title[0]}
           </span>
         </div>
@@ -51,7 +51,7 @@ export const ProjectCard = memo(function ProjectCard({ project, index, onClick }
               onClick={(e) => e.stopPropagation()}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className='w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
+              className='w-11 h-11 sm:w-10 sm:h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
               aria-label={`View ${project.title} live demo`}
             >
               <ExternalLink className='w-5 h-5' aria-hidden="true" />
@@ -65,7 +65,7 @@ export const ProjectCard = memo(function ProjectCard({ project, index, onClick }
               onClick={(e) => e.stopPropagation()}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className='w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
+              className='w-11 h-11 sm:w-10 sm:h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
               aria-label={`View ${project.title} source code on GitHub`}
             >
               <Github className='w-5 h-5' aria-hidden="true" />
@@ -75,10 +75,10 @@ export const ProjectCard = memo(function ProjectCard({ project, index, onClick }
 
         {/* Featured badge */}
         {project.featured && (
-          <div className='absolute top-3 left-3'>
+          <div className='absolute top-2 sm:top-3 left-2 sm:left-3'>
             <Badge
               variant='secondary'
-              className='bg-primary/20 text-primary border-primary/30 text-sm'
+              className='bg-primary/20 text-primary border-primary/30 text-xs sm:text-sm'
             >
               Featured
             </Badge>
@@ -86,8 +86,8 @@ export const ProjectCard = memo(function ProjectCard({ project, index, onClick }
         )}
 
         {/* Year badge */}
-        <div className='absolute top-3 right-3'>
-          <Badge variant='outline' className='bg-black/30 backdrop-blur-sm border-white/15 text-sm'>
+        <div className='absolute top-2 sm:top-3 right-2 sm:right-3'>
+          <Badge variant='outline' className='bg-black/30 backdrop-blur-sm border-white/15 text-xs sm:text-sm'>
             <Calendar className='w-3 h-3 mr-1' />
             {project.year}
           </Badge>
@@ -95,28 +95,28 @@ export const ProjectCard = memo(function ProjectCard({ project, index, onClick }
       </div>
 
       {/* Content */}
-      <div className='flex-1 flex flex-col p-5'>
-        <h3 className='text-lg font-semibold mb-2 group-hover:text-primary transition-colors'>
+      <div className='flex-1 flex flex-col p-4 sm:p-5'>
+        <h3 className='text-base sm:text-lg font-semibold mb-2 group-hover:text-primary transition-colors'>
           {project.title}
         </h3>
 
-        <p className='text-sm text-muted-foreground mb-4 line-clamp-2 flex-1'>
+        <p className='text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4 line-clamp-2 flex-1'>
           {project.description}
         </p>
 
         {/* Technologies */}
-        <div className='flex flex-wrap gap-1.5'>
+        <div className='flex flex-wrap gap-1 sm:gap-1.5'>
           {project.technologies.slice(0, 4).map((tech) => (
             <Badge
               key={tech}
               variant='outline'
-              className='text-sm bg-white/5 border-white/15 hover:bg-white/10 hover:border-white/20'
+              className='text-xs sm:text-sm bg-white/5 border-white/15 hover:bg-white/10 hover:border-white/20'
             >
               {tech}
             </Badge>
           ))}
           {project.technologies.length > 4 && (
-            <Badge variant='outline' className='text-sm bg-white/5 border-white/15'>
+            <Badge variant='outline' className='text-xs sm:text-sm bg-white/5 border-white/15'>
               +{project.technologies.length - 4}
             </Badge>
           )}

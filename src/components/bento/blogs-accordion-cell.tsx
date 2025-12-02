@@ -16,25 +16,25 @@ export function BlogsAccordionCell() {
   };
 
   return (
-    <div className='relative h-full flex flex-col overflow-hidden'>
+    <div className='relative min-h-[400px] md:min-h-0 h-full flex flex-col overflow-hidden'>
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
-        className='flex items-center justify-between p-4 md:p-5 pb-0'
+        className='flex items-center justify-between p-4 sm:p-5 md:p-5 pb-0'
       >
         <h3 className='text-sm font-medium text-muted-foreground uppercase tracking-wider'>
           Recent Blogs
         </h3>
-        <Link href='/blogs' className='flex items-center gap-1 text-sm text-primary group'>
-          <span className='hidden md:inline'>View All</span>
+        <Link href='/blogs' className='flex items-center gap-1 text-sm text-primary group min-h-[44px] justify-end'>
+          <span className='hidden sm:inline'>View All</span>
           <ArrowUpRight className='w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform' />
         </Link>
       </motion.div>
 
       {/* Blogs Accordion */}
-      <div className='flex-1 flex flex-col p-4 md:p-5 pt-3 overflow-hidden'>
+      <div className='flex-1 flex flex-col p-4 sm:p-5 md:p-5 pt-3 overflow-hidden'>
         {featuredBlogs.map((blog, index) => {
           const isExpanded = expandedId === blog.id;
 
@@ -53,13 +53,13 @@ export function BlogsAccordionCell() {
               <button
                 onClick={() => toggleBlog(blog.id)}
                 className={cn(
-                  'w-full flex items-center justify-between py-3 text-left group transition-colors',
+                  'w-full flex items-center justify-between py-3 sm:py-3.5 text-left group transition-colors min-h-[48px]',
                   isExpanded ? 'text-foreground' : 'text-muted-foreground hover:text-foreground',
                 )}
               >
                 <span
                   className={cn(
-                    'text-sm md:text-base font-medium transition-all line-clamp-1',
+                    'text-sm sm:text-base md:text-base font-medium transition-all line-clamp-1 pr-2',
                     isExpanded && 'text-foreground',
                   )}
                 >
@@ -67,7 +67,7 @@ export function BlogsAccordionCell() {
                 </span>
                 <ChevronDown
                   className={cn(
-                    'w-4 h-4 transition-transform duration-300 flex-shrink-0',
+                    'w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 shrink-0',
                     isExpanded && 'rotate-180',
                   )}
                 />
@@ -85,23 +85,23 @@ export function BlogsAccordionCell() {
                   >
                     <div className='pb-4 space-y-3'>
                       {/* Blog Card */}
-                      <div className='relative rounded-xl overflow-hidden bg-linear-to-br from-primary/10 via-primary/5 to-transparent border border-white/10 p-4'>
+                      <div className='relative rounded-xl overflow-hidden bg-linear-to-br from-primary/10 via-primary/5 to-transparent border border-white/10 p-3 sm:p-4'>
                         {/* Category Badge */}
                         <div className='mb-2'>
-                          <span className='inline-block text-sm px-2 py-1 rounded-full bg-primary/20 text-primary font-medium'>
+                          <span className='inline-block text-xs sm:text-sm px-2 py-0.5 sm:py-1 rounded-full bg-primary/20 text-primary font-medium'>
                             {blog.category}
                           </span>
                         </div>
 
                         {/* Description */}
-                        <p className='text-sm text-muted-foreground/90 line-clamp-6 mb-3'>
+                        <p className='text-xs sm:text-sm text-muted-foreground/90 line-clamp-3 sm:line-clamp-4 md:line-clamp-6 mb-3'>
                           {blog.description}
                         </p>
 
                         {/* Meta Info */}
-                        <div className='flex items-center gap-3 text-sm text-muted-foreground/70'>
+                        <div className='flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-muted-foreground/70 flex-wrap'>
                           <div className='flex items-center gap-1'>
-                            <Calendar className='w-3 h-3' />
+                            <Calendar className='w-3 h-3 sm:w-3.5 sm:h-3.5' />
                             <span>
                               {new Date(blog.publishedAt).toLocaleDateString('en-US', {
                                 month: 'short',
@@ -111,7 +111,7 @@ export function BlogsAccordionCell() {
                             </span>
                           </div>
                           <div className='flex items-center gap-1'>
-                            <Clock className='w-3 h-3' />
+                            <Clock className='w-3 h-3 sm:w-3.5 sm:h-3.5' />
                             <span>{blog.readTime}</span>
                           </div>
                         </div>
@@ -121,7 +121,7 @@ export function BlogsAccordionCell() {
                           {blog.tags.slice(0, 3).map((tag) => (
                             <span
                               key={tag}
-                              className='text-sm px-2 py-0.5 rounded-full bg-white/5 text-muted-foreground/70 border border-white/5'
+                              className='text-xs sm:text-sm px-2 py-0.5 rounded-full bg-white/5 text-muted-foreground/70 border border-white/5'
                             >
                               {tag}
                             </span>

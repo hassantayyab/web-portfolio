@@ -47,13 +47,13 @@ const LazySocialCell = dynamic(() =>
 export default function HomePage() {
   return (
     <ClientLayout>
-      <main className='h-screen w-screen overflow-hidden no-scrollbar' id="main-content">
+      <main className='min-h-screen md:h-screen w-full md:overflow-hidden' id="main-content">
         {/* Background effects */}
         <div className='fixed inset-0 bg-linear-to-br from-background via-background to-primary/5 pointer-events-none' />
         <div className='fixed inset-0 dot-pattern opacity-30 pointer-events-none' />
 
         {/* Bento Grid */}
-        <BentoGrid className='h-full pt-24 md:pt-24'>
+        <BentoGrid className='pt-20 pb-8 md:pt-24 md:pb-0 md:h-full'>
           {/* Row 1-2: Hero (left) + Photo (center-right) + Blogs (right) */}
           {/* Hero - 5 cols (2.5 in 6-col = 5 in 12-col), 2 rows */}
           <BentoCell colSpan={5} rowSpan={2}>

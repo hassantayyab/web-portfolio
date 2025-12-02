@@ -12,9 +12,9 @@ export function HeroCell() {
   const displaySkills = useMemo(() => skills.slice(0, SKILL_LIMITS.HERO_DISPLAY), []);
 
   return (
-    <div className='relative h-full flex flex-col justify-between p-6 md:p-8 overflow-hidden'>
+    <div className='relative min-h-[400px] md:min-h-0 md:h-full flex flex-col justify-between p-4 sm:p-6 md:p-8 overflow-hidden'>
       {/* Background gradient */}
-      <div className='absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-50' />
+      <div className='absolute inset-0 bg-linear-to-br from-primary/10 via-transparent to-transparent opacity-50' />
 
       {/* Animated grid pattern */}
       <div className='absolute inset-0 grid-pattern opacity-30' />
@@ -35,7 +35,7 @@ export function HeroCell() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: ANIMATION_DURATIONS.SLOW, delay: ANIMATION_DELAYS.SHORT }}
-          className='text-display font-bold mb-3 tracking-tight'
+          className='text-display font-bold mb-3 tracking-tight break-words'
         >
           {personalInfo.name}
         </motion.h1>
@@ -45,7 +45,7 @@ export function HeroCell() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: ANIMATION_DURATIONS.SLOW, delay: ANIMATION_DELAYS.MEDIUM }}
-          className='flex flex-wrap gap-2 text-body-lg md:text-xl lg:text-2xl text-muted-foreground'
+          className='flex flex-wrap gap-2 text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground'
         >
           {words.map((word, index) => (
             <motion.span
@@ -68,7 +68,7 @@ export function HeroCell() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: ANIMATION_DURATIONS.SLOW, delay: 0.7 }}
-          className='mt-4 text-body text-muted-foreground/80 max-w-md'
+          className='mt-4 text-sm sm:text-body text-muted-foreground/80 max-w-md'
         >
           {personalInfo.shortBio}
         </motion.p>
@@ -79,7 +79,7 @@ export function HeroCell() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: ANIMATION_DURATIONS.SLOW, delay: 0.9 }}
-        className='relative z-10 flex items-center gap-3 md:gap-4 flex-wrap'
+        className='relative z-10 flex items-center gap-2 md:gap-3 lg:gap-4 flex-wrap mt-4 md:mt-0'
       >
         {displaySkills.map((skill, index) => {
           const IconComponent = getSkillIcon(skill.icon);
@@ -94,13 +94,13 @@ export function HeroCell() {
                 delay: 1 + index * ANIMATION_DELAYS.STAGGER,
               }}
               whileHover={{ scale: 1.05, y: -2 }}
-              className='group flex items-center gap-1.5 px-2.5 py-1.5 md:px-3 md:py-2 rounded-lg bg-white/5 border border-white/15 hover:bg-white/10 hover:border-white/25 hover:shadow-md transition-all duration-300 min-h-[36px]'
+              className='group flex items-center gap-1.5 px-2 py-1.5 sm:px-2.5 sm:py-1.5 md:px-3 md:py-2 rounded-lg bg-white/5 border border-white/15 hover:bg-white/10 hover:border-white/25 hover:shadow-md transition-all duration-300 min-h-[36px]'
             >
               <IconComponent
-                className='w-4 h-4 md:w-5 md:h-5 text-muted-foreground group-hover:text-foreground transition-colors flex-shrink-0'
+                className='w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-muted-foreground group-hover:text-foreground transition-colors shrink-0'
                 aria-hidden='true'
               />
-              <span className='text-sm md:text-sm text-muted-foreground/80 group-hover:text-foreground transition-colors font-medium'>
+              <span className='text-xs sm:text-sm md:text-sm text-muted-foreground/80 group-hover:text-foreground transition-colors font-medium'>
                 {skill.name}
               </span>
             </motion.div>

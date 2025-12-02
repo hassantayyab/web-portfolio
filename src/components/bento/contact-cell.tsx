@@ -16,7 +16,7 @@ export function ContactCell() {
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
         className={cn(
-          "relative h-full w-full flex flex-col justify-center items-center p-6 md:p-8 overflow-hidden cursor-pointer text-left",
+          "relative min-h-[250px] md:min-h-0 h-full w-full flex flex-col justify-center items-center p-6 md:p-8 overflow-hidden cursor-pointer text-left",
           "group border-2 border-primary/30 group-hover:border-primary/50 transition-all duration-300",
           "shadow-lg shadow-primary/10 group-hover:shadow-xl group-hover:shadow-primary/20 group-hover:scale-[1.01]"
         )}
@@ -46,7 +46,7 @@ export function ContactCell() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.2 }}
-            className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-3"
+            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold mb-3"
           >
             Let&apos;s work together
           </motion.h3>
@@ -55,7 +55,7 @@ export function ContactCell() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.3 }}
-            className="text-base md:text-lg lg:text-xl text-muted-foreground"
+            className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground break-words"
           >
             {personalInfo.email}
           </motion.p>

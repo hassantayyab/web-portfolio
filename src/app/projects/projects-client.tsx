@@ -40,7 +40,7 @@ export default function ProjectsPageClient() {
               <div className="flex flex-wrap gap-2">
                 <button
                   onClick={() => setFilter("all")}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                  className={`px-3 sm:px-4 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all min-h-[44px] ${
                     filter === "all"
                       ? "bg-primary text-primary-foreground"
                       : "bg-white/5 text-muted-foreground hover:bg-white/10 hover:text-foreground"
@@ -52,7 +52,7 @@ export default function ProjectsPageClient() {
                   <button
                     key={tech}
                     onClick={() => setFilter(tech)}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                    className={`px-3 sm:px-4 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all min-h-[44px] ${
                       filter === tech
                         ? "bg-primary text-primary-foreground"
                         : "bg-white/5 text-muted-foreground hover:bg-white/10 hover:text-foreground"
@@ -65,7 +65,7 @@ export default function ProjectsPageClient() {
             </motion.div>
 
             {/* Projects grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
               {filteredProjects.map((project, index) => (
                 <ProjectCard
                   key={project.id}

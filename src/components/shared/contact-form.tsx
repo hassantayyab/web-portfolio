@@ -93,65 +93,79 @@ export function ContactForm() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       onSubmit={handleSubmit(onSubmit)}
-      className='space-y-6'
+      className='space-y-4 sm:space-y-5 md:space-y-6'
     >
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 md:gap-6'>
         {/* Name */}
-        <div className='space-y-2.5'>
-          <Label htmlFor='name'>Name</Label>
+        <div className='space-y-2 sm:space-y-2.5'>
+          <Label htmlFor='name' className='text-sm sm:text-base'>
+            Name
+          </Label>
           <Input
             id='name'
             placeholder='John Doe'
             {...register('name')}
-            className='bg-white/5 border-white/15 focus:border-primary min-h-[44px]'
+            className='bg-white/5 border-white/15 focus:border-primary min-h-[44px] text-sm sm:text-base'
           />
           {errors.name && (
-            <p className='text-sm text-destructive font-medium'>{errors.name.message}</p>
+            <p className='text-xs sm:text-sm text-destructive font-medium'>{errors.name.message}</p>
           )}
         </div>
 
         {/* Email */}
-        <div className='space-y-2.5'>
-          <Label htmlFor='email'>Email</Label>
+        <div className='space-y-2 sm:space-y-2.5'>
+          <Label htmlFor='email' className='text-sm sm:text-base'>
+            Email
+          </Label>
           <Input
             id='email'
             type='email'
             placeholder='john@example.com'
             {...register('email')}
-            className='bg-white/5 border-white/15 focus:border-primary min-h-[44px]'
+            className='bg-white/5 border-white/15 focus:border-primary min-h-[44px] text-sm sm:text-base'
           />
           {errors.email && (
-            <p className='text-sm text-destructive font-medium'>{errors.email.message}</p>
+            <p className='text-xs sm:text-sm text-destructive font-medium'>
+              {errors.email.message}
+            </p>
           )}
         </div>
       </div>
 
       {/* Subject */}
-      <div className='space-y-2.5'>
-        <Label htmlFor='subject'>Subject</Label>
+      <div className='space-y-2 sm:space-y-2.5'>
+        <Label htmlFor='subject' className='text-sm sm:text-base'>
+          Subject
+        </Label>
         <Input
           id='subject'
           placeholder="What's this about?"
           {...register('subject')}
-          className='bg-white/5 border-white/15 focus:border-primary min-h-[44px]'
+          className='bg-white/5 border-white/15 focus:border-primary min-h-[44px] text-sm sm:text-base'
         />
         {errors.subject && (
-          <p className='text-sm text-destructive font-medium'>{errors.subject.message}</p>
+          <p className='text-xs sm:text-sm text-destructive font-medium'>
+            {errors.subject.message}
+          </p>
         )}
       </div>
 
       {/* Message */}
-      <div className='space-y-2.5'>
-        <Label htmlFor='message'>Message</Label>
+      <div className='space-y-2 sm:space-y-2.5'>
+        <Label htmlFor='message' className='text-sm sm:text-base'>
+          Message
+        </Label>
         <Textarea
           id='message'
           placeholder='Tell me about your project or just say hello...'
           rows={6}
           {...register('message')}
-          className='bg-white/5 border-white/15 focus:border-primary resize-none'
+          className='bg-white/5 border-white/15 focus:border-primary resize-none text-sm sm:text-base'
         />
         {errors.message && (
-          <p className='text-sm text-destructive font-medium'>{errors.message.message}</p>
+          <p className='text-xs sm:text-sm text-destructive font-medium'>
+            {errors.message.message}
+          </p>
         )}
       </div>
 
