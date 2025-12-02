@@ -82,7 +82,7 @@ export function SkillsCell() {
               </div>
 
               {/* Skill name - always visible */}
-              <span className='text-[10px] md:text-xs text-muted-foreground/80 group-hover:text-foreground transition-colors text-center leading-tight'>
+              <span className='text-xs md:text-xs text-muted-foreground/80 group-hover:text-foreground transition-colors text-center leading-tight'>
                 {skill.name}
               </span>
             </motion.div>
