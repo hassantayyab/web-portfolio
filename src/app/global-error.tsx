@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { AlertCircle, RefreshCw } from "lucide-react";
+import { logger } from "@/lib/logger";
 
 interface GlobalErrorProps {
   error: Error & { digest?: string };
@@ -14,15 +15,9 @@ interface GlobalErrorProps {
  */
 export default function GlobalError({ error, reset }: GlobalErrorProps) {
   useEffect(() => {
-    // Log error to error reporting service (e.g., Sentry)
-    console.error("Global error:", {
-      message: error.message,
+    logger.error("Global error", error, {
       digest: error.digest,
-      stack: error.stack,
     });
-
-    // In production, send to error monitoring service
-    // Example: Sentry.captureException(error);
   }, [error]);
 
   return (

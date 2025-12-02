@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { AlertCircle, Home, RefreshCw } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { logger } from "@/lib/logger";
 
 interface ErrorProps {
   error: Error & { digest?: string };
@@ -17,15 +18,9 @@ interface ErrorProps {
  */
 export default function Error({ error, reset }: ErrorProps) {
   useEffect(() => {
-    // Log error to error reporting service (e.g., Sentry)
-    console.error("Route error:", {
-      message: error.message,
+    logger.error("Route error", error, {
       digest: error.digest,
-      stack: error.stack,
     });
-
-    // In production, send to error monitoring service
-    // Example: Sentry.captureException(error);
   }, [error]);
 
   return (

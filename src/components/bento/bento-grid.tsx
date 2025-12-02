@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import { cn } from "@/lib/utils";
 import { ReactNode } from "react";
 import { BENTO_SPANS } from "@/lib/constants";
@@ -9,7 +10,7 @@ interface BentoGridProps {
   className?: string;
 }
 
-export function BentoGrid({ children, className }: BentoGridProps) {
+export const BentoGrid = memo(function BentoGrid({ children, className }: BentoGridProps) {
   return (
     <div
       className={cn(
@@ -22,7 +23,7 @@ export function BentoGrid({ children, className }: BentoGridProps) {
       {children}
     </div>
   );
-}
+});
 
 type ColSpan = typeof BENTO_SPANS.COL[number];
 type RowSpan = typeof BENTO_SPANS.ROW[number];
@@ -34,7 +35,7 @@ interface BentoCellProps {
   rowSpan?: RowSpan;
 }
 
-export function BentoCell({
+export const BentoCell = memo(function BentoCell({
   children,
   className,
   colSpan = 1,
@@ -74,5 +75,5 @@ export function BentoCell({
       {children}
     </div>
   );
-}
+});
 

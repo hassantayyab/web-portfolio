@@ -1,5 +1,6 @@
 'use client';
 
+import { memo } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Project } from '@/lib/types';
 import { cn } from '@/lib/utils';
@@ -12,7 +13,7 @@ interface ProjectCardProps {
   onClick: () => void;
 }
 
-export function ProjectCard({ project, index, onClick }: ProjectCardProps) {
+export const ProjectCard = memo(function ProjectCard({ project, index, onClick }: ProjectCardProps) {
   return (
     <motion.article
       initial={{ opacity: 0, y: 20 }}
@@ -123,4 +124,4 @@ export function ProjectCard({ project, index, onClick }: ProjectCardProps) {
       </div>
     </motion.article>
   );
-}
+});

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 import { defaultMetadata, generatePersonJsonLd, generateWebsiteJsonLd } from "@/lib/metadata";
+import { WebVitalsScript } from "@/components/shared/web-vitals-script";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -50,6 +51,7 @@ export default function RootLayout({
             duration: 5000,
           }}
         />
+        <WebVitalsScript />
       </body>
     </html>
   );

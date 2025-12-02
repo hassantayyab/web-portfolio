@@ -26,12 +26,24 @@ const envSchema = z.object({
  */
 function getEnv() {
   try {
-    return envSchema.parse({
+    const parsed = envSchema.parse({
       NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
       RESEND_API_KEY: process.env.RESEND_API_KEY,
       CONTACT_EMAIL: process.env.CONTACT_EMAIL,
       NODE_ENV: process.env.NODE_ENV,
     });
+
+    // Warn in production if critical env vars are missing
+    if (parsed.NODE_ENV === 'production') {
+      if (!parsed.RESEND_API_KEY) {
+        console.warn('⚠️  RESEND_API_KEY is not set. Email functionality will be disabled.');
+      }
+      if (!parsed.CONTACT_EMAIL) {
+        console.warn('⚠️  CONTACT_EMAIL is not set. Contact form emails may not be delivered.');
+      }
+    }
+
+    return parsed;
   } catch (error) {
     if (error instanceof z.ZodError) {
       const missingVars = error.issues.map((err) => err.path.join('.')).join(', ');

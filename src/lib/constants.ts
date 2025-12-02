@@ -36,6 +36,17 @@ export const RATE_LIMIT = {
 } as const;
 
 /**
+ * Request security constants
+ */
+export const REQUEST_SECURITY = {
+  MAX_BODY_SIZE: 10 * 1024, // 10KB
+  TIMEOUT_MS: 30 * 1000, // 30 seconds
+  MAX_NAME_LENGTH: 500,
+  MAX_SUBJECT_LENGTH: 500,
+  MAX_MESSAGE_LENGTH: 10000,
+} as const;
+
+/**
  * Form validation constants
  */
 export const FORM_CONSTANTS = {

@@ -1,16 +1,48 @@
 'use client';
 
+import { Suspense } from 'react';
+import dynamic from 'next/dynamic';
 import {
   BentoCell,
   BentoGrid,
-  BlogsAccordionCell,
-  ContactCell,
   HeroCell,
   PhotoCell,
-  ProjectsCell,
-  SocialCell,
 } from '@/components/bento';
 import { ClientLayout } from '@/components/shared/client-layout';
+import { Skeleton } from '@/components/shared/skeleton';
+
+// Lazy load below-the-fold components
+const LazyBlogsAccordionCell = dynamic(() => 
+  import('@/components/bento').then(mod => ({ default: mod.BlogsAccordionCell })),
+  { 
+    loading: () => <Skeleton className="h-full w-full" />,
+    ssr: true,
+  }
+);
+
+const LazyProjectsCell = dynamic(() => 
+  import('@/components/bento').then(mod => ({ default: mod.ProjectsCell })),
+  { 
+    loading: () => <Skeleton className="h-full w-full" />,
+    ssr: true,
+  }
+);
+
+const LazyContactCell = dynamic(() => 
+  import('@/components/bento').then(mod => ({ default: mod.ContactCell })),
+  { 
+    loading: () => <Skeleton className="h-full w-full" />,
+    ssr: true,
+  }
+);
+
+const LazySocialCell = dynamic(() => 
+  import('@/components/bento').then(mod => ({ default: mod.SocialCell })),
+  { 
+    loading: () => <Skeleton className="h-full w-full" />,
+    ssr: true,
+  }
+);
 
 export default function HomePage() {
   return (
@@ -35,24 +67,32 @@ export default function HomePage() {
 
           {/* Blogs Accordion - 4 cols (2 in 6-col = 4 in 12-col), 3 rows */}
           <BentoCell colSpan={4} rowSpan={3}>
-            <BlogsAccordionCell />
+            <Suspense fallback={<Skeleton className="h-full w-full" />}>
+              <LazyBlogsAccordionCell />
+            </Suspense>
           </BentoCell>
 
           {/* Row 3-4: Projects + Contact (both now 2 rows tall) */}
           {/* Projects - 4 cols (2 in 6-col = 4 in 12-col), 2 rows */}
           <BentoCell colSpan={4} rowSpan={2}>
-            <ProjectsCell />
+            <Suspense fallback={<Skeleton className="h-full w-full" />}>
+              <LazyProjectsCell />
+            </Suspense>
           </BentoCell>
 
           {/* Contact CTA - 4 cols (2 in 6-col = 4 in 12-col), 2 rows */}
           <BentoCell colSpan={4} rowSpan={2}>
-            <ContactCell />
+            <Suspense fallback={<Skeleton className="h-full w-full" />}>
+              <LazyContactCell />
+            </Suspense>
           </BentoCell>
 
           {/* Row 4: Social Links (under blogs) */}
           {/* Social Links - 4 cols (2 in 6-col = 4 in 12-col), 1 row */}
           <BentoCell colSpan={4} rowSpan={1}>
-            <SocialCell />
+            <Suspense fallback={<Skeleton className="h-full w-full" />}>
+              <LazySocialCell />
+            </Suspense>
           </BentoCell>
         </BentoGrid>
       </main>
