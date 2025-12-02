@@ -27,28 +27,30 @@ export default function BlogsClient() {
               className='group relative'
             >
               <Link href={`/blogs/${blog.id}`} className='block h-full cursor-pointer'>
-                <div className='h-full flex flex-col p-4 sm:p-5 md:p-6 rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-sm hover:border-white/20 hover:bg-white/[0.05] transition-all duration-300 relative'>
+                <div className='h-full flex flex-col p-4 sm:p-5 md:p-6 rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-sm hover:border-white/20 hover:bg-white/[0.05] transition-all duration-300 relative overflow-hidden'>
                   {/* Hover glow effect */}
                   <div className='absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/10 via-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300' />
 
                   {/* Content */}
-                  <div className='relative z-10 flex flex-col flex-1'>
+                  <div className='relative z-10 flex flex-col flex-1 min-h-0 overflow-hidden'>
                     {/* Category Badge */}
-                    <div className='mb-3'>
+                    <div className='mb-3 flex-shrink-0'>
                       <span className='inline-block text-xs sm:text-sm px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-primary/10 text-primary border border-primary/20 font-medium'>
                         {blog.category}
                       </span>
                     </div>
 
                     {/* Title */}
-                    <h2 className='text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-3 group-hover:text-primary transition-colors'>
+                    <h2 className='text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-3 group-hover:text-primary transition-colors flex-shrink-0'>
                       {blog.title}
                     </h2>
 
                     {/* Description */}
-                    <p className='text-xs sm:text-sm md:text-base text-muted-foreground mb-3 sm:mb-4 flex-1 line-clamp-3'>
-                      {blog.description}
-                    </p>
+                    <div className='flex-1 min-h-0 overflow-hidden mb-3 sm:mb-4'>
+                      <p className='text-xs sm:text-sm md:text-base text-muted-foreground line-clamp-3'>
+                        {blog.description}
+                      </p>
+                    </div>
 
                     {/* Meta Info */}
                     <div className='flex items-center gap-3 sm:gap-4 text-xs sm:text-sm text-muted-foreground/70 mb-3 sm:mb-4 flex-wrap'>
