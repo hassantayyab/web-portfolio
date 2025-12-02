@@ -2,11 +2,11 @@
 
 import { motion } from "framer-motion";
 import { ClientLayout } from "@/components/shared/client-layout";
-import { PageTransition } from "@/components/shared";
+import { PageLayout } from "@/components/shared/page-layout";
 import { Timeline } from "@/components/shared/timeline";
 import { personalInfo, skills, experiences, education } from "@/lib/data";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Calendar, GraduationCap, Briefcase, Code, Heart } from "lucide-react";
+import { MapPin, Calendar } from "lucide-react";
 
 export default function AboutPageClient() {
   const skillsByCategory = {
@@ -17,25 +17,11 @@ export default function AboutPageClient() {
 
   return (
     <ClientLayout>
-      <main className="min-h-screen">
-        {/* Background effects */}
-        <div className="fixed inset-0 bg-gradient-to-br from-background via-background to-primary/5 pointer-events-none" />
-        <div className="fixed inset-0 dot-pattern opacity-30 pointer-events-none" />
-
-        <PageTransition>
-          <div className="relative z-10 max-w-4xl mx-auto px-4 md:px-6 py-24 md:py-32">
-            {/* Header */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="mb-16"
-            >
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">About Me</h1>
-              <p className="text-lg text-muted-foreground">
-                Get to know more about my background, experience, and what drives me.
-              </p>
-            </motion.div>
+      <PageLayout
+        title="About Me"
+        description="Get to know more about my background, experience, and what drives me."
+        maxWidth="4xl"
+      >
 
             {/* Bio Section */}
             <motion.section
@@ -44,12 +30,7 @@ export default function AboutPageClient() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="mb-16"
             >
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <Heart className="w-5 h-5 text-primary" />
-                </div>
-                <h2 className="text-2xl font-semibold">Who I Am</h2>
-              </div>
+              <h2 className="text-2xl font-semibold mb-6">Who I Am</h2>
               
               <div className="prose prose-invert prose-lg max-w-none">
                 <p className="text-muted-foreground leading-relaxed">
@@ -76,12 +57,7 @@ export default function AboutPageClient() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="mb-16"
             >
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <Code className="w-5 h-5 text-primary" />
-                </div>
-                <h2 className="text-2xl font-semibold">Skills & Technologies</h2>
-              </div>
+              <h2 className="text-2xl font-semibold mb-6">Skills & Technologies</h2>
 
               <div className="space-y-6">
                 {/* Frontend */}
@@ -147,12 +123,7 @@ export default function AboutPageClient() {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="mb-16"
             >
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <Briefcase className="w-5 h-5 text-primary" />
-                </div>
-                <h2 className="text-2xl font-semibold">Experience</h2>
-              </div>
+              <h2 className="text-2xl font-semibold mb-8">Experience</h2>
 
               <Timeline experiences={experiences} />
             </motion.section>
@@ -163,12 +134,7 @@ export default function AboutPageClient() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <GraduationCap className="w-5 h-5 text-primary" />
-                </div>
-                <h2 className="text-2xl font-semibold">Education</h2>
-              </div>
+              <h2 className="text-2xl font-semibold mb-6">Education</h2>
 
               <div className="space-y-6">
                 {education.map((edu) => (
@@ -191,9 +157,7 @@ export default function AboutPageClient() {
                 ))}
               </div>
             </motion.section>
-          </div>
-        </PageTransition>
-      </main>
+      </PageLayout>
     </ClientLayout>
   );
 }

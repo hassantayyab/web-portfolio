@@ -6,7 +6,7 @@ import { ClientLayout } from "@/components/shared/client-layout";
 import { ProjectCard, ProjectModal } from "@/components/projects";
 import { projects } from "@/lib/data";
 import { Project } from "@/lib/types";
-import { PageTransition } from "@/components/shared";
+import { PageLayout } from "@/components/shared/page-layout";
 
 export default function ProjectsPageClient() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -24,27 +24,11 @@ export default function ProjectsPageClient() {
 
   return (
     <ClientLayout>
-      <main className="min-h-screen">
-        {/* Background effects */}
-        <div className="fixed inset-0 bg-gradient-to-br from-background via-background to-primary/5 pointer-events-none" />
-        <div className="fixed inset-0 dot-pattern opacity-30 pointer-events-none" />
-
-        <PageTransition>
-          <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 py-24 md:py-32">
-            {/* Header */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="mb-12"
-            >
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">Projects</h1>
-              <p className="text-lg text-muted-foreground max-w-2xl">
-                A collection of projects I&apos;ve worked on, from web applications
-                to open source contributions. Each project represents a unique
-                challenge and learning experience.
-              </p>
-            </motion.div>
+      <PageLayout
+        title="Projects"
+        description="A collection of projects I've worked on, from web applications to open source contributions. Each project represents a unique challenge and learning experience."
+        maxWidth="7xl"
+      >
 
             {/* Filter */}
             <motion.div
@@ -110,15 +94,13 @@ export default function ProjectsPageClient() {
                 </button>
               </motion.div>
             )}
-          </div>
-        </PageTransition>
+      </PageLayout>
 
-        {/* Project modal */}
-        <ProjectModal
-          project={selectedProject}
-          onClose={() => setSelectedProject(null)}
-        />
-      </main>
+      {/* Project modal */}
+      <ProjectModal
+        project={selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
     </ClientLayout>
   );
 }

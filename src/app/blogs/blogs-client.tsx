@@ -1,7 +1,7 @@
 'use client';
 
 import { ClientLayout } from '@/components/shared/client-layout';
-import { PageTransition } from '@/components/shared/page-transition';
+import { PageLayout } from '@/components/shared/page-layout';
 import { blogs } from '@/lib/data';
 import { motion } from 'framer-motion';
 import { ArrowRight, Calendar, Clock } from 'lucide-react';
@@ -9,28 +9,11 @@ import { ArrowRight, Calendar, Clock } from 'lucide-react';
 export default function BlogsClient() {
   return (
     <ClientLayout>
-      <PageTransition>
-        <main className='min-h-screen pt-24 md:pt-28 pb-20'>
-          {/* Background effects */}
-          <div className='fixed inset-0 bg-linear-to-br from-background via-background to-primary/5 pointer-events-none' />
-          <div className='fixed inset-0 dot-pattern opacity-30 pointer-events-none' />
-
-          <div className='relative z-10 container mx-auto px-4 md:px-6 max-w-6xl'>
-            {/* Header */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className='mb-12 md:mb-16'
-            >
-              <h1 className='text-4xl md:text-5xl lg:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70'>
-                Blog
-              </h1>
-              <p className='text-lg md:text-xl text-muted-foreground max-w-2xl'>
-                Thoughts on web development, design, and technology. Join me as I share insights and
-                learnings from my journey.
-              </p>
-            </motion.div>
+      <PageLayout
+        title="Blog"
+        description="Thoughts on web development, design, and technology. Join me as I share insights and learnings from my journey."
+        maxWidth="6xl"
+      >
 
             {/* Blogs Grid */}
             <div className='grid gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3'>
@@ -117,9 +100,7 @@ export default function BlogsClient() {
                 <p className='text-muted-foreground text-lg'>No blog posts yet. Check back soon!</p>
               </motion.div>
             )}
-          </div>
-        </main>
-      </PageTransition>
+      </PageLayout>
     </ClientLayout>
   );
 }
