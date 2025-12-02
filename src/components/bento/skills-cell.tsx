@@ -52,7 +52,7 @@ export function SkillsCell() {
         transition={{ duration: 0.3 }}
         className='mb-2 md:mb-3'
       >
-        <h3 className='text-xs md:text-sm font-medium text-muted-foreground uppercase tracking-wider'>
+        <h3 className='text-sm md:text-sm font-medium text-muted-foreground uppercase tracking-wider'>
           Tech Stack
         </h3>
       </motion.div>
@@ -82,7 +82,7 @@ export function SkillsCell() {
               </div>
 
               {/* Skill name - always visible */}
-              <span className='text-xs md:text-xs text-muted-foreground/80 group-hover:text-foreground transition-colors text-center leading-tight'>
+              <span className='text-sm md:text-sm text-muted-foreground/80 group-hover:text-foreground transition-colors text-center leading-tight'>
                 {skill.name}
               </span>
             </motion.div>

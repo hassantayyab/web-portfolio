@@ -93,7 +93,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
                   placeholder='Type a command or search...'
                   className='flex h-14 w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground'
                 />
-                <kbd className='pointer-events-none h-5 select-none items-center gap-1 rounded border border-white/10 bg-white/5 px-1.5 font-mono text-xs font-medium text-muted-foreground hidden sm:inline-flex'>
+                <kbd className='pointer-events-none h-5 select-none items-center gap-1 rounded border border-white/10 bg-white/5 px-1.5 font-mono text-sm font-medium text-muted-foreground hidden sm:inline-flex'>
                   ESC
                 </kbd>
               </div>

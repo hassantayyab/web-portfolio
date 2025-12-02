@@ -29,7 +29,7 @@ export function ProjectsAccordionCell() {
         </h3>
         <Link
           href='/projects'
-          className='flex items-center gap-1 text-xs text-primary hover:gap-2 transition-all group'
+          className='flex items-center gap-1 text-sm text-primary hover:gap-2 transition-all group'
         >
           <ArrowUpRight className='w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform' />
         </Link>
@@ -101,14 +101,14 @@ export function ProjectsAccordionCell() {
                         {/* Overlay with project info on hover */}
                         <div className='absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4'>
                           <div>
-                            <p className='text-xs text-white/80 line-clamp-2'>
+                            <p className='text-sm text-white/80 line-clamp-2'>
                               {project.description}
                             </p>
                             <div className='flex flex-wrap gap-1 mt-2'>
                               {project.technologies.slice(0, 3).map((tech) => (
                                 <span
                                   key={tech}
-                                  className='text-xs px-2 py-0.5 rounded-full bg-white/10 text-white/70'
+                                  className='text-sm px-2 py-0.5 rounded-full bg-white/10 text-white/70'
                                 >
                                   {tech}
                                 </span>
@@ -119,7 +119,7 @@ export function ProjectsAccordionCell() {
                       </div>
 
                       {/* Quick Info */}
-                      <div className='flex items-center justify-between text-xs text-muted-foreground'>
+                      <div className='flex items-center justify-between text-sm text-muted-foreground'>
                         <span>{project.technologies.slice(0, 2).join(' • ')}</span>
                         <span>{project.year}</span>
                       </div>

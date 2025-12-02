@@ -27,7 +27,7 @@ export function ProjectsCell() {
         <h3 className='text-sm font-medium text-muted-foreground uppercase tracking-wider'>
           Featured Projects
         </h3>
-        <Link href='/projects' className='flex items-center gap-1 text-xs text-primary group'>
+        <Link href='/projects' className='flex items-center gap-1 text-sm text-primary group'>
           <span className='hidden md:inline'>View All</span>
           <ArrowUpRight className='w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform' />
         </Link>
@@ -90,12 +90,12 @@ export function ProjectsCell() {
                         <div className='mb-2'>
                           <div className='flex items-center gap-1.5'>
                             <Calendar className='w-3 h-3 text-primary' />
-                            <span className='text-xs text-primary font-medium'>{project.year}</span>
+                            <span className='text-sm text-primary font-medium'>{project.year}</span>
                           </div>
                         </div>
 
                         {/* Description */}
-                        <p className='text-xs text-muted-foreground/90 line-clamp-2 mb-3'>
+                        <p className='text-sm text-muted-foreground/90 line-clamp-2 mb-3'>
                           {project.description}
                         </p>
 
@@ -104,13 +104,13 @@ export function ProjectsCell() {
                           {project.technologies.slice(0, 4).map((tech) => (
                             <span
                               key={tech}
-                              className='text-xs px-2 py-0.5 rounded-full bg-white/5 text-muted-foreground/70 border border-white/5'
+                              className='text-sm px-2 py-0.5 rounded-full bg-white/5 text-muted-foreground/70 border border-white/5'
                             >
                               {tech}
                             </span>
                           ))}
                           {project.technologies.length > 4 && (
-                            <span className='text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary/80 border border-primary/20'>
+                            <span className='text-sm px-2 py-0.5 rounded-full bg-primary/10 text-primary/80 border border-primary/20'>
                               +{project.technologies.length - 4}
                             </span>
                           )}

@@ -27,7 +27,7 @@ export function BlogsAccordionCell() {
         <h3 className='text-sm font-medium text-muted-foreground uppercase tracking-wider'>
           Recent Blogs
         </h3>
-        <Link href='/blogs' className='flex items-center gap-1 text-xs text-primary group'>
+        <Link href='/blogs' className='flex items-center gap-1 text-sm text-primary group'>
           <span className='hidden md:inline'>View All</span>
           <ArrowUpRight className='w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform' />
         </Link>
@@ -88,7 +88,7 @@ export function BlogsAccordionCell() {
                       <div className='relative rounded-xl overflow-hidden bg-linear-to-br from-primary/10 via-primary/5 to-transparent border border-white/10 p-4'>
                         {/* Category Badge */}
                         <div className='mb-2'>
-                          <span className='inline-block text-xs px-2 py-1 rounded-full bg-primary/20 text-primary font-medium'>
+                          <span className='inline-block text-sm px-2 py-1 rounded-full bg-primary/20 text-primary font-medium'>
                             {blog.category}
                           </span>
                         </div>
@@ -99,7 +99,7 @@ export function BlogsAccordionCell() {
                         </p>
 
                         {/* Meta Info */}
-                        <div className='flex items-center gap-3 text-xs text-muted-foreground/70'>
+                        <div className='flex items-center gap-3 text-sm text-muted-foreground/70'>
                           <div className='flex items-center gap-1'>
                             <Calendar className='w-3 h-3' />
                             <span>
@@ -121,7 +121,7 @@ export function BlogsAccordionCell() {
                           {blog.tags.slice(0, 3).map((tag) => (
                             <span
                               key={tag}
-                              className='text-xs px-2 py-0.5 rounded-full bg-white/5 text-muted-foreground/70 border border-white/5'
+                              className='text-sm px-2 py-0.5 rounded-full bg-white/5 text-muted-foreground/70 border border-white/5'
                             >
                               {tag}
                             </span>
