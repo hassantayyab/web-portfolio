@@ -1,6 +1,5 @@
-import { siteConfig } from '@/lib/metadata';
 import { Metadata } from 'next';
-import HomePageClient from './home-page';
+import { siteConfig } from '@/lib/metadata';
 
 export const metadata: Metadata = {
   title: 'Home',
@@ -15,6 +14,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function HomePage() {
-  return <HomePageClient />;
+export default function HomeLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return children;
 }
+

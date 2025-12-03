@@ -1,12 +1,23 @@
 import { MetadataRoute } from "next";
+import { env } from "@/lib/env";
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://johndoe.dev";
+  const baseUrl = env.NEXT_PUBLIC_SITE_URL;
 
   return {
     rules: [
       {
         userAgent: "*",
+        allow: "/",
+        disallow: ["/api/"],
+      },
+      {
+        userAgent: "Googlebot",
+        allow: "/",
+        disallow: ["/api/"],
+      },
+      {
+        userAgent: "Bingbot",
         allow: "/",
         disallow: ["/api/"],
       },

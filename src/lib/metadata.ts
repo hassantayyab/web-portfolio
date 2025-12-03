@@ -1,19 +1,27 @@
 import { Metadata } from "next";
-import { personalInfo } from "./data";
+import { personalInfo, socialLinks } from "./data";
 import { env } from "./env";
 
 const baseUrl = env.NEXT_PUBLIC_SITE_URL;
+
+// Extract social links from data
+const getSocialLink = (name: string) => {
+  const link = socialLinks.find((s) => s.name.toLowerCase() === name.toLowerCase());
+  return link?.url || "";
+};
 
 export const siteConfig = {
   name: personalInfo.name,
   title: `${personalInfo.name} | ${personalInfo.title}`,
   description: personalInfo.shortBio,
+  longDescription: personalInfo.bio,
   url: baseUrl,
   ogImage: `${baseUrl}/og.png`,
   links: {
-    twitter: "https://twitter.com/johndoe",
-    github: "https://github.com/johndoe",
-    linkedin: "https://linkedin.com/in/johndoe",
+    twitter: getSocialLink("Twitter"),
+    github: getSocialLink("GitHub"),
+    linkedin: getSocialLink("LinkedIn"),
+    email: personalInfo.email,
   },
 };
 
@@ -33,10 +41,22 @@ export const defaultMetadata: Metadata = {
     "Web Development",
     "Frontend Developer",
     "Backend Developer",
+    "Software Engineer",
+    "Portfolio",
+    "Web Developer",
+    "JavaScript",
+    "React.js",
+    "Next.js Developer",
+    "TypeScript Developer",
     personalInfo.name,
+    personalInfo.title,
   ],
   authors: [{ name: personalInfo.name, url: siteConfig.url }],
   creator: personalInfo.name,
+  publisher: personalInfo.name,
+  alternates: {
+    canonical: baseUrl,
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -49,7 +69,8 @@ export const defaultMetadata: Metadata = {
         url: siteConfig.ogImage,
         width: 1200,
         height: 630,
-        alt: siteConfig.title,
+        alt: `${personalInfo.name} - ${personalInfo.title}`,
+        type: "image/png",
       },
     ],
   },
@@ -58,7 +79,7 @@ export const defaultMetadata: Metadata = {
     title: siteConfig.title,
     description: siteConfig.description,
     images: [siteConfig.ogImage],
-    creator: "@johndoe",
+    creator: siteConfig.links.twitter ? siteConfig.links.twitter.replace("https://twitter.com/", "@") : undefined,
   },
   robots: {
     index: true,
@@ -75,11 +96,19 @@ export const defaultMetadata: Metadata = {
     // Add your verification codes here
     // google: "your-google-verification-code",
     // yandex: "your-yandex-verification-code",
+    // bing: "your-bing-verification-code",
   },
+  category: "Technology",
 };
 
 // JSON-LD structured data for the person/portfolio
 export function generatePersonJsonLd() {
+  const sameAs = [
+    siteConfig.links.twitter,
+    siteConfig.links.github,
+    siteConfig.links.linkedin,
+  ].filter(Boolean);
+
   return {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -87,15 +116,13 @@ export function generatePersonJsonLd() {
     url: siteConfig.url,
     jobTitle: personalInfo.title,
     email: personalInfo.email,
+    description: personalInfo.bio,
     address: {
       "@type": "PostalAddress",
       addressLocality: personalInfo.location,
     },
-    sameAs: [
-      siteConfig.links.twitter,
-      siteConfig.links.github,
-      siteConfig.links.linkedin,
-    ],
+    sameAs: sameAs.length > 0 ? sameAs : undefined,
+    image: `${baseUrl}${personalInfo.avatarUrl}`,
   };
 }
 
@@ -111,6 +138,68 @@ export function generateWebsiteJsonLd() {
       "@type": "Person",
       name: personalInfo.name,
     },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${baseUrl}/?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
+  };
+}
+
+// JSON-LD for Portfolio/CreativeWork
+export function generatePortfolioJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "@id": `${baseUrl}#portfolio`,
+    name: `${personalInfo.name}'s Portfolio`,
+    description: siteConfig.description,
+    url: siteConfig.url,
+    author: {
+      "@type": "Person",
+      name: personalInfo.name,
+    },
+    creator: {
+      "@type": "Person",
+      name: personalInfo.name,
+    },
+  };
+}
+
+// JSON-LD for BlogPosting
+export function generateBlogPostJsonLd(blog: {
+  id: string;
+  title: string;
+  description: string;
+  publishedAt: string;
+  category?: string;
+  tags?: string[];
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: blog.title,
+    description: blog.description,
+    url: `${baseUrl}/blogs/${blog.id}`,
+    datePublished: blog.publishedAt,
+    author: {
+      "@type": "Person",
+      name: personalInfo.name,
+      url: siteConfig.url,
+    },
+    publisher: {
+      "@type": "Person",
+      name: personalInfo.name,
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${baseUrl}/blogs/${blog.id}`,
+    },
+    articleSection: blog.category,
+    keywords: blog.tags?.join(", "),
   };
 }
 

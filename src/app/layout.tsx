@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
-import { defaultMetadata, generatePersonJsonLd, generateWebsiteJsonLd } from "@/lib/metadata";
+import { defaultMetadata, generatePersonJsonLd, generateWebsiteJsonLd, generatePortfolioJsonLd } from "@/lib/metadata";
 import { WebVitalsScript } from "@/components/shared/web-vitals-script";
 import "./globals.css";
 
@@ -40,6 +40,12 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(generateWebsiteJsonLd()),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(generatePortfolioJsonLd()),
           }}
         />
         {children}

@@ -26,11 +26,9 @@ function sendToAnalytics(metric: Metric) {
     //   headers: { 'Content-Type': 'application/json' },
     //   body: JSON.stringify(metric),
     // }).catch(console.error);
-
+  } else {
     // For now, log in development
-    if (process.env.NODE_ENV === 'development') {
-      console.log('[Web Vitals]', metric);
-    }
+    console.log('[Web Vitals]', metric);
   }
 }
 
