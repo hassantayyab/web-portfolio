@@ -63,7 +63,7 @@ export function ProjectsAccordionCell() {
               <button
                 onClick={() => toggleProject(project.id)}
                 className={cn(
-                  'w-full flex items-center justify-between py-3 text-left group transition-colors',
+                  'w-full flex items-center justify-between py-3 text-left group transition-colors cursor-pointer',
                   isExpanded ? 'text-foreground' : 'text-muted-foreground hover:text-foreground',
                 )}
                 aria-expanded={isExpanded}

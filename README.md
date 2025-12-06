@@ -9,9 +9,25 @@ A modern, dark-themed portfolio website built with Next.js 15, Tailwind CSS v4, 
 - **Responsive Design**: Fully responsive across all devices
 - **Animations**: Smooth animations using Framer Motion
 - **Command Palette**: Quick navigation with Cmd+K
-- **Contact Form**: Integrated contact form with Resend email
+- **Contact Form**: Production-ready contact form with validation, rate limiting, and email delivery
 - **SEO Optimized**: Full metadata, sitemap, and structured data
 - **Cursor Effects**: Subtle cursor glow effect on desktop
+
+### 📧 Contact Form Features
+
+The contact form is fully implemented with enterprise-level features:
+
+- ✅ Real-time validation & error messages
+- ✅ Rate limiting (5 requests/hour per IP)
+- ✅ Spam protection (honeypot + validation)
+- ✅ XSS protection & input sanitization
+- ✅ Beautiful email templates (React Email)
+- ✅ Email delivery via Resend
+- ✅ Loading states & success feedback
+- ✅ Mobile responsive & accessible
+- ✅ Redis/KV support for scaling
+
+**Setup in 5 minutes:** See [CONTACT_FORM_README.md](./CONTACT_FORM_README.md)
 
 ## Tech Stack
 
@@ -44,13 +60,12 @@ cd web-portfolio
 npm install
 ```
 
-3. Set up environment variables:
+3. Set up the contact form (interactive):
 ```bash
-# Create a .env.local file with:
-RESEND_API_KEY=re_xxxxxxxxxxxx
-CONTACT_EMAIL=your@email.com
-NEXT_PUBLIC_SITE_URL=https://yourdomain.com
+npm run setup:contact
 ```
+
+Or manually copy `.env.example` to `.env.local` and add your API keys.
 
 4. Run the development server:
 ```bash
@@ -58,6 +73,19 @@ npm run dev
 ```
 
 5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### 📧 Contact Form Setup
+
+Quick setup:
+```bash
+npm run setup:contact  # Interactive setup wizard
+```
+
+For detailed instructions, see:
+- [QUICK_START.md](./QUICK_START.md) - Get running in 5 minutes
+- [CONTACT_FORM_README.md](./CONTACT_FORM_README.md) - Complete guide
+- [CONTACT_FORM_SETUP.md](./CONTACT_FORM_SETUP.md) - Detailed setup
+- [TESTING_CONTACT_FORM.md](./TESTING_CONTACT_FORM.md) - Testing guide
 
 ## Customization
 

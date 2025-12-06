@@ -55,7 +55,7 @@ export function Navbar() {
           aria-label='Main navigation'
         >
           {/* Logo/Name - Left Side */}
-          <Link href='/' className='flex items-center gap-1 group'>
+          <Link href='/' className='flex items-center gap-1 group cursor-pointer'>
             <span className='text-lg font-bold tracking-tight group-hover:text-primary transition-colors'>
               {firstName}
             </span>
@@ -73,7 +73,7 @@ export function Navbar() {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    'relative px-4 py-2 text-sm font-medium rounded-full transition-colors min-h-[44px] flex items-center',
+                    'relative px-4 py-2 text-sm font-medium rounded-full transition-colors min-h-[44px] flex items-center cursor-pointer',
                     isActive ? 'text-foreground' : 'text-muted-foreground hover:text-foreground',
                   )}
                 >
@@ -130,7 +130,7 @@ export function Navbar() {
                     href={item.href}
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={cn(
-                      'flex items-center px-4 py-3.5 text-sm transition-colors min-h-[44px]',
+                      'flex items-center px-4 py-3.5 text-sm transition-colors min-h-[44px] cursor-pointer',
                       isActive
                         ? 'text-foreground bg-white/10'
                         : 'text-muted-foreground hover:text-foreground hover:bg-white/5',

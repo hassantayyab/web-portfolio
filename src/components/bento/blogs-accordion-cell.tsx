@@ -27,7 +27,7 @@ export function BlogsAccordionCell() {
         <h3 className='text-sm font-medium text-muted-foreground uppercase tracking-wider'>
           Recent Blogs
         </h3>
-        <Link href='/blogs' className='flex items-center gap-1 text-sm text-primary group min-h-[44px] justify-end'>
+        <Link href='/blogs' className='flex items-center gap-1 text-sm text-primary group min-h-[44px] justify-end cursor-pointer'>
           <span className='hidden sm:inline'>View All</span>
           <ArrowUpRight className='w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform' />
         </Link>
@@ -53,7 +53,7 @@ export function BlogsAccordionCell() {
               <button
                 onClick={() => toggleBlog(blog.id)}
                 className={cn(
-                  'w-full flex items-center justify-between py-3 sm:py-3.5 text-left group transition-colors min-h-[48px]',
+                  'w-full flex items-center justify-between py-3 sm:py-3.5 text-left group transition-colors min-h-[48px] cursor-pointer',
                   isExpanded ? 'text-foreground' : 'text-muted-foreground hover:text-foreground',
                 )}
               >

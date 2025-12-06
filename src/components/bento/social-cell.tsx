@@ -32,7 +32,7 @@ export function SocialCell() {
               whileHover={{ y: -2, scale: 1.02 }}
               className={cn(
                 'flex items-center gap-2 sm:gap-2.5 px-3 sm:px-4 md:px-5 lg:px-6 py-2.5 sm:py-3 md:py-3.5 rounded-xl min-h-[44px]',
-                'bg-white/5 border border-white/15 transition-all duration-300',
+                'bg-white/5 border border-white/15 transition-all duration-300 cursor-pointer',
                 'hover:bg-white/10 hover:border-white/25 hover:shadow-lg group',
               )}
             >

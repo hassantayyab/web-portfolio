@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "prepare": "husky"
+    "prepare": "husky",
+    "setup:contact": "bash scripts/setup-contact-form.sh"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

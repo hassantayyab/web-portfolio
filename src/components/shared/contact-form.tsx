@@ -18,6 +18,8 @@ const contactSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
   subject: z.string().min(5, 'Subject must be at least 5 characters'),
   message: z.string().min(20, 'Message must be at least 20 characters'),
+  // Honeypot field - should remain empty
+  website: z.string().max(0).optional(),
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
@@ -37,6 +39,12 @@ export function ContactForm() {
 
   const onSubmit = useCallback(
     async (data: ContactFormData) => {
+      // Honeypot check - if filled, it's likely a bot
+      if (data.website) {
+        toast.error('Spam detected. Please try again.');
+        return;
+      }
+
       setIsSubmitting(true);
 
       try {
@@ -94,7 +102,14 @@ export function ContactForm() {
       transition={{ duration: 0.5 }}
       onSubmit={handleSubmit(onSubmit)}
       className='space-y-4 sm:space-y-5 md:space-y-6'
+      noValidate
+      aria-label='Contact form'
     >
+      {/* Honeypot field - hidden from real users */}
+      <div className='absolute opacity-0 pointer-events-none' aria-hidden='true'>
+        <input type='text' {...register('website')} tabIndex={-1} autoComplete='off' />
+      </div>
+
       <div className='grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 md:gap-6'>
         {/* Name */}
         <div className='space-y-2 sm:space-y-2.5'>

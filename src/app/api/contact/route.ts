@@ -43,6 +43,8 @@ const contactSchema = z.object({
       REQUEST_SECURITY.MAX_MESSAGE_LENGTH,
       `Message must be at most ${REQUEST_SECURITY.MAX_MESSAGE_LENGTH} characters`,
     ),
+  // Honeypot field - should be empty (spam protection)
+  website: z.string().max(0).optional(),
 });
 
 /**
@@ -170,7 +172,22 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { name, email, subject, message } = result.data;
+    const { name, email, subject, message, website } = result.data;
+
+    // Honeypot check - if filled, it's a bot
+    if (website && website.length > 0) {
+      logger.info('Honeypot triggered - potential spam detected', {
+        requestId,
+        ip,
+      });
+      return NextResponse.json(
+        {
+          error: 'Invalid form submission',
+          requestId,
+        },
+        { status: 400 },
+      );
+    }
 
     // Sanitize inputs (React Email will handle escaping, but extra safety)
     const sanitizedName = sanitizeInput(name);

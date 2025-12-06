@@ -1,13 +1,13 @@
-import { Metadata } from "next";
-import { personalInfo, socialLinks } from "./data";
-import { env } from "./env";
+import { Metadata } from 'next';
+import { personalInfo, socialLinks } from './data';
+import { env } from './env';
 
 const baseUrl = env.NEXT_PUBLIC_SITE_URL;
 
 // Extract social links from data
 const getSocialLink = (name: string) => {
   const link = socialLinks.find((s) => s.name.toLowerCase() === name.toLowerCase());
-  return link?.url || "";
+  return link?.url || '';
 };
 
 export const siteConfig = {
@@ -18,9 +18,9 @@ export const siteConfig = {
   url: baseUrl,
   ogImage: `${baseUrl}/og.png`,
   links: {
-    twitter: getSocialLink("Twitter"),
-    github: getSocialLink("GitHub"),
-    linkedin: getSocialLink("LinkedIn"),
+    twitter: getSocialLink('Twitter'),
+    github: getSocialLink('GitHub'),
+    linkedin: getSocialLink('LinkedIn'),
     email: personalInfo.email,
   },
 };
@@ -33,21 +33,21 @@ export const defaultMetadata: Metadata = {
   },
   description: siteConfig.description,
   keywords: [
-    "Full Stack Developer",
-    "React Developer",
-    "Next.js",
-    "TypeScript",
-    "Node.js",
-    "Web Development",
-    "Frontend Developer",
-    "Backend Developer",
-    "Software Engineer",
-    "Portfolio",
-    "Web Developer",
-    "JavaScript",
-    "React.js",
-    "Next.js Developer",
-    "TypeScript Developer",
+    'Full Stack Developer',
+    'React Developer',
+    'Next.js',
+    'TypeScript',
+    'Node.js',
+    'Web Development',
+    'Frontend Developer',
+    'Backend Developer',
+    'Software Engineer',
+    'Portfolio',
+    'Web Developer',
+    'JavaScript',
+    'React.js',
+    'Next.js Developer',
+    'TypeScript Developer',
     personalInfo.name,
     personalInfo.title,
   ],
@@ -58,8 +58,8 @@ export const defaultMetadata: Metadata = {
     canonical: baseUrl,
   },
   openGraph: {
-    type: "website",
-    locale: "en_US",
+    type: 'website',
+    locale: 'en_US',
     url: siteConfig.url,
     siteName: siteConfig.name,
     title: siteConfig.title,
@@ -70,16 +70,18 @@ export const defaultMetadata: Metadata = {
         width: 1200,
         height: 630,
         alt: `${personalInfo.name} - ${personalInfo.title}`,
-        type: "image/png",
+        type: 'image/png',
       },
     ],
   },
   twitter: {
-    card: "summary_large_image",
+    card: 'summary_large_image',
     title: siteConfig.title,
     description: siteConfig.description,
     images: [siteConfig.ogImage],
-    creator: siteConfig.links.twitter ? siteConfig.links.twitter.replace("https://twitter.com/", "@") : undefined,
+    creator: siteConfig.links.twitter
+      ? siteConfig.links.twitter.replace('https://twitter.com/', '@')
+      : undefined,
   },
   robots: {
     index: true,
@@ -87,9 +89,9 @@ export const defaultMetadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
     },
   },
   verification: {
@@ -98,7 +100,7 @@ export const defaultMetadata: Metadata = {
     // yandex: "your-yandex-verification-code",
     // bing: "your-bing-verification-code",
   },
-  category: "Technology",
+  category: 'Technology',
 };
 
 // JSON-LD structured data for the person/portfolio
@@ -110,15 +112,15 @@ export function generatePersonJsonLd() {
   ].filter(Boolean);
 
   return {
-    "@context": "https://schema.org",
-    "@type": "Person",
+    '@context': 'https://schema.org',
+    '@type': 'Person',
     name: personalInfo.name,
     url: siteConfig.url,
     jobTitle: personalInfo.title,
     email: personalInfo.email,
     description: personalInfo.bio,
     address: {
-      "@type": "PostalAddress",
+      '@type': 'PostalAddress',
       addressLocality: personalInfo.location,
     },
     sameAs: sameAs.length > 0 ? sameAs : undefined,
@@ -129,22 +131,22 @@ export function generatePersonJsonLd() {
 // JSON-LD for the website
 export function generateWebsiteJsonLd() {
   return {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
     name: siteConfig.name,
     url: siteConfig.url,
     description: siteConfig.description,
     author: {
-      "@type": "Person",
+      '@type': 'Person',
       name: personalInfo.name,
     },
     potentialAction: {
-      "@type": "SearchAction",
+      '@type': 'SearchAction',
       target: {
-        "@type": "EntryPoint",
+        '@type': 'EntryPoint',
         urlTemplate: `${baseUrl}/?q={search_term_string}`,
       },
-      "query-input": "required name=search_term_string",
+      'query-input': 'required name=search_term_string',
     },
   };
 }
@@ -152,18 +154,18 @@ export function generateWebsiteJsonLd() {
 // JSON-LD for Portfolio/CreativeWork
 export function generatePortfolioJsonLd() {
   return {
-    "@context": "https://schema.org",
-    "@type": "CreativeWork",
-    "@id": `${baseUrl}#portfolio`,
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    '@id': `${baseUrl}#portfolio`,
     name: `${personalInfo.name}'s Portfolio`,
     description: siteConfig.description,
     url: siteConfig.url,
     author: {
-      "@type": "Person",
+      '@type': 'Person',
       name: personalInfo.name,
     },
     creator: {
-      "@type": "Person",
+      '@type': 'Person',
       name: personalInfo.name,
     },
   };
@@ -179,27 +181,26 @@ export function generateBlogPostJsonLd(blog: {
   tags?: string[];
 }) {
   return {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
     headline: blog.title,
     description: blog.description,
     url: `${baseUrl}/blogs/${blog.id}`,
     datePublished: blog.publishedAt,
     author: {
-      "@type": "Person",
+      '@type': 'Person',
       name: personalInfo.name,
       url: siteConfig.url,
     },
     publisher: {
-      "@type": "Person",
+      '@type': 'Person',
       name: personalInfo.name,
     },
     mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": `${baseUrl}/blogs/${blog.id}`,
+      '@type': 'WebPage',
+      '@id': `${baseUrl}/blogs/${blog.id}`,
     },
     articleSection: blog.category,
-    keywords: blog.tags?.join(", "),
+    keywords: blog.tags?.join(', '),
   };
 }
-

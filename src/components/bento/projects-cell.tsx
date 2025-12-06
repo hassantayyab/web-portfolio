@@ -74,7 +74,7 @@ export function ProjectsCell() {
               <button
                 onClick={() => toggleProject(project.id)}
                 className={cn(
-                  'w-full flex items-center justify-between py-3 sm:py-3.5 md:py-3 text-left group transition-colors min-h-[48px]',
+                  'w-full flex items-center justify-between py-3 sm:py-3.5 md:py-3 text-left group transition-colors min-h-[48px] cursor-pointer',
                   isExpanded ? 'text-foreground' : 'text-muted-foreground hover:text-foreground',
                 )}
                 aria-expanded={isExpanded}

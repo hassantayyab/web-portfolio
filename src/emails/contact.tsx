@@ -30,7 +30,7 @@ export function ContactEmail({
       <Body style={main}>
         <Container style={container}>
           <Section style={header}>
-            <Heading style={headerTitle}>New Contact Form Submission</Heading>
+            <Heading style={headerTitle}>📧 New Contact Message</Heading>
           </Section>
 
           <Section style={content}>
@@ -65,80 +65,87 @@ export function ContactEmail({
   );
 }
 
-// Styles
+// Styles - Matching portfolio dark theme
 const main = {
-  backgroundColor: "#f6f9fc",
+  backgroundColor: "#0f0f14", // Dark background matching portfolio
   fontFamily:
     '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+  padding: "20px 0",
 };
 
 const container = {
-  backgroundColor: "#ffffff",
+  backgroundColor: "#1a1a20", // Dark card background
   margin: "0 auto",
   padding: "0",
   maxWidth: "600px",
-  borderRadius: "10px",
+  borderRadius: "16px",
   overflow: "hidden",
-  boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+  border: "1px solid rgba(255, 255, 255, 0.1)",
+  boxShadow: "0 4px 24px rgba(0, 0, 0, 0.5)",
 };
 
 const header = {
-  background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-  padding: "30px",
+  background: "linear-gradient(135deg, #f4ff00 0%, #e8ff00 100%)", // Yellow accent matching app primary color
+  padding: "32px 30px",
 };
 
 const headerTitle = {
-  color: "#ffffff",
-  fontSize: "24px",
+  color: "#0f0f14", // Dark text on bright background
+  fontSize: "26px",
   fontWeight: "bold",
   margin: "0",
+  letterSpacing: "-0.01em",
 };
 
 const content = {
-  padding: "30px",
+  padding: "32px 30px",
 };
 
 const field = {
-  marginBottom: "20px",
+  marginBottom: "24px",
 };
 
 const label = {
-  color: "#667eea",
-  fontWeight: "bold",
-  fontSize: "14px",
-  margin: "0 0 5px 0",
+  color: "#f4ff00", // Yellow accent matching app primary color
+  fontWeight: "600",
+  fontSize: "13px",
+  margin: "0 0 8px 0",
+  textTransform: "uppercase" as const,
+  letterSpacing: "0.05em",
 };
 
 const value = {
-  color: "#333",
+  color: "#f2f2f2", // Light text on dark background
   fontSize: "16px",
   margin: "0",
+  lineHeight: "1.6",
 };
 
 const messageBox = {
-  backgroundColor: "#f8f9fa",
-  padding: "15px",
-  borderRadius: "5px",
-  border: "1px solid #e9ecef",
+  backgroundColor: "rgba(255, 255, 255, 0.05)", // Subtle background
+  padding: "18px",
+  borderRadius: "10px",
+  border: "1px solid rgba(255, 255, 255, 0.1)",
 };
 
 const messageText = {
-  color: "#333",
-  fontSize: "14px",
-  lineHeight: "1.6",
+  color: "#e6e6e6",
+  fontSize: "15px",
+  lineHeight: "1.7",
   margin: "0",
   whiteSpace: "pre-wrap" as const,
 };
 
 const hr = {
-  borderColor: "#e9ecef",
-  margin: "20px 0",
+  borderColor: "rgba(255, 255, 255, 0.1)",
+  margin: "24px 0",
 };
 
 const footer = {
-  color: "#6c757d",
-  fontSize: "12px",
+  color: "#999999",
+  fontSize: "13px",
   margin: "0",
+  textAlign: "center" as const,
 };
 
 export default ContactEmail;

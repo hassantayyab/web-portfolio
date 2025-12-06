@@ -1,11 +1,11 @@
 'use client';
 
-import { memo } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Project } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import { Calendar, ExternalLink, Github } from 'lucide-react';
+import { memo } from 'react';
 
 interface ProjectCardProps {
   project: Project;
@@ -13,13 +13,13 @@ interface ProjectCardProps {
   onClick: () => void;
 }
 
-export const ProjectCard = memo(function ProjectCard({ project, index, onClick }: ProjectCardProps) {
+export const ProjectCard = memo(function ProjectCard({
+  project,
+  index,
+  onClick,
+}: ProjectCardProps) {
   return (
     <motion.article
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: index * 0.1 }}
-      whileHover={{ y: -5 }}
       onClick={onClick}
       className={cn(
         'group relative flex flex-col rounded-2xl overflow-hidden cursor-pointer',
@@ -29,8 +29,8 @@ export const ProjectCard = memo(function ProjectCard({ project, index, onClick }
     >
       {/* Project image/placeholder */}
       <div className='relative h-40 sm:h-48 overflow-hidden'>
-        <div className='absolute inset-0 bg-gradient-to-br from-primary/30 via-primary/20 to-primary/10' />
-        
+        <div className='absolute inset-0 bg-linear-to-br from-primary/30 via-primary/20 to-primary/10' />
+
         {/* Subtle pattern overlay */}
         <div className='absolute inset-0 opacity-20 grid-pattern' />
 
@@ -51,10 +51,10 @@ export const ProjectCard = memo(function ProjectCard({ project, index, onClick }
               onClick={(e) => e.stopPropagation()}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className='w-11 h-11 sm:w-10 sm:h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
+              className='w-11 h-11 sm:w-10 sm:h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
               aria-label={`View ${project.title} live demo`}
             >
-              <ExternalLink className='w-5 h-5' aria-hidden="true" />
+              <ExternalLink className='w-5 h-5' aria-hidden='true' />
             </motion.a>
           )}
           {project.githubUrl && (
@@ -65,10 +65,10 @@ export const ProjectCard = memo(function ProjectCard({ project, index, onClick }
               onClick={(e) => e.stopPropagation()}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className='w-11 h-11 sm:w-10 sm:h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
+              className='w-11 h-11 sm:w-10 sm:h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
               aria-label={`View ${project.title} source code on GitHub`}
             >
-              <Github className='w-5 h-5' aria-hidden="true" />
+              <Github className='w-5 h-5' aria-hidden='true' />
             </motion.a>
           )}
         </div>
@@ -87,7 +87,10 @@ export const ProjectCard = memo(function ProjectCard({ project, index, onClick }
 
         {/* Year badge */}
         <div className='absolute top-2 sm:top-3 right-2 sm:right-3'>
-          <Badge variant='outline' className='bg-black/30 backdrop-blur-sm border-white/15 text-xs sm:text-sm'>
+          <Badge
+            variant='outline'
+            className='bg-black/30 backdrop-blur-sm border-white/15 text-xs sm:text-sm'
+          >
             <Calendar className='w-3 h-3 mr-1' />
             {project.year}
           </Badge>
@@ -110,7 +113,7 @@ export const ProjectCard = memo(function ProjectCard({ project, index, onClick }
             <Badge
               key={tech}
               variant='outline'
-              className='text-xs sm:text-sm bg-white/5 border-white/15 hover:bg-white/10 hover:border-white/20'
+              className='text-xs sm:text-sm bg-white/5 border-white/150'
             >
               {tech}
             </Badge>
