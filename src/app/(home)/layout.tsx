@@ -1,5 +1,5 @@
-import { Metadata } from 'next';
 import { siteConfig } from '@/lib/metadata';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Home',
@@ -14,14 +14,6 @@ export const metadata: Metadata = {
   },
 };
 
-export default function HomeLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function HomeLayout({ children }: { children: React.ReactNode }) {
   return children;
 }
-
-
-
-
