@@ -131,7 +131,7 @@ export function ProjectsCell() {
                             .map((tech) => (
                               <span
                                 key={tech}
-                                className='text-sm px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-white/5 text-muted-foreground/80 border border-white/10 hover:bg-white/10 hover:border-white/15 transition-colors'
+                                className='text-xs sm:text-sm px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-white/5 text-muted-foreground/80 border border-white/10 hover:bg-white/10 hover:border-white/15 transition-colors'
                               >
                                 {tech}
                               </span>

@@ -124,7 +124,7 @@ export function BlogsAccordionCell() {
                           {blog.tags.slice(0, 3).map((tag) => (
                             <span
                               key={tag}
-                              className='text-sm px-2 py-0.5 rounded-full bg-white/5 text-muted-foreground/70 border border-white/5'
+                              className='text-xs sm:text-sm px-2 py-0.5 rounded-full bg-white/5 text-muted-foreground/70 border border-white/5'
                             >
                               {tag}
                             </span>
