@@ -12,7 +12,7 @@ export function ContactCell() {
       <div
         className={cn(
           'relative min-h-[250px] md:min-h-0 h-full w-full flex flex-col justify-center items-center p-6 md:p-8 overflow-hidden cursor-pointer text-left',
-          'group border-2 border-primary/30 group-hover:border-primary/50 transition-all duration-300',
+          'group transition-all duration-300',
           'shadow-lg shadow-primary/10 group-hover:shadow-xl group-hover:shadow-primary/20 group-hover:scale-[1.01]',
         )}
       >
@@ -33,7 +33,7 @@ export function ContactCell() {
         <div className='relative z-10 text-center'>
           {/* Text */}
           <motion.h3 className='text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold mb-3'>
-            Let&apos;s work together dawd
+            Let&apos;s work together
           </motion.h3>
 
           <motion.p className='text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground wrap-break-word'>
