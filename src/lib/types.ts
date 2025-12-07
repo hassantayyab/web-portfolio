@@ -14,11 +14,11 @@ export interface Project {
 export interface Skill {
   name: string;
   icon: string;
-  category: "frontend" | "backend" | "tools" | "other";
+  category: 'frontend' | 'backend' | 'tools' | 'other';
 }
 
 export interface SocialLink {
-  name: string;
+  name?: string;
   url: string;
   icon: string;
 }
@@ -30,7 +30,7 @@ export interface Experience {
   companyUrl?: string;
   location: string;
   startDate: string;
-  endDate: string | "Present";
+  endDate: string | 'Present';
   description: string[];
   technologies?: string[];
 }
@@ -53,7 +53,7 @@ export interface PersonalInfo {
   timezone: string;
   bio: string;
   shortBio: string;
-  availability: "available" | "busy" | "not-available";
+  availability: 'available' | 'busy' | 'not-available';
   availabilityText: string;
   resumeUrl?: string;
   avatarUrl: string;
@@ -71,4 +71,3 @@ export interface Blog {
   readTime: string;
   featured?: boolean;
 }
-

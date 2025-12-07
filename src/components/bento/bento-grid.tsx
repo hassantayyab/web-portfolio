@@ -13,7 +13,7 @@ export const BentoGrid = memo(function BentoGrid({ children, className }: BentoG
   return (
     <div
       className={cn(
-        'grid gap-3 md:gap-4 w-full',
+        'grid gap-4 w-full',
         'grid-cols-1 md:grid-cols-4 lg:grid-cols-12',
         'auto-rows-auto md:grid-rows-[repeat(4,1fr)]',
         className,

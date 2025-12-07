@@ -4,6 +4,8 @@ import * as SimpleIcons from 'react-icons/si';
 // Map skill icon names to react-icons simple-icons components
 export const getSkillIcon = (iconName: string): IconType => {
   const iconMap: Record<string, IconType> = {
+    angular: SimpleIcons.SiAngular,
+    nestjs: SimpleIcons.SiNestjs,
     react: SimpleIcons.SiReact,
     nextjs: SimpleIcons.SiNextdotjs,
     typescript: SimpleIcons.SiTypescript,

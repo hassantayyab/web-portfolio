@@ -123,7 +123,7 @@ export function ContactForm() {
             className='bg-white/5 border-white/15 focus:border-primary min-h-[44px] text-sm sm:text-base'
           />
           {errors.name && (
-            <p className='text-xs sm:text-sm text-destructive font-medium'>{errors.name.message}</p>
+            <p className='text-sm text-destructive font-medium'>{errors.name.message}</p>
           )}
         </div>
 
@@ -140,9 +140,7 @@ export function ContactForm() {
             className='bg-white/5 border-white/15 focus:border-primary min-h-[44px] text-sm sm:text-base'
           />
           {errors.email && (
-            <p className='text-xs sm:text-sm text-destructive font-medium'>
-              {errors.email.message}
-            </p>
+            <p className='text-sm text-destructive font-medium'>{errors.email.message}</p>
           )}
         </div>
       </div>
@@ -159,9 +157,7 @@ export function ContactForm() {
           className='bg-white/5 border-white/15 focus:border-primary min-h-[44px] text-sm sm:text-base'
         />
         {errors.subject && (
-          <p className='text-xs sm:text-sm text-destructive font-medium'>
-            {errors.subject.message}
-          </p>
+          <p className='text-sm text-destructive font-medium'>{errors.subject.message}</p>
         )}
       </div>
 
@@ -178,9 +174,7 @@ export function ContactForm() {
           className='bg-white/5 border-white/15 focus:border-primary resize-none text-sm sm:text-base'
         />
         {errors.message && (
-          <p className='text-xs sm:text-sm text-destructive font-medium'>
-            {errors.message.message}
-          </p>
+          <p className='text-sm text-destructive font-medium'>{errors.message.message}</p>
         )}
       </div>
 

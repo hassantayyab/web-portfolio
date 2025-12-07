@@ -78,7 +78,7 @@ export const ProjectCard = memo(function ProjectCard({
           <div className='absolute top-2 sm:top-3 left-2 sm:left-3'>
             <Badge
               variant='secondary'
-              className='bg-primary/20 text-primary border-primary/30 text-xs sm:text-sm'
+              className='bg-primary/20 text-primary border-primary/30 text-sm'
             >
               Featured
             </Badge>
@@ -87,10 +87,7 @@ export const ProjectCard = memo(function ProjectCard({
 
         {/* Year badge */}
         <div className='absolute top-2 sm:top-3 right-2 sm:right-3'>
-          <Badge
-            variant='outline'
-            className='bg-black/30 backdrop-blur-sm border-white/15 text-xs sm:text-sm'
-          >
+          <Badge variant='outline' className='bg-black/30 backdrop-blur-sm border-white/15 text-sm'>
             <Calendar className='w-3 h-3 mr-1' />
             {project.year}
           </Badge>
@@ -103,23 +100,19 @@ export const ProjectCard = memo(function ProjectCard({
           {project.title}
         </h3>
 
-        <p className='text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4 line-clamp-2 flex-1'>
+        <p className='text-sm text-muted-foreground mb-3 sm:mb-4 line-clamp-2 flex-1'>
           {project.description}
         </p>
 
         {/* Technologies */}
         <div className='flex flex-wrap gap-1 sm:gap-1.5'>
           {project.technologies.slice(0, 4).map((tech) => (
-            <Badge
-              key={tech}
-              variant='outline'
-              className='text-xs sm:text-sm bg-white/5 border-white/150'
-            >
+            <Badge key={tech} variant='outline' className='text-sm bg-white/5 border-white/150'>
               {tech}
             </Badge>
           ))}
           {project.technologies.length > 4 && (
-            <Badge variant='outline' className='text-xs sm:text-sm bg-white/5 border-white/15'>
+            <Badge variant='outline' className='text-sm bg-white/5 border-white/15'>
               +{project.technologies.length - 4}
             </Badge>
           )}

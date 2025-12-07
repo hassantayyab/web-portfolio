@@ -25,7 +25,7 @@ export function HeroCell() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: ANIMATION_DURATIONS.SLOW, delay: ANIMATION_DELAYS.INITIAL }}
-          className='text-sm md:text-base text-primary font-medium mb-2'
+          className='text-sm md:text-base text-muted-foreground font-medium mb-2'
         >
           Hello, I&apos;m
         </motion.p>
@@ -35,7 +35,7 @@ export function HeroCell() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: ANIMATION_DURATIONS.SLOW, delay: ANIMATION_DELAYS.SHORT }}
-          className='text-display font-bold mb-3 tracking-tight break-words'
+          className='text-display font-bold mb-3 tracking-tight wrap-break-word'
         >
           {personalInfo.name}
         </motion.h1>
@@ -45,7 +45,7 @@ export function HeroCell() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: ANIMATION_DURATIONS.SLOW, delay: ANIMATION_DELAYS.MEDIUM }}
-          className='flex flex-wrap gap-2 text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground'
+          className='flex flex-wrap gap-2 text-base sm:text-lg md:text-xl lg:text-2xl text-primary'
         >
           {words.map((word, index) => (
             <motion.span
@@ -68,7 +68,7 @@ export function HeroCell() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: ANIMATION_DURATIONS.SLOW, delay: 0.7 }}
-          className='mt-4 text-sm sm:text-body text-muted-foreground/80 max-w-md'
+          className='mt-4 text-base sm:text-lg text-muted-foreground/80 max-w-lg text-pretty'
         >
           {personalInfo.shortBio}
         </motion.p>
@@ -100,7 +100,7 @@ export function HeroCell() {
                 className='w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-muted-foreground group-hover:text-foreground transition-colors shrink-0'
                 aria-hidden='true'
               />
-              <span className='text-xs sm:text-sm md:text-sm text-muted-foreground/80 group-hover:text-foreground transition-colors font-medium'>
+              <span className='text-sm md:text-sm text-muted-foreground/80 group-hover:text-foreground transition-colors font-medium'>
                 {skill.name}
               </span>
             </motion.div>

@@ -36,7 +36,7 @@ export function ProjectsCell() {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
-        className='flex items-center justify-between p-4 sm:p-5 md:p-5 pb-0'
+        className='flex items-center justify-between px-4 pt-4 sm:px-5 sm:pt-5 md:px-6 md:pt-6 pb-0'
       >
         <h3 className='text-sm font-medium text-muted-foreground uppercase tracking-wider'>
           Featured Projects
@@ -55,7 +55,7 @@ export function ProjectsCell() {
       </motion.div>
 
       {/* Projects Accordion */}
-      <div className='flex-1 flex flex-col p-4 sm:p-5 md:p-6 pt-3 overflow-hidden'>
+      <div className='flex-1 flex flex-col px-4 pb-4 sm:px-5 sm:pb-5 md:px-6 md:pb-6 pt-3 overflow-hidden'>
         {featuredProjects.map((project, index) => {
           const isExpanded = expandedId === project.id;
 
@@ -115,12 +115,12 @@ export function ProjectsCell() {
                         <div className='mb-2'>
                           <div className='flex items-center gap-1.5'>
                             <Calendar className='w-3 h-3 sm:w-3.5 sm:h-3.5 text-primary' />
-                            <span className='text-xs sm:text-sm text-primary font-medium'>{project.year}</span>
+                            <span className='text-sm text-primary font-medium'>{project.year}</span>
                           </div>
                         </div>
 
                         {/* Description */}
-                        <p className='text-xs sm:text-sm text-muted-foreground/90 line-clamp-2 sm:line-clamp-3 mb-3'>
+                        <p className='text-sm text-muted-foreground/90 line-clamp-2 sm:line-clamp-3 mb-3'>
                           {project.description}
                         </p>
 
@@ -131,13 +131,13 @@ export function ProjectsCell() {
                             .map((tech) => (
                               <span
                                 key={tech}
-                                className='text-xs sm:text-sm px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-white/5 text-muted-foreground/80 border border-white/10 hover:bg-white/10 hover:border-white/15 transition-colors'
+                                className='text-sm px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-white/5 text-muted-foreground/80 border border-white/10 hover:bg-white/10 hover:border-white/15 transition-colors'
                               >
                                 {tech}
                               </span>
                             ))}
                           {project.technologies.length > PROJECT_LIMITS.TECH_PREVIEW && (
-                            <span className='text-xs sm:text-sm px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-primary/10 text-primary/90 border border-primary/25'>
+                            <span className='text-sm px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-primary/10 text-primary/90 border border-primary/25'>
                               +{project.technologies.length - PROJECT_LIMITS.TECH_PREVIEW}
                             </span>
                           )}

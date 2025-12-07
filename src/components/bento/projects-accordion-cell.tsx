@@ -26,7 +26,7 @@ export function ProjectsAccordionCell() {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
-        className='flex items-center justify-between p-4 md:p-5 pb-0'
+        className='flex items-center justify-between px-4 pt-4 sm:px-5 sm:pt-5 md:px-6 md:pt-6 pb-0'
       >
         <h3 className='text-sm font-medium text-muted-foreground uppercase tracking-wider'>
           Projects
@@ -44,7 +44,7 @@ export function ProjectsAccordionCell() {
       </motion.div>
 
       {/* Projects Accordion */}
-      <div className='flex-1 flex flex-col p-4 md:p-5 pt-3 overflow-hidden'>
+      <div className='flex-1 flex flex-col px-4 pb-4 sm:px-5 sm:pb-5 md:px-6 md:pb-6 pt-3 overflow-hidden'>
         {featuredProjects.map((project, index) => {
           const isExpanded = expandedId === project.id;
 
@@ -99,7 +99,7 @@ export function ProjectsAccordionCell() {
                   >
                     <div className='pb-4 space-y-3'>
                       {/* Project Image */}
-                      <div className='relative aspect-[16/9] rounded-xl overflow-hidden bg-gradient-to-br from-primary/20 via-primary/10 to-transparent border border-white/15'>
+                      <div className='relative aspect-video rounded-xl overflow-hidden bg-linear-to-br from-primary/20 via-primary/10 to-transparent border border-white/15'>
                         {/* Placeholder image effect */}
                         <div className='absolute inset-0 flex items-center justify-center'>
                           <span className='text-4xl font-bold text-primary/30'>
@@ -111,7 +111,7 @@ export function ProjectsAccordionCell() {
                         </div>
 
                         {/* Overlay with project info on hover */}
-                        <div className='absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4'>
+                        <div className='absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4'>
                           <div>
                             <p className='text-sm text-white/80 line-clamp-2'>
                               {project.description}

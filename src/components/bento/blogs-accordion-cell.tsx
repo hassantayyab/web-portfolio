@@ -22,19 +22,22 @@ export function BlogsAccordionCell() {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
-        className='flex items-center justify-between p-4 sm:p-5 md:p-5 pb-0'
+        className='flex items-center justify-between px-4 pt-4 sm:px-5 sm:pt-5 md:px-6 md:pt-6 pb-0'
       >
         <h3 className='text-sm font-medium text-muted-foreground uppercase tracking-wider'>
           Recent Blogs
         </h3>
-        <Link href='/blogs' className='flex items-center gap-1 text-sm text-primary group min-h-[44px] justify-end cursor-pointer'>
+        <Link
+          href='/blogs'
+          className='flex items-center gap-1 text-sm text-primary group min-h-[44px] justify-end cursor-pointer'
+        >
           <span className='hidden sm:inline'>View All</span>
           <ArrowUpRight className='w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform' />
         </Link>
       </motion.div>
 
       {/* Blogs Accordion */}
-      <div className='flex-1 flex flex-col p-4 sm:p-5 md:p-5 pt-3 overflow-hidden'>
+      <div className='flex-1 flex flex-col px-4 pb-4 sm:px-5 sm:pb-5 md:px-6 md:pb-6 pt-3 overflow-hidden'>
         {featuredBlogs.map((blog, index) => {
           const isExpanded = expandedId === blog.id;
 
@@ -88,18 +91,18 @@ export function BlogsAccordionCell() {
                       <div className='relative rounded-xl overflow-hidden bg-linear-to-br from-primary/10 via-primary/5 to-transparent border border-white/10 p-3 sm:p-4'>
                         {/* Category Badge */}
                         <div className='mb-2'>
-                          <span className='inline-block text-xs sm:text-sm px-2 py-0.5 sm:py-1 rounded-full bg-primary/20 text-primary font-medium'>
+                          <span className='inline-block text-sm px-2 py-0.5 sm:py-1 rounded-full bg-primary/20 text-primary font-medium'>
                             {blog.category}
                           </span>
                         </div>
 
                         {/* Description */}
-                        <p className='text-xs sm:text-sm text-muted-foreground/90 line-clamp-3 sm:line-clamp-4 md:line-clamp-6 mb-3'>
+                        <p className='text-sm text-muted-foreground/90 line-clamp-3 sm:line-clamp-4 md:line-clamp-6 mb-3'>
                           {blog.description}
                         </p>
 
                         {/* Meta Info */}
-                        <div className='flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-muted-foreground/70 flex-wrap'>
+                        <div className='flex items-center gap-2 sm:gap-3 text-sm text-muted-foreground/70 flex-wrap'>
                           <div className='flex items-center gap-1'>
                             <Calendar className='w-3 h-3 sm:w-3.5 sm:h-3.5' />
                             <span>
@@ -121,7 +124,7 @@ export function BlogsAccordionCell() {
                           {blog.tags.slice(0, 3).map((tag) => (
                             <span
                               key={tag}
-                              className='text-xs sm:text-sm px-2 py-0.5 rounded-full bg-white/5 text-muted-foreground/70 border border-white/5'
+                              className='text-sm px-2 py-0.5 rounded-full bg-white/5 text-muted-foreground/70 border border-white/5'
                             >
                               {tag}
                             </span>

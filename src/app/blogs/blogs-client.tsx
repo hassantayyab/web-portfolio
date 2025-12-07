@@ -26,7 +26,7 @@ export default function BlogsClient() {
                 <div className='relative z-10 flex flex-col flex-1 min-h-0 overflow-hidden'>
                   {/* Category Badge */}
                   <div className='mb-3 shrink-0'>
-                    <span className='inline-block text-xs sm:text-sm px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-primary/10 text-primary border border-primary/20 font-medium'>
+                    <span className='inline-block text-sm px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-primary/10 text-primary border border-primary/20 font-medium'>
                       {blog.category}
                     </span>
                   </div>
@@ -38,13 +38,13 @@ export default function BlogsClient() {
 
                   {/* Description */}
                   <div className='flex-1 min-h-0 overflow-hidden mb-3 sm:mb-4'>
-                    <p className='text-xs sm:text-sm md:text-base text-muted-foreground line-clamp-3'>
+                    <p className='text-sm md:text-base text-muted-foreground line-clamp-3'>
                       {blog.description}
                     </p>
                   </div>
 
                   {/* Meta Info */}
-                  <div className='flex items-center gap-3 sm:gap-4 text-xs sm:text-sm text-muted-foreground/70 mb-3 sm:mb-4 flex-wrap'>
+                  <div className='flex items-center gap-3 sm:gap-4 text-sm text-muted-foreground/70 mb-3 sm:mb-4 flex-wrap'>
                     <div className='flex items-center gap-1 sm:gap-1.5'>
                       <Calendar className='w-3 h-3 sm:w-3.5 sm:h-3.5' />
                       <span>
@@ -66,7 +66,7 @@ export default function BlogsClient() {
                     {blog.tags.map((tag) => (
                       <span
                         key={tag}
-                        className='text-xs sm:text-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md bg-white/5 text-muted-foreground/70 border border-white/5'
+                        className='text-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md bg-white/5 text-muted-foreground/70 border border-white/5'
                       >
                         {tag}
                       </span>
@@ -74,7 +74,7 @@ export default function BlogsClient() {
                   </div>
 
                   {/* Read More Link */}
-                  <div className='flex items-center gap-2 text-xs sm:text-sm text-primary group-hover:gap-3 transition-all'>
+                  <div className='flex items-center gap-2 text-sm text-primary group-hover:gap-3 transition-all'>
                     <span className='font-medium'>Read More</span>
                     <ArrowRight className='w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform' />
                   </div>

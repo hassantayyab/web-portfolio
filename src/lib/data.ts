@@ -1,17 +1,19 @@
 import { Blog, Education, Experience, PersonalInfo, Project, Skill, SocialLink } from './types';
 
 export const personalInfo: PersonalInfo = {
-  name: 'John Doe',
-  title: 'Full Stack Developer',
-  email: 'hello@johndoe.dev',
-  location: 'San Francisco, CA',
-  timezone: 'PST (UTC-8)',
-  bio: "I'm a passionate full-stack developer with 5+ years of experience building modern web applications. I specialize in React, Next.js, and Node.js, with a keen eye for design and user experience. When I'm not coding, you'll find me exploring new technologies, contributing to open source, or enjoying a good cup of coffee.",
-  shortBio: 'Building beautiful, performant web experiences with modern technologies.',
+  name: 'Hassan Tayyab',
+  title: 'Full-Stack Developer',
+  email: 'hassandogar9@gmail.com',
+  location: 'Munich, Germany',
+  timezone: 'CET (UTC+1)',
+  bio: 'I am a full-stack developer who builds web applications fast with the power of AI-assisted coding. I am an expert in Angular and Nest.js. I am also a UX/UI designer and a product manager.',
+  shortBio:
+    'I am a full-stack developer who builds web applications fast with the power of A-assisted coding. I am an expert in Angular and Nest.js. I am also a UX/UI designer and a product manager.',
   availability: 'available',
   availabilityText: 'Open to new opportunities',
-  resumeUrl: '/resume.pdf',
-  avatarUrl: '/avatar.jpg',
+  resumeUrl:
+    'https://docs.google.com/document/d/1ZkWMsLCwD5_SHPuQquWmxDJcrKGafqUVjUq25bus5zI/edit?usp=sharing',
+  avatarUrl: '/hassan-black.PNG',
 };
 
 export const socialLinks: SocialLink[] = [
@@ -26,7 +28,6 @@ export const socialLinks: SocialLink[] = [
     icon: 'linkedin',
   },
   {
-    name: 'X',
     url: 'https://x.com/htdogar',
     icon: 'x',
   },
@@ -39,25 +40,26 @@ export const socialLinks: SocialLink[] = [
 
 export const skills: Skill[] = [
   // Frontend
+  { name: 'Angular', icon: 'angular', category: 'frontend' },
+  { name: 'Nest.js', icon: 'nestjs', category: 'backend' },
   { name: 'React', icon: 'react', category: 'frontend' },
   { name: 'Next.js', icon: 'nextjs', category: 'frontend' },
   { name: 'TypeScript', icon: 'typescript', category: 'frontend' },
-  { name: 'Tailwind CSS', icon: 'tailwind', category: 'frontend' },
-  { name: 'Framer Motion', icon: 'framer', category: 'frontend' },
+  // { name: 'Tailwind CSS', icon: 'tailwind', category: 'frontend' },
 
   // Backend
-  { name: 'Node.js', icon: 'nodejs', category: 'backend' },
-  { name: 'PostgreSQL', icon: 'postgresql', category: 'backend' },
-  { name: 'MongoDB', icon: 'mongodb', category: 'backend' },
-  { name: 'GraphQL', icon: 'graphql', category: 'backend' },
-  { name: 'Prisma', icon: 'prisma', category: 'backend' },
+  // { name: 'Node.js', icon: 'nodejs', category: 'backend' },
+  // { name: 'PostgreSQL', icon: 'postgresql', category: 'backend' },
+  // { name: 'MongoDB', icon: 'mongodb', category: 'backend' },
+  // { name: 'GraphQL', icon: 'graphql', category: 'backend' },
+  // { name: 'Prisma', icon: 'prisma', category: 'backend' },
 
   // Tools
-  { name: 'Git', icon: 'git', category: 'tools' },
-  { name: 'Docker', icon: 'docker', category: 'tools' },
-  { name: 'Figma', icon: 'figma', category: 'tools' },
-  { name: 'VS Code', icon: 'vscode', category: 'tools' },
-  { name: 'Vercel', icon: 'vercel', category: 'tools' },
+  //   { name: 'Git', icon: 'git', category: 'tools' },
+  //   { name: 'Docker', icon: 'docker', category: 'tools' },
+  //   { name: 'Figma', icon: 'figma', category: 'tools' },
+  //   { name: 'VS Code', icon: 'vscode', category: 'tools' },
+  //   { name: 'Vercel', icon: 'vercel', category: 'tools' },
 ];
 
 export const projects: Project[] = [

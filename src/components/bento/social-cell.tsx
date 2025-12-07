@@ -34,9 +34,11 @@ export function SocialCell() {
               )}
             >
               <Icon className='w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground group-hover:text-primary transition-colors' />
-              <span className='text-xs sm:text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors uppercase tracking-wider'>
-                {link.name}
-              </span>
+              {link.name && (
+                <span className='text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors tracking-wider'>
+                  {link.name}
+                </span>
+              )}
             </motion.a>
           );
         })}

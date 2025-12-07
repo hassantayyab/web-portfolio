@@ -6,7 +6,7 @@ const baseUrl = env.NEXT_PUBLIC_SITE_URL;
 
 // Extract social links from data
 const getSocialLink = (name: string) => {
-  const link = socialLinks.find((s) => s.name.toLowerCase() === name.toLowerCase());
+  const link = socialLinks.find((s) => s.name?.toLowerCase() === name.toLowerCase());
   return link?.url || '';
 };
 
