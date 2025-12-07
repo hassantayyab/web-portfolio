@@ -21,7 +21,7 @@ export default function HomePageClient() {
         <div className='fixed inset-0 dot-pattern opacity-30 pointer-events-none' />
 
         {/* Bento Grid */}
-        <BentoGrid className='pt-20 pb-8 md:pt-24 md:pb-0 md:h-full'>
+        <BentoGrid className='pt-20 pb-12 md:pt-24 md:pb-12 md:h-full'>
           {/* Row 1-2: Hero (left) + Photo (center-right) + Blogs (right) */}
           {/* Hero - 5 cols (2.5 in 6-col = 5 in 12-col), 2 rows */}
           <BentoCell colSpan={5} rowSpan={2}>
