@@ -1,7 +1,6 @@
 'use client';
 
 import { ProjectCard, ProjectModal } from '@/components/projects';
-import { ClientLayout } from '@/components/shared/client-layout';
 import { PageLayout } from '@/components/shared/page-layout';
 import { projects } from '@/lib/data';
 import { Project } from '@/lib/types';
@@ -19,7 +18,7 @@ export default function ProjectsPageClient() {
     filter === 'all' ? projects : projects.filter((p) => p.technologies.includes(filter));
 
   return (
-    <ClientLayout>
+    <>
       <PageLayout
         title='Projects'
         description="A collection of projects I've worked on, from web applications to open source contributions. Each project represents a unique challenge and learning experience."
@@ -83,6 +82,6 @@ export default function ProjectsPageClient() {
 
       {/* Project modal */}
       <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
-    </ClientLayout>
+    </>
   );
 }

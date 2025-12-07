@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
+import { ClientLayout } from "@/components/shared/client-layout";
 import { defaultMetadata, generatePersonJsonLd, generateWebsiteJsonLd, generatePortfolioJsonLd } from "@/lib/metadata";
 import { WebVitalsScript } from "@/components/shared/web-vitals-script";
 import "./globals.css";
@@ -48,7 +49,9 @@ export default function RootLayout({
             __html: JSON.stringify(generatePortfolioJsonLd()),
           }}
         />
-        {children}
+        <ClientLayout>
+          {children}
+        </ClientLayout>
         <Toaster 
           position="top-center"
           richColors

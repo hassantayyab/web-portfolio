@@ -1,6 +1,5 @@
 'use client';
 
-import { ClientLayout } from '@/components/shared/client-layout';
 import { PageLayout } from '@/components/shared/page-layout';
 import { Timeline } from '@/components/shared/timeline';
 import { Badge } from '@/components/ui/badge';
@@ -21,12 +20,11 @@ export default function AboutPageClient() {
   );
 
   return (
-    <ClientLayout>
-      <PageLayout
-        title='About Me'
-        description='Get to know more about my background, experience, and what drives me.'
-        maxWidth='4xl'
-      >
+    <PageLayout
+      title='About Me'
+      description='Get to know more about my background, experience, and what drives me.'
+      maxWidth='4xl'
+    >
         {/* Bio Section */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
@@ -156,7 +154,6 @@ export default function AboutPageClient() {
             ))}
           </div>
         </motion.section>
-      </PageLayout>
-    </ClientLayout>
+    </PageLayout>
   );
 }

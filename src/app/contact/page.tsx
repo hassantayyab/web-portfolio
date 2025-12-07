@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import { siteConfig } from "@/lib/metadata";
-import { ClientLayout } from "@/components/shared/client-layout";
 import ContactPageClient from "./contact-client";
 
 export const metadata: Metadata = {
@@ -31,9 +30,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <ClientLayout>
-      <ContactPageClient />
-    </ClientLayout>
+    <ContactPageClient />
   );
 }
 
