@@ -45,7 +45,7 @@ export function HeroCell() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: ANIMATION_DURATIONS.SLOW, delay: ANIMATION_DELAYS.MEDIUM }}
-          className='flex flex-wrap gap-2 text-base sm:text-lg md:text-xl lg:text-2xl text-primary'
+          className='flex flex-wrap gap-2 text-lg md:text-xl lg:text-2xl text-primary'
         >
           {words.map((word, index) => (
             <motion.span
