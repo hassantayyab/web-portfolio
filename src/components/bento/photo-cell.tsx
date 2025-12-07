@@ -10,7 +10,7 @@ export function PhotoCell() {
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, delay: 0.2 }}
-      className='relative min-h-[300px] md:min-h-0 h-full w-full overflow-hidden'
+      className='relative min-h-[360px] md:min-h-0 h-full w-full overflow-hidden'
     >
       {/* Full-size photo container */}
       <div className='absolute inset-0 bg-linear-to-br from-muted/80 to-muted/40'>
