@@ -49,7 +49,7 @@ export function Navbar() {
       >
         <nav
           className={cn(
-            'mx-4 md:mx-6 flex items-center justify-between px-4 md:px-6 py-3 rounded-2xl border border-white/15 backdrop-blur-xl transition-all duration-300',
+            'mx-4 md:mx-5 flex items-center justify-between px-4 md:px-6 py-3 rounded-2xl border border-white/15 backdrop-blur-xl transition-all duration-300',
             isScrolled ? 'bg-background/80 shadow-lg shadow-black/20' : 'bg-background/50',
           )}
           aria-label='Main navigation'

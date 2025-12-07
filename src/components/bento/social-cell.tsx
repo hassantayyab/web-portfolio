@@ -3,13 +3,14 @@
 import { socialLinks } from '@/lib/data';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, Linkedin, Mail, Twitter } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
+import { SiGithub, SiGmail, SiLinkedin, SiX } from 'react-icons/si';
 
 const iconMap: Record<string, React.FC<{ className?: string }>> = {
-  github: Github,
-  linkedin: Linkedin,
-  twitter: Twitter,
-  mail: Mail,
+  github: SiGithub,
+  linkedin: SiLinkedin,
+  x: SiX,
+  mail: SiGmail,
 };
 
 export function SocialCell() {
@@ -26,10 +27,6 @@ export function SocialCell() {
               href={link.url}
               target='_blank'
               rel='noopener noreferrer'
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: index * 0.05 }}
-              whileHover={{ y: -2, scale: 1.02 }}
               className={cn(
                 'flex items-center gap-2 sm:gap-2.5 px-3 sm:px-4 md:px-5 lg:px-6 py-2.5 sm:py-3 md:py-3.5 rounded-xl min-h-[44px]',
                 'bg-white/5 border border-white/15 transition-all duration-300 cursor-pointer',
