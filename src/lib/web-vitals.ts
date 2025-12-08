@@ -3,7 +3,7 @@
  * Tracks Core Web Vitals and other performance metrics
  */
 
-import { Metric, onCLS, onFCP, onFID, onINP, onLCP, onTTFB } from 'web-vitals';
+import { Metric, onCLS, onFCP, onINP, onLCP, onTTFB } from 'web-vitals';
 
 type ReportHandler = (metric: Metric) => void;
 
@@ -19,7 +19,6 @@ function sendToAnalytics(metric: Metric) {
     // if (typeof window !== 'undefined' && (window as any).va) {
     //   (window as any).va('track', metric.name, metric.value);
     // }
-
     // Example: Send to custom analytics endpoint
     // fetch('/api/analytics', {
     //   method: 'POST',
@@ -42,7 +41,6 @@ export function initWebVitals(onPerfEntry?: ReportHandler) {
 
   // Core Web Vitals
   onCLS(reportHandler);
-  onFID(reportHandler);
   onFCP(reportHandler);
   onLCP(reportHandler);
   onTTFB(reportHandler);
