@@ -126,16 +126,6 @@ export const projects: Project[] = [
     year: '2024',
   },
   {
-    id: 'tweetads',
-    title: 'TweetAds',
-    description: 'Marketplace connecting brands with Twitter creators for sponsored posts.',
-    longDescription:
-      'Delivered a two-sided platform with searchable creator profiles, niche filters, and API-based booking to streamline Twitter influencer collaborations and transparent pricing.',
-    image: '/work/tweetads.jpg',
-    technologies: ['Angular 2+', 'Firebase', 'TypeScript', 'LemonSqueezy', 'Bootstrap 5'],
-    year: '2023',
-  },
-  {
     id: 'shopconnect',
     title: 'ShopConnect',
     description: 'Bilingual shopping community app redesign with gamified engagement.',
@@ -177,22 +167,6 @@ export const projects: Project[] = [
     year: '2024',
   },
   {
-    id: 'quickai',
-    title: 'QuickAI',
-    description: 'In-browser AI companion Chrome extension built on Manifest V3.',
-    longDescription:
-      'Packaged rewrite, chat, and summarize workflows into a lightweight extension with local API-key storage, cutting tab-switching for early users by ~50% and shipping to the Chrome Web Store.',
-    image: '/work/quickai.jpg',
-    technologies: [
-      'Manifest V3',
-      'TypeScript',
-      'Angular 2+',
-      'Chrome Extension APIs',
-      'Tailwind CSS',
-    ],
-    year: '2025',
-  },
-  {
     id: 'open-process-ventures',
     title: 'Open Process Ventures',
     description: 'Web3 incubator platform for startup onboarding and investor matching.',
@@ -210,16 +184,6 @@ export const projects: Project[] = [
     ],
     year: '2023',
     featured: true,
-  },
-  {
-    id: 'talento',
-    title: 'Talento',
-    description: 'Anonymous talent marketplace with AI matching and built-in hiring flows.',
-    longDescription:
-      'Shipped a privacy-first job marketplace where candidates stay anonymous until opt-in, AI scores matches, and built-in chat and salary bands streamline hiring; pilot cut time-to-hire by 35%.',
-    image: '/work/talento.jpg',
-    technologies: ['Angular 2+', 'Firebase', 'TypeScript', 'LemonSqueezy'],
-    year: '2024',
   },
   {
     id: 'workforce-management',
@@ -492,46 +456,6 @@ export const caseStudies: CaseStudy[] = [
     },
   },
   {
-    id: 5,
-    slug: 'tweetads',
-    title: 'TweetAds',
-    subtitle: 'Marketplace for Twitter (X) Advertisers & Creators',
-    category: 'marketing',
-    projectType: 'development',
-    timeline: '8 weeks',
-    industry: 'Advertising Technology',
-    image: '/work/tweetads.jpg',
-    description:
-      'TweetAds is a self-serve marketplace where brands discover high-performing Twitter (X) accounts and book sponsored posts in minutes, while creators monetize their audiences through transparent, data-driven collaborations.',
-    challenge:
-      'Brands struggle to identify relevant Twitter voices and negotiate one-off deals, and creators lack an easy, trustworthy way to turn their reach into revenue.',
-    solution:
-      'We built a two-sided platform with searchable creator profiles, niche & keyword filters to make Twitter influencer marketing as easy as shopping online.',
-    results:
-      'A quiet soft-launch validated TweetAds end-to-end workflow: creators and brands praised the smoother negotiations, clear pricing, and higher-quality matches compared with cold outreach. Positive feedback is driving the next feature set before a wider public roll-out.',
-    metrics: {
-      users: '',
-      growth: '',
-      funding: '',
-    },
-    technologies: ['Angular 2+', 'Firebase', 'TypeScript', 'LemonSqueezy', 'Bootstrap 5'],
-    testimonial: {
-      quote:
-        'Appaddle delivered exactly what we needed. The AI integration was seamless and the code quality exceeded our expectations. Our efficiency has improved dramatically.',
-      author: 'NDA',
-      role: 'Founder & CEO',
-    },
-    keyFeatures: [
-      'Creator marketplace with audience stats',
-      'Advanced search & niche filters',
-      'API for programmatic ad booking',
-    ],
-    gallery: ['/work/tweetads.jpg'],
-    launchDate: 'February 2023',
-    teamSize: '2 developers',
-    keyAchievements: ['Implemented design system', 'Developed from scratch', 'Launched in 2023'],
-  },
-  {
     id: 13,
     slug: 'brandon-shopping-community',
     title: 'ShopConnect',
@@ -773,58 +697,6 @@ export const caseStudies: CaseStudy[] = [
     },
   },
   {
-    id: 7,
-    slug: 'quickai',
-    title: 'QuickAI',
-    subtitle: 'In-Browser AI Companion Extension',
-    category: 'productivity',
-    projectType: 'development',
-    timeline: '6 weeks',
-    industry: 'Generative AI Tools',
-    image: '/work/quickai.png',
-    description:
-      'QuickAI brings OpenAI-powered help straight into Chrome: polish any text field, chat with an AI assistant, or get an instant page summary without ever leaving the tab.',
-    challenge:
-      'Frequent context-switching to separate AI websites or copy-paste workflows slows users down and exposes their content to unnecessary risk.',
-    solution:
-      "We packaged must-have AI tasks (rewrite, chat, summarize) into a lightweight Manifest V3 extension. The user's own API key stays local, ensuring privacy while unlocking GPT-4 right where they work.",
-    results:
-      'The fully-working MVP went live on the Chrome Web Store on 30 Apr 2025 and quickly attracted its first 3 organic installs (as shown on the listing). Early testers report the in-tab AI tools cut their copy-paste and tab-switching time by roughly half, validating QuickAI core value before broader marketing.',
-    metrics: {
-      users: '',
-      growth: '',
-      funding: '',
-    },
-    technologies: [
-      'Manifest V3',
-      'TypeScript',
-      'Angular 2+',
-      'Chrome Extension APIs',
-      'OpenAI API',
-      'Tailwind CSS',
-    ],
-    testimonial: {
-      quote: '',
-      author: '',
-      role: '',
-    },
-    keyFeatures: [
-      'Quick Text Polish in any input',
-      'Sidebar AI chat on Alt + C',
-      'One-click page summarizer',
-      'Local API-key storage for privacy',
-      'Lightweight (<=150 KB) build',
-    ],
-    gallery: ['/work/quickai.jpg'],
-    launchDate: 'April 2025',
-    teamSize: 'Solo developer',
-    keyAchievements: [
-      'Published on Chrome Web Store v1.0.0 (30 Apr 2025)',
-      'Compliant with Google Manifest V3 requirements',
-      'First installs and positive early feedback',
-    ],
-  },
-  {
     id: 4,
     slug: 'open-process-ventures',
     title: 'Open Process Ventures',
@@ -880,52 +752,6 @@ export const caseStudies: CaseStudy[] = [
       '200+ mentors in network',
       'Featured in CoinDesk and Decrypt',
       'Partnership with major VCs',
-    ],
-  },
-  {
-    id: 6,
-    slug: 'talento',
-    title: 'Talento',
-    subtitle: 'Anonymous IT Job Marketplace',
-    category: 'recruitment',
-    projectType: 'development',
-    timeline: '10 weeks',
-    industry: 'HR Technology',
-    image: '/work/talento.jpg',
-    description:
-      "Talento lets software engineers and other tech professionals browse and apply for curated job openings without revealing their identity until they're ready, while companies receive a pipeline of pre-matched, motivated candidates.",
-    challenge:
-      'Most job boards expose personal data and flood inboxes with spam, while recruiters waste hours on unqualified CVs and long email chains.',
-    solution:
-      'We built an anonymous, data-driven talent marketplace: candidates create private profiles, an AI matching engine scores them against live vacancies, and details are shared only after both sides opt-in. Built-in chat, salary bands, and skill tags streamline the entire hiring funnel.',
-    results:
-      'In the three-month private beta Talento matched 320 anonymised engineer profiles with 42 hiring teams, generating 78 interviews and 26 accepted offers. Pilot companies reported a 35% faster time-to-hire and rated candidate fit 4.6/5 compared with traditional sourcing.',
-    metrics: {
-      users: '',
-      growth: '',
-      funding: '',
-    },
-    technologies: ['Angular 2+', 'Firebase', 'TypeScript', 'LemonSqueezy'],
-    testimonial: {
-      quote: '',
-      author: '',
-      role: '',
-    },
-    keyFeatures: [
-      'Anonymous candidate profiles',
-      'AI-powered skill matching',
-      'Built-in chat & interview scheduling',
-      'Transparent salary ranges',
-      'One-click apply workflow',
-      'Dark-mode friendly UI',
-    ],
-    gallery: ['/work/talento.jpg'],
-    launchDate: 'September 2024',
-    teamSize: '2 developers',
-    keyAchievements: [
-      'Private beta accepted 300+ engineers',
-      'Short-listed at HR Tech Pitch Night Warsaw',
-      "Reached #7 on Product Hunt 'Upcoming' list",
     ],
   },
   {

@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Project } from '@/lib/types';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Calendar, ExternalLink, Github, X } from 'lucide-react';
+import Image from 'next/image';
 import { useEffect, useRef } from 'react';
 
 interface ProjectModalProps {
@@ -117,13 +118,29 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
               {/* Scrollable content */}
               <div className='max-h-[80vh] overflow-y-auto'>
                 {/* Header image */}
-                <div className='relative h-64 md:h-80'>
-                  <div className='absolute inset-0 bg-gradient-to-br from-primary/40 via-primary/20 to-transparent' />
-                  <div className='absolute inset-0 flex items-center justify-center'>
-                    <span className='text-8xl md:text-9xl font-bold text-primary/30'>
-                      {project.title[0]}
-                    </span>
+                <div className='relative h-72 md:h-96 overflow-hidden'>
+                  {/* Project image with fallback */}
+                  <div className='absolute inset-0 bg-linear-to-br from-primary/30 via-primary/15 to-primary/5'>
+                    {project.image ? (
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        className='object-cover'
+                        sizes='(max-width: 768px) 100vw, 900px'
+                        priority
+                      />
+                    ) : (
+                      <div className='absolute inset-0 flex items-center justify-center'>
+                        <span className='text-8xl md:text-9xl font-bold text-primary/30'>
+                          {project.title[0]}
+                        </span>
+                      </div>
+                    )}
                   </div>
+
+                  {/* Overlay for readability */}
+                  <div className='absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent' />
 
                   {/* Badges */}
                   <div className='absolute bottom-4 left-4 flex items-center gap-2'>
@@ -150,7 +167,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                       {project.title}
                     </h2>
 
-                    <div className='flex items-center gap-2 flex-shrink-0'>
+                    <div className='flex items-center gap-2 shrink-0'>
                       {project.liveUrl && (
                         <Button asChild size='sm' className='gap-2'>
                           <a href={project.liveUrl} target='_blank' rel='noopener noreferrer'>

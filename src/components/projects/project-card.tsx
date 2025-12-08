@@ -29,7 +29,7 @@ export const ProjectCard = memo(function ProjectCard({
       )}
     >
       {/* Project image/placeholder */}
-      <div className='relative h-40 sm:h-48 overflow-hidden'>
+      <div className='relative h-48 sm:h-56 overflow-hidden'>
         {/* Image with fallback */}
         <div className='absolute inset-0 bg-linear-to-br from-primary/30 via-primary/20 to-primary/10'>
           {project.image ? (

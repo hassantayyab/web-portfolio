@@ -20,7 +20,7 @@ export default function ProjectsPageClient() {
     <>
       <PageLayout
         title='Projects'
-        description='A selection of shipped client work and product builds across SaaS, AI, marketplaces, and mobile—happy to share deeper case studies on request.'
+        description="Some of the projects I've worked on. Although not all can be shared here due to confidentiality, I'm happy to share more details upon request."
         maxWidth='7xl'
       >
         {/* Projects grid */}
