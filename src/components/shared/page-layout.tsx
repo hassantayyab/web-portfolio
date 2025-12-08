@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { ReactNode } from 'react';
 import { PageTransition } from './page-transition';
 
@@ -41,17 +40,12 @@ export function PageLayout({
           className={`relative z-10 ${maxWidthClasses[maxWidth]} mx-auto px-4 sm:px-5 md:px-6 py-24 md:py-32 ${className || ''}`}
         >
           {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className='mb-8 sm:mb-10 md:mb-12'
-          >
+          <div className='mb-8 sm:mb-10 md:mb-12'>
             <h1 className='text-h1 mb-3 sm:mb-4'>{title}</h1>
             {description && (
               <p className='text-body-lg text-muted-foreground max-w-2xl'>{description}</p>
             )}
-          </motion.div>
+          </div>
 
           {/* Content */}
           {children}

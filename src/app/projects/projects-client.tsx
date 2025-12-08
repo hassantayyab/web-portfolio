@@ -13,7 +13,7 @@ export default function ProjectsPageClient() {
     <>
       <PageLayout
         title='Projects'
-        description="A collection of projects I've worked on, from web applications to open source contributions. Each project represents a unique challenge and learning experience."
+        description="Some of the projects I've worked on. Although not all can be shared here due to confidentiality, I'm happy to share more details upon request."
         maxWidth='7xl'
       >
         {/* Projects grid */}
