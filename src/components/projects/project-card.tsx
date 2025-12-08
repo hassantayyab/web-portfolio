@@ -107,7 +107,7 @@ export const ProjectCard = memo(function ProjectCard({
         {/* Technologies */}
         <div className='flex flex-wrap gap-1 sm:gap-1.5'>
           {project.technologies.slice(0, 4).map((tech) => (
-            <Badge key={tech} variant='outline' className='text-sm bg-white/5 border-white/150'>
+            <Badge key={tech} variant='outline' className='text-sm bg-white/5 border-white/25'>
               {tech}
             </Badge>
           ))}
