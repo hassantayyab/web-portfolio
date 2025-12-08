@@ -71,3 +71,45 @@ export interface Blog {
   readTime: string;
   featured?: boolean;
 }
+
+export interface CaseStudy {
+  id: number;
+  slug: string;
+  title: string;
+  subtitle: string;
+  category: string;
+  projectType: 'development' | 'design' | 'full-stack';
+  timeline: string;
+  industry: string;
+  image: string;
+  description: string;
+  challenge: string;
+  solution: string;
+  results: string;
+  metrics: {
+    users: string;
+    growth: string;
+    funding: string;
+  };
+  technologies: string[];
+  testimonial?: {
+    quote: string;
+    author: string;
+    role: string;
+  };
+  keyFeatures?: string[];
+  gallery: string[];
+  liveDemoUrl?: string;
+  githubUrl?: string;
+  behanceUrl?: string;
+  figmaUrl?: string;
+  launchDate: string;
+  teamSize: string;
+  keyAchievements: string[];
+  designProcess?: string[];
+  userResearch?: {
+    participants: string;
+    methods: string[];
+    insights: string[];
+  };
+}

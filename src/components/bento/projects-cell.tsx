@@ -9,10 +9,16 @@ import Link from 'next/link';
 import { useMemo, useState } from 'react';
 
 export function ProjectsCell() {
-  const featuredProjects = useMemo(
-    () => projects.filter((p) => p.featured).slice(0, PROJECT_LIMITS.FEATURED_ON_HOME),
-    [],
-  );
+  const featuredProjects = useMemo(() => {
+    return projects
+      .filter((p) => p.featured)
+      .sort((a, b) => {
+        const aYear = Number.parseInt(a.year, 10) || 0;
+        const bYear = Number.parseInt(b.year, 10) || 0;
+        return bYear - aYear;
+      })
+      .slice(0, PROJECT_LIMITS.FEATURED_ON_HOME);
+  }, []);
   const [expandedId, setExpandedId] = useState<string | null>(featuredProjects[0]?.id || null);
 
   const toggleProject = (id: string) => {

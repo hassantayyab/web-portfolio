@@ -5,6 +5,7 @@ import { Project } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import { Calendar, ExternalLink, Github } from 'lucide-react';
+import Image from 'next/image';
 import { memo } from 'react';
 
 interface ProjectCardProps {
@@ -29,17 +30,28 @@ export const ProjectCard = memo(function ProjectCard({
     >
       {/* Project image/placeholder */}
       <div className='relative h-40 sm:h-48 overflow-hidden'>
-        <div className='absolute inset-0 bg-linear-to-br from-primary/30 via-primary/20 to-primary/10' />
+        {/* Image with fallback */}
+        <div className='absolute inset-0 bg-linear-to-br from-primary/30 via-primary/20 to-primary/10'>
+          {project.image ? (
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              className='object-cover opacity-90 group-hover:scale-105 transition-transform duration-500'
+              sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
+              priority={index < 3}
+            />
+          ) : (
+            <div className='absolute inset-0 flex items-center justify-center'>
+              <span className='text-5xl sm:text-6xl font-bold text-primary/40 group-hover:scale-110 group-hover:text-primary/50 transition-all duration-300'>
+                {project.title[0]}
+              </span>
+            </div>
+          )}
+        </div>
 
         {/* Subtle pattern overlay */}
-        <div className='absolute inset-0 opacity-20 grid-pattern' />
-
-        {/* Project initial as placeholder */}
-        <div className='absolute inset-0 flex items-center justify-center'>
-          <span className='text-5xl sm:text-6xl font-bold text-primary/40 group-hover:scale-110 group-hover:text-primary/50 transition-all duration-300'>
-            {project.title[0]}
-          </span>
-        </div>
+        <div className='absolute inset-0 opacity-25 bg-grid-white/[0.08]' />
 
         {/* Hover overlay */}
         <div className='absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3'>
