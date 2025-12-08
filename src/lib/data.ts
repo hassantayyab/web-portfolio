@@ -41,25 +41,26 @@ export const socialLinks: SocialLink[] = [
 export const skills: Skill[] = [
   // Frontend
   { name: 'Angular', icon: 'angular', category: 'frontend' },
-  // { name: 'Nest.js', icon: 'nestjs', category: 'backend' },
   // { name: 'React', icon: 'react', category: 'frontend' },
   { name: 'Next.js', icon: 'nextjs', category: 'frontend' },
   { name: 'TypeScript', icon: 'typescript', category: 'frontend' },
   { name: 'Tailwind CSS', icon: 'tailwind', category: 'frontend' },
 
   // Backend
-  // { name: 'Node.js', icon: 'nodejs', category: 'backend' },
+  { name: 'Nest.js', icon: 'nestjs', category: 'backend' },
+  { name: 'Node.js', icon: 'nodejs', category: 'backend' },
   // { name: 'PostgreSQL', icon: 'postgresql', category: 'backend' },
-  // { name: 'MongoDB', icon: 'mongodb', category: 'backend' },
+  { name: 'MongoDB', icon: 'mongodb', category: 'backend' },
   // { name: 'GraphQL', icon: 'graphql', category: 'backend' },
-  // { name: 'Prisma', icon: 'prisma', category: 'backend' },
+  { name: 'Prisma', icon: 'prisma', category: 'backend' },
 
   // Tools
-  //   { name: 'Git', icon: 'git', category: 'tools' },
+  { name: 'Git', icon: 'git', category: 'tools' },
   //   { name: 'Docker', icon: 'docker', category: 'tools' },
   { name: 'Figma', icon: 'figma', category: 'tools' },
+  { name: 'Cursor', icon: 'cursor', category: 'tools' },
   //   { name: 'VS Code', icon: 'vscode', category: 'tools' },
-  //   { name: 'Vercel', icon: 'vercel', category: 'tools' },
+  { name: 'Vercel', icon: 'vercel', category: 'tools' },
 ];
 
 export const projects: Project[] = [

@@ -1,7 +1,7 @@
 /**
  * Application-wide constants
  * Centralized location for magic numbers, strings, and configuration values
- * 
+ *
  * @remarks
  * Using constants instead of magic numbers improves maintainability
  * and makes it easier to adjust values across the application
@@ -84,6 +84,5 @@ export const PROJECT_LIMITS = {
  * Skill display limits
  */
 export const SKILL_LIMITS = {
-  HERO_DISPLAY: 6,
+  HERO_DISPLAY: 5,
 } as const;
-
