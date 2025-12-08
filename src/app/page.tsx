@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import HomePageClient from './home-page';
 
 export const metadata: Metadata = {
-  title: 'Home',
+  title: 'Hassan Tayyab | Full-Stack Developer',
   description: siteConfig.longDescription,
   openGraph: {
     title: siteConfig.title,

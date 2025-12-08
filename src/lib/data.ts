@@ -2,13 +2,13 @@ import { Blog, Education, Experience, PersonalInfo, Project, Skill, SocialLink }
 
 export const personalInfo: PersonalInfo = {
   name: 'Hassan Tayyab',
-  title: 'Full-Stack Developer',
+  title: 'Frontend Engineer',
   email: 'hassandogar9@gmail.com',
   location: 'Munich, Germany',
   timezone: 'CET (UTC+1)',
-  bio: 'I am a full-stack developer who builds web applications fast with the power of AI-assisted coding. I am an expert in Angular and Nest.js. I am also a UX/UI designer and a product manager.',
+  bio: 'Frontend engineer skilled in Angular, React, and Next.js, with a strong background in UX design. I build clean, scalable web applications fast using AI-assisted development and a user-centered mindset. Passionate about crafting intuitive interfaces, smooth interactions, and delivering high-quality frontend experiences end-to-end.',
   shortBio:
-    'I am a full-stack developer who builds web applications fast with the power of A-assisted coding. I am an expert in Angular and Nest.js. I am also a UX/UI designer and a product manager.',
+    'Frontend engineer with a strong UX design background, building fast, intuitive web apps using AI-assisted development. Experienced in Angular, React, and Next.js.',
   availability: 'available',
   availabilityText: 'Open to new opportunities',
   resumeUrl:
@@ -41,11 +41,11 @@ export const socialLinks: SocialLink[] = [
 export const skills: Skill[] = [
   // Frontend
   { name: 'Angular', icon: 'angular', category: 'frontend' },
-  { name: 'Nest.js', icon: 'nestjs', category: 'backend' },
-  { name: 'React', icon: 'react', category: 'frontend' },
+  // { name: 'Nest.js', icon: 'nestjs', category: 'backend' },
+  // { name: 'React', icon: 'react', category: 'frontend' },
   { name: 'Next.js', icon: 'nextjs', category: 'frontend' },
   { name: 'TypeScript', icon: 'typescript', category: 'frontend' },
-  // { name: 'Tailwind CSS', icon: 'tailwind', category: 'frontend' },
+  { name: 'Tailwind CSS', icon: 'tailwind', category: 'frontend' },
 
   // Backend
   // { name: 'Node.js', icon: 'nodejs', category: 'backend' },
@@ -57,7 +57,7 @@ export const skills: Skill[] = [
   // Tools
   //   { name: 'Git', icon: 'git', category: 'tools' },
   //   { name: 'Docker', icon: 'docker', category: 'tools' },
-  //   { name: 'Figma', icon: 'figma', category: 'tools' },
+  { name: 'Figma', icon: 'figma', category: 'tools' },
   //   { name: 'VS Code', icon: 'vscode', category: 'tools' },
   //   { name: 'Vercel', icon: 'vercel', category: 'tools' },
 ];

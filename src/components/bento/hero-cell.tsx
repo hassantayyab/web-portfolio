@@ -63,14 +63,14 @@ export function HeroCell() {
           ))}
         </motion.div>
 
-        {/* Short bio */}
+        {/* Bio */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: ANIMATION_DURATIONS.SLOW, delay: 0.7 }}
-          className='mt-4 text-base sm:text-lg text-muted-foreground/80 max-w-lg text-pretty'
+          className='mt-4 text-base sm:text-lg text-muted-foreground/80 sm:max-w-xl text-pretty'
         >
-          {personalInfo.shortBio}
+          {personalInfo.bio}
         </motion.p>
       </div>
 
