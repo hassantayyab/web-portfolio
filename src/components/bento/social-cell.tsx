@@ -1,12 +1,14 @@
 'use client';
 
+import type { FC } from 'react';
+
 import { socialLinks } from '@/lib/data';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
 import { SiGithub, SiGmail, SiLinkedin, SiX } from 'react-icons/si';
 
-const iconMap: Record<string, React.FC<{ className?: string }>> = {
+const iconMap: Record<string, FC<{ className?: string }>> = {
   github: SiGithub,
   linkedin: SiLinkedin,
   x: SiX,
@@ -23,7 +25,7 @@ export function SocialCell() {
 
           return (
             <motion.a
-              key={link.name}
+              key={link.url || link.name || index}
               href={link.url}
               target='_blank'
               rel='noopener noreferrer'
