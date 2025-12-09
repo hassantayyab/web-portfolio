@@ -41,13 +41,13 @@ export const socialLinks: SocialLink[] = [
 export const skills: Skill[] = [
   // Frontend
   { name: 'Angular', icon: 'angular', category: 'frontend' },
-  // { name: 'React', icon: 'react', category: 'frontend' },
+  { name: 'React', icon: 'react', category: 'frontend' },
   { name: 'Next.js', icon: 'nextjs', category: 'frontend' },
   { name: 'TypeScript', icon: 'typescript', category: 'frontend' },
   { name: 'Tailwind CSS', icon: 'tailwind', category: 'frontend' },
 
   // Backend
-  { name: 'Nest.js', icon: 'nestjs', category: 'backend' },
+  { name: 'NestJS', icon: 'nestjs', category: 'backend' },
   { name: 'Node.js', icon: 'nodejs', category: 'backend' },
   // { name: 'PostgreSQL', icon: 'postgresql', category: 'backend' },
   { name: 'MongoDB', icon: 'mongodb', category: 'backend' },

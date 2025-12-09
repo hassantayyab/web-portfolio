@@ -1,6 +1,6 @@
 'use client';
 
-import { ANIMATION_DELAYS, ANIMATION_DURATIONS, SKILL_LIMITS } from '@/lib/constants';
+import { ANIMATION_DELAYS, ANIMATION_DURATIONS } from '@/lib/constants';
 import { personalInfo, skills } from '@/lib/data';
 import { getSkillIcon } from '@/lib/skill-icons';
 import { motion } from 'framer-motion';
@@ -8,8 +8,11 @@ import { useMemo } from 'react';
 
 export function HeroCell() {
   const words = useMemo(() => personalInfo.title.split(' '), []);
-  // Get first 6 skills for display in hero
-  const displaySkills = useMemo(() => skills.slice(0, SKILL_LIMITS.HERO_DISPLAY), []);
+  const viewableSkills = ['angular', 'nextjs', 'typescript', 'nestjs'];
+  const displaySkills = useMemo(
+    () => skills.filter((skill) => viewableSkills.includes(skill.icon)),
+    [],
+  );
 
   return (
     <div className='relative min-h-[400px] md:min-h-0 md:h-full flex flex-col justify-between p-4 sm:p-6 md:p-8 overflow-hidden'>
