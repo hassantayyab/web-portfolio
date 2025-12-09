@@ -255,7 +255,7 @@ export const experiences: Experience[] = [
     startDate: 'July 2018',
     endDate: 'May 2020',
     description: [
-      'Led frontend for NectFlight (B2B SaaS) across Sender and Enterprise portals; supported Traveller and Admin portals',
+      'Led frontend for NextFlight (B2B SaaS) across Sender and Enterprise portals; supported Traveller and Admin portals',
       'Built Stripe, PayPal, Zendesk, Firebase, and Maps integrations with robust UI flows',
       'Owned SSS school management app frontend for iOS/Android using Angular + Ionic',
       'Implemented analytics and dashboards with HighCharts to improve visibility',
