@@ -21,6 +21,7 @@ export const siteConfig = {
     twitter: getSocialLink('Twitter'),
     github: getSocialLink('GitHub'),
     linkedin: getSocialLink('LinkedIn'),
+    youtube: getSocialLink('YouTube'),
     email: personalInfo.email,
   },
 };

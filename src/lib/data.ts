@@ -23,6 +23,11 @@ export const socialLinks: SocialLink[] = [
     icon: 'github',
   },
   {
+    name: 'YouTube',
+    url: 'https://www.youtube.com/@HassanTDogar',
+    icon: 'youtube',
+  },
+  {
     name: 'LinkedIn',
     url: 'https://www.linkedin.com/in/hassan-t-dogar/',
     icon: 'linkedin',
