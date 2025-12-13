@@ -157,7 +157,7 @@ export function redirectToLogin(request: NextRequest): NextResponse {
 /**
  * Auth session type
  */
-export interface AuthSession {
+export interface AuthSession extends Record<string, unknown> {
   authenticated: boolean;
   role: 'admin';
   expiresAt: number;

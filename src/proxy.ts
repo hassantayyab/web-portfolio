@@ -1,9 +1,9 @@
-import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { verifyAuthFromRequest, redirectToLogin } from './lib/auth';
+import { NextResponse } from 'next/server';
+import { redirectToLogin, verifyAuthFromRequest } from './lib/auth';
 
 /**
- * Proxy to protect admin and blog creation routes
+ * Proxy middleware to protect admin and blog creation routes
  */
 export default async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -26,9 +26,7 @@ export default async function proxy(request: NextRequest) {
     '/api/upload',
   ];
 
-  const isProtectedRoute = protectedRoutes.some((route) =>
-    pathname.startsWith(route)
-  );
+  const isProtectedRoute = protectedRoutes.some((route) => pathname.startsWith(route));
 
   if (isProtectedRoute) {
     const isAuthenticated = await verifyAuthFromRequest(request);
@@ -36,10 +34,7 @@ export default async function proxy(request: NextRequest) {
     if (!isAuthenticated) {
       // Redirect to login for pages, return 401 for API routes
       if (pathname.startsWith('/api/')) {
-        return NextResponse.json(
-          { error: 'Authentication required' },
-          { status: 401 }
-        );
+        return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
       }
 
       return redirectToLogin(request);
@@ -62,4 +57,3 @@ export const config = {
     '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
 };
-

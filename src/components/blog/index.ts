@@ -2,7 +2,6 @@ export { RichTextEditor } from './rich-text-editor';
 export type { Editor } from './rich-text-editor';
 export { EditorToolbar } from './editor-toolbar';
 export { EditorStats } from './editor-stats';
-export { RichTextEditorExample } from './rich-text-editor-example';
 export { RichTextEditorWithAutoSave } from './rich-text-editor-with-autosave';
 export type { AutoSaveData } from './rich-text-editor-with-autosave';
 export { SaveStatusIndicator } from './save-status-indicator';
