@@ -1,36 +1,53 @@
-import { siteConfig } from '@/lib/metadata';
 import { Metadata } from 'next';
+import { createServerSupabaseClient } from '@/lib/supabase';
 import BlogsClient from './blogs-client';
+import { Blog } from '@/lib/types';
+import { env } from '@/lib/env';
+
+const baseUrl = env.NEXT_PUBLIC_SITE_URL;
 
 export const metadata: Metadata = {
-  title: 'Blogs',
-  description:
-    'Read my latest articles about web development, technology, React, Next.js, TypeScript, and software engineering best practices.',
-  keywords: [
-    'Web Development Blog',
-    'React Blog',
-    'Next.js Tutorials',
-    'TypeScript Articles',
-    'Software Engineering Blog',
-    'Frontend Development',
-    'Full Stack Development',
-  ],
+  title: 'Blog | Hassan Tayyab',
+  description: 'Read my latest articles about web development, design, and technology. Insights on React, Next.js, TypeScript, and modern web development practices.',
+  keywords: ['blog', 'web development', 'react', 'nextjs', 'typescript', 'programming', 'software engineering'],
+  alternates: {
+    canonical: `${baseUrl}/blogs`,
+  },
   openGraph: {
-    title: `Blogs | ${siteConfig.name}`,
-    description: 'Read my latest articles about web development, technology, and more.',
-    url: `${siteConfig.url}/blogs`,
+    title: 'Blog | Hassan Tayyab',
+    description: 'Read my latest articles about web development, design, and technology.',
+    url: `${baseUrl}/blogs`,
+    siteName: 'Hassan Tayyab',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: `Blogs | ${siteConfig.name}`,
-    description: 'Read my latest articles about web development, technology, and more.',
-  },
-  alternates: {
-    canonical: `${siteConfig.url}/blogs`,
+    site: '@hassantayyab',
+    creator: '@hassantayyab',
+    title: 'Blog | Hassan Tayyab',
+    description: 'Read my latest articles about web development, design, and technology.',
   },
 };
 
-export default function BlogsPage() {
-  return <BlogsClient />;
+async function getBlogs(): Promise<Blog[]> {
+  const supabase = createServerSupabaseClient();
+
+  const { data, error } = await supabase
+    .from('blogs')
+    .select('*')
+    .eq('status', 'published')
+    .order('publishedAt', { ascending: false });
+
+  if (error) {
+    console.error('Error fetching blogs:', error);
+    return [];
+  }
+
+  return (data as unknown as Blog[]) || [];
+}
+
+export default async function BlogsPage() {
+  const blogs = await getBlogs();
+
+  return <BlogsClient blogs={blogs} />;
 }

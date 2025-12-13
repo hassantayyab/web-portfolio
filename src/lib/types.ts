@@ -62,13 +62,47 @@ export interface PersonalInfo {
 export interface Blog {
   id: string;
   title: string;
-  description: string;
-  content?: string;
-  image?: string;
-  category: string;
+  slug: string;
+  content: string; // Markdown content
+  excerpt: string;
+  author: string;
+  publishedAt: string | null;
+  updatedAt: string;
+  status: 'draft' | 'published';
+  coverImage: string | null;
   tags: string[];
-  publishedAt: string;
-  readTime: string;
+  readTime: number; // in minutes
+  views: number;
+  category?: string;
+  featured?: boolean;
+}
+
+// Type for creating a new blog post
+export interface CreateBlogInput {
+  title: string;
+  slug: string;
+  content: Record<string, unknown>;
+  excerpt: string;
+  author: string;
+  status: 'draft' | 'published';
+  coverImage?: string | null;
+  tags: string[];
+  category?: string;
+  featured?: boolean;
+}
+
+// Type for updating an existing blog post
+export interface UpdateBlogInput {
+  title?: string;
+  slug?: string;
+  content?: Record<string, unknown>;
+  excerpt?: string;
+  author?: string;
+  status?: 'draft' | 'published';
+  coverImage?: string | null;
+  tags?: string[];
+  readTime?: number;
+  category?: string;
   featured?: boolean;
 }
 

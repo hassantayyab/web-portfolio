@@ -9,6 +9,9 @@ interface PageLayoutProps {
   description?: string;
   maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '4xl' | '6xl' | '7xl';
   className?: string;
+  actions?: ReactNode;
+  hideHeader?: boolean;
+  titleClassName?: string;
 }
 
 const maxWidthClasses = {
@@ -28,6 +31,9 @@ export function PageLayout({
   description,
   maxWidth = '7xl',
   className,
+  actions,
+  hideHeader = false,
+  titleClassName,
 }: PageLayoutProps) {
   return (
     <main className='min-h-screen' id='main-content'>
@@ -40,12 +46,23 @@ export function PageLayout({
           className={`relative z-10 ${maxWidthClasses[maxWidth]} mx-auto px-4 sm:px-5 md:px-6 py-24 md:py-32 ${className || ''}`}
         >
           {/* Header */}
-          <div className='mb-8 sm:mb-10 md:mb-12'>
-            <h1 className='text-h1 mb-3 sm:mb-4'>{title}</h1>
-            {description && (
-              <p className='text-body-lg text-muted-foreground max-w-2xl'>{description}</p>
-            )}
-          </div>
+          {!hideHeader && (
+            <div className='mb-8 sm:mb-10 md:mb-12'>
+              <div className='flex items-start justify-between gap-4'>
+                <div>
+                  <h1 className={`text-h1 mb-3 sm:mb-4 ${titleClassName || ''}`}>{title}</h1>
+                  {description && (
+                    <p className='text-body-lg text-muted-foreground max-w-2xl'>{description}</p>
+                  )}
+                </div>
+                {actions && (
+                  <div className='flex-shrink-0'>
+                    {actions}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
 
           {/* Content */}
           {children}

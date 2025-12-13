@@ -1,18 +1,18 @@
 'use client';
 
-import type { FC } from 'react';
-
 import { socialLinks } from '@/lib/data';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
-import { SiGithub, SiGmail, SiLinkedin, SiX } from 'react-icons/si';
+import type { IconType } from 'react-icons';
+import { SiGithub, SiGmail, SiLinkedin, SiX, SiYoutube } from 'react-icons/si';
 
-const iconMap: Record<string, FC<{ className?: string }>> = {
+const iconMap: Record<string, IconType> = {
   github: SiGithub,
   linkedin: SiLinkedin,
   x: SiX,
   mail: SiGmail,
+  youtube: SiYoutube,
 };
 
 export function SocialCell() {
