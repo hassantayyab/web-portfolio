@@ -112,14 +112,17 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Failed to upload image to storage' }, { status: 500 });
     }
 
-    // Get public URL
-    const {
-      data: { publicUrl },
-    } = supabase.storage.from(STORAGE_BUCKET).getPublicUrl(finalFilePath);
+    // Get public URL using Supabase SDK method
+    const { data: urlData } = supabase.storage.from(STORAGE_BUCKET).getPublicUrl(finalFilePath);
+
+    if (!urlData?.publicUrl) {
+      console.error('Failed to get public URL');
+      return NextResponse.json({ error: 'Failed to generate public URL' }, { status: 500 });
+    }
 
     return NextResponse.json({
       success: true,
-      url: publicUrl,
+      url: urlData.publicUrl,
       fileName: finalFileName,
       fileSize: buffer.length,
       fileType: contentType,
