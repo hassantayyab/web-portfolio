@@ -60,7 +60,21 @@ export async function POST(request: NextRequest) {
 
     if (data.id) {
       // Update existing blog
-      const updateData: any = {
+      const updateData: {
+        title: string;
+        slug: string;
+        content: string;
+        excerpt: string;
+        author: string;
+        coverImage: string | null;
+        tags: string[];
+        category: string | null;
+        featured: boolean;
+        readTime: number;
+        status: 'draft' | 'published';
+        updatedAt: string;
+        publishedAt?: string;
+      } = {
         title: data.title,
         slug: data.slug,
         content: data.content,
@@ -82,7 +96,7 @@ export async function POST(request: NextRequest) {
       const { data: updatedBlog, error } = await supabase
         .from('blogs')
         .update(updateData)
-        .eq('id', data.id as any)
+        .eq('id', data.id)
         .select()
         .single();
 
@@ -106,7 +120,22 @@ export async function POST(request: NextRequest) {
       });
     } else {
       // Create new blog
-      const insertData: any = {
+      const insertData: {
+        title: string;
+        slug: string;
+        content: string;
+        excerpt: string;
+        author: string;
+        coverImage: string | null;
+        tags: string[];
+        category: string | null;
+        featured: boolean;
+        readTime: number;
+        status: 'draft' | 'published';
+        views: number;
+        publishedAt: string | null;
+        updatedAt: string;
+      } = {
         title: data.title,
         slug: data.slug,
         content: data.content,

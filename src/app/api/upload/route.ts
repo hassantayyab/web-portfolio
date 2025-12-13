@@ -8,7 +8,6 @@ const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'];
 const STORAGE_BUCKET = 'blog-images';
 const MAX_WIDTH = 1920; // Max width for images
-const MAX_HEIGHT = 1080; // Max height for images
 const QUALITY = 85; // JPEG/WebP quality
 
 /**
@@ -74,12 +73,12 @@ export async function POST(request: NextRequest) {
 
         // Convert and optimize based on format
         if (file.type === 'image/png') {
-          buffer = (await image.png({ quality: QUALITY }).toBuffer()) as Buffer;
+          buffer = await image.png({ quality: QUALITY }).toBuffer();
         } else if (file.type === 'image/webp') {
-          buffer = (await image.webp({ quality: QUALITY }).toBuffer()) as Buffer;
+          buffer = await image.webp({ quality: QUALITY }).toBuffer();
         } else {
           // Convert to JPEG for other formats
-          buffer = (await image.jpeg({ quality: QUALITY }).toBuffer()) as Buffer;
+          buffer = await image.jpeg({ quality: QUALITY }).toBuffer();
         }
       } catch (optimizeError) {
         console.error('Image optimization error:', optimizeError);
@@ -88,7 +87,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Upload to Supabase Storage
-    const { data, error } = await supabase.storage.from(STORAGE_BUCKET).upload(filePath, buffer, {
+    const { error } = await supabase.storage.from(STORAGE_BUCKET).upload(filePath, buffer, {
       contentType: file.type,
       cacheControl: '3600',
       upsert: false,

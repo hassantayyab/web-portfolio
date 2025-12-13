@@ -29,10 +29,10 @@ export function MarkdownRenderer({ content, className = '' }: MarkdownRendererPr
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeHighlight]}
         components={{
-          h1: ({ node, ...props }) => <h1 className="text-5xl font-bold mt-10 mb-6" {...props} />,
-          h2: ({ node, ...props }) => <h2 className="text-4xl font-bold mt-8 mb-5" {...props} />,
-          h3: ({ node, ...props }) => <h3 className="text-3xl font-semibold mt-7 mb-4" {...props} />,
-          h4: ({ node, ...props }) => <h4 className="text-2xl font-semibold mt-6 mb-3" {...props} />,
+          h1: ({ node, ...props }) => <h1 className="text-h1 font-bold mt-10 mb-6" {...props} />,
+          h2: ({ node, ...props }) => <h2 className="text-h2 font-bold mt-8 mb-5" {...props} />,
+          h3: ({ node, ...props }) => <h3 className="text-h3 font-semibold mt-7 mb-4" {...props} />,
+          h4: ({ node, ...props }) => <h4 className="text-h4 font-semibold mt-6 mb-3" {...props} />,
           p: ({ node, ...props }) => <p className="text-lg leading-8 mb-6" {...props} />,
           ul: ({ node, ...props }) => <ul className="list-disc my-4 pl-6" {...props} />,
           ol: ({ node, ...props }) => <ol className="list-decimal my-4 pl-6" {...props} />,

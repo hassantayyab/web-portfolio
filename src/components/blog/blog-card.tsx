@@ -9,19 +9,17 @@ interface BlogCardProps {
   blog: Blog;
 }
 
-function calculateReadingTime(content: Record<string, unknown>): number {
-  const extractText = (node: any): string => {
-    if (!node) return '';
-    if (node.text) return node.text;
-    if (node.content && Array.isArray(node.content)) {
-      return node.content.map(extractText).join(' ');
-    }
-    return '';
-  };
+function calculateReadingTime(content: string | unknown): number {
+  // Only calculate for markdown strings, ignore old JSON format
+  const contentStr = typeof content === 'string' ? content : '';
+  if (!contentStr) return 1;
 
-  const text = extractText(content);
-  const words = text.trim().split(/\s+/).length;
-  return Math.ceil(words / 200);
+  const words = contentStr
+    .trim()
+    .split(/\s+/)
+    .filter((word) => word.length > 0).length;
+  const readingTime = Math.ceil(words / 200) || 1; // Average reading speed: 200 words/minute
+  return readingTime;
 }
 
 export function BlogCard({ blog }: BlogCardProps) {
@@ -36,6 +34,7 @@ export function BlogCard({ blog }: BlogCardProps) {
       {/* Cover Image */}
       {blog.coverImage && (
         <div className="aspect-video overflow-hidden bg-muted">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={blog.coverImage}
             alt={blog.title}
@@ -96,7 +95,7 @@ export function BlogCard({ blog }: BlogCardProps) {
           <div className="flex items-center gap-1">
             <Calendar className="h-3 w-3" />
             <span>
-              {new Date(blog.publishedAt || blog.createdAt).toLocaleDateString('en-US', {
+              {new Date(blog.publishedAt || blog.updatedAt).toLocaleDateString('en-US', {
                 month: 'short',
                 day: 'numeric',
                 year: 'numeric',

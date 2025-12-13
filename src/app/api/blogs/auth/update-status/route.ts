@@ -43,16 +43,23 @@ export async function PATCH(request: NextRequest) {
     const timestamp = new Date().toISOString();
 
     // Update the blog status
+    const updateData: {
+      status: 'draft' | 'published';
+      updatedAt: string;
+      publishedAt?: string;
+    } = {
+      status,
+      updatedAt: timestamp,
+    };
+    
+    // Set publishedAt only when publishing for the first time
+    if (status === 'published') {
+      updateData.publishedAt = timestamp;
+    }
+
     const { data: updatedBlog, error } = await supabase
       .from('blogs')
-      .update({
-        status,
-        updatedAt: timestamp,
-        // Set publishedAt only when publishing for the first time
-        ...(status === 'published' && {
-          publishedAt: timestamp,
-        }),
-      })
+      .update(updateData)
       .eq('id', id)
       .select()
       .single();

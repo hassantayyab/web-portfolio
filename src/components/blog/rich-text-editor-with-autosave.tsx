@@ -8,7 +8,7 @@ interface AutoSaveData {
   id?: string;
   title: string;
   slug: string;
-  content: Record<string, unknown>;
+  content: string;
   excerpt?: string;
   author: string;
   coverImage?: string | null;
@@ -18,7 +18,7 @@ interface AutoSaveData {
 }
 
 interface RichTextEditorWithAutoSaveProps {
-  initialContent?: Record<string, unknown>;
+  initialContent?: string;
   blogData: Omit<AutoSaveData, 'content'>;
   onSave?: (savedBlog: AutoSaveData & { id: string }) => void;
   onError?: (error: string) => void;
@@ -46,8 +46,8 @@ export function RichTextEditorWithAutoSave({
   autoSaveDelay = 2000,
   enableAutoSave = true,
 }: RichTextEditorWithAutoSaveProps) {
-  const [content, setContent] = useState<Record<string, unknown>>(
-    initialContent || { type: 'doc', content: [] }
+  const [content, setContent] = useState<string>(
+    initialContent || ''
   );
   const [saveStatus, setSaveStatus] = useState<SaveStatus>('idle');
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
@@ -55,8 +55,8 @@ export function RichTextEditorWithAutoSave({
   const [blogId, setBlogId] = useState<string | undefined>(blogData.id);
 
   // Refs for debouncing
-  const saveTimeoutRef = useRef<NodeJS.Timeout>();
-  const retryTimeoutRef = useRef<NodeJS.Timeout>();
+  const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const retryTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const retryCountRef = useRef(0);
   const MAX_RETRIES = 3;
 
@@ -165,13 +165,15 @@ export function RichTextEditorWithAutoSave({
   }, []);
 
   // Manual save function that can be called externally
-  const manualSave = useCallback(() => {
-    const dataToSave: AutoSaveData = {
-      ...blogData,
-      content,
-    };
-    saveDraft(dataToSave);
-  }, [blogData, content, saveDraft]);
+  // Note: This function is exported via the component's type but not used internally
+  // It can be accessed via ref if needed in the future
+  // const manualSave = useCallback(() => {
+  //   const dataToSave: AutoSaveData = {
+  //     ...blogData,
+  //     content,
+  //   };
+  //   saveDraft(dataToSave);
+  // }, [blogData, content, saveDraft]);
 
   return (
     <div className="space-y-4">
@@ -183,7 +185,7 @@ export function RichTextEditorWithAutoSave({
 
       <RichTextEditor
         content={content}
-        onChange={setContent}
+        onChange={(newContent) => setContent(newContent)}
         placeholder={placeholder}
         editable={editable}
         className={className}

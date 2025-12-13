@@ -11,6 +11,7 @@ interface PageLayoutProps {
   className?: string;
   actions?: ReactNode;
   hideHeader?: boolean;
+  titleClassName?: string;
 }
 
 const maxWidthClasses = {
@@ -32,6 +33,7 @@ export function PageLayout({
   className,
   actions,
   hideHeader = false,
+  titleClassName,
 }: PageLayoutProps) {
   return (
     <main className='min-h-screen' id='main-content'>
@@ -48,7 +50,7 @@ export function PageLayout({
             <div className='mb-8 sm:mb-10 md:mb-12'>
               <div className='flex items-start justify-between gap-4'>
                 <div>
-                  <h1 className='text-h1 mb-3 sm:mb-4'>{title}</h1>
+                  <h1 className={`text-h1 mb-3 sm:mb-4 ${titleClassName || ''}`}>{title}</h1>
                   {description && (
                     <p className='text-body-lg text-muted-foreground max-w-2xl'>{description}</p>
                   )}

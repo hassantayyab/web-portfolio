@@ -20,7 +20,7 @@ import { common, createLowlight } from 'lowlight';
 const lowlight = createLowlight(common);
 
 interface RichTextRendererProps {
-  content: Record<string, unknown>;
+  content: string | Record<string, unknown>;
   className?: string;
 }
 
@@ -30,18 +30,14 @@ interface RichTextRendererProps {
  */
 export function RichTextRenderer({ content, className = '' }: RichTextRendererProps) {
   const contentRef = useRef<HTMLDivElement>(null);
-
-  // Debug: Log the content structure
-  console.log('RichTextRenderer received content:', {
-    type: typeof content,
-    isString: typeof content === 'string',
-    isObject: typeof content === 'object',
-    hasType: content && typeof content === 'object' && 'type' in content,
-    contentPreview: typeof content === 'string' ? content.substring(0, 100) : JSON.stringify(content).substring(0, 200),
-  });
+  
+  // Compute HTML first (before any early returns)
+  let html: string | null = null;
+  let hasError = false;
+  let errorMessage = '';
 
   // Validate and normalize content structure
-  let normalizedContent = content;
+  let normalizedContent: Record<string, unknown> | string = content;
   
   // If content is a string, try to parse it as JSON first
   if (typeof content === 'string') {
@@ -53,7 +49,11 @@ export function RichTextRenderer({ content, className = '' }: RichTextRendererPr
       console.warn('Content is plain text/markdown, converting to Tiptap format');
       // Convert markdown-like text to Tiptap JSON structure
       const lines = content.split('\n');
-      const nodes: any[] = [];
+      const nodes: Array<{
+        type: string;
+        attrs?: Record<string, unknown>;
+        content?: Array<{ type: string; text: string } | { type: string; attrs?: Record<string, unknown>; content?: Array<{ type: string; text: string }> }>;
+      }> = [];
       
       for (const line of lines) {
         const trimmed = line.trim();
@@ -112,12 +112,8 @@ export function RichTextRenderer({ content, className = '' }: RichTextRendererPr
   // Ensure content has proper structure
   if (!normalizedContent || typeof normalizedContent !== 'object') {
     console.error('Invalid content structure:', normalizedContent);
-    return (
-      <div className={`rich-text-content prose prose-lg dark:prose-invert max-w-none ${className}`}>
-        <p className="text-red-500">Error: Invalid content format</p>
-        <pre className="text-xs mt-2">{JSON.stringify(content, null, 2)}</pre>
-      </div>
-    );
+    hasError = true;
+    errorMessage = 'Invalid content format';
   }
 
   // If content doesn't have type, wrap it
@@ -137,10 +133,10 @@ export function RichTextRenderer({ content, className = '' }: RichTextRendererPr
     };
   }
 
-  // Generate HTML from Tiptap JSON
-  let html: string;
-  try {
-    html = generateHTML(normalizedContent, [
+  // Generate HTML from Tiptap JSON (only if no error so far)
+  if (!hasError) {
+    try {
+      html = generateHTML(normalizedContent as Record<string, unknown>, [
     StarterKit.configure({
       codeBlock: false, // Using CodeBlockLowlight instead
     }),
@@ -182,20 +178,19 @@ export function RichTextRenderer({ content, className = '' }: RichTextRendererPr
     }),
     TextStyle,
     Color,
-    Highlight,
-    ]);
-  } catch (error) {
-    console.error('Error generating HTML from Tiptap content:', error);
-    return (
-      <div className={`rich-text-content prose prose-lg dark:prose-invert max-w-none ${className}`}>
-        <p className="text-red-500">Error rendering content. Please check the content format.</p>
-      </div>
-    );
+      Highlight,
+      ]);
+    } catch (error) {
+      console.error('Error generating HTML from Tiptap content:', error);
+      hasError = true;
+      errorMessage = 'Error rendering content. Please check the content format.';
+    }
   }
 
   // Add copy button to code blocks after render
+  // This hook must be called unconditionally (before any early returns)
   useEffect(() => {
-    if (!contentRef.current) return;
+    if (!contentRef.current || !html) return;
 
     const codeBlocks = contentRef.current.querySelectorAll('pre');
     
@@ -239,6 +234,26 @@ export function RichTextRenderer({ content, className = '' }: RichTextRendererPr
       pre.appendChild(button);
     });
   }, [html]);
+
+  // Now handle early returns after all hooks are called
+  if (hasError) {
+    return (
+      <div className={`rich-text-content prose prose-lg dark:prose-invert max-w-none ${className}`}>
+        <p className="text-red-500">{errorMessage}</p>
+        {errorMessage === 'Invalid content format' && (
+          <pre className="text-xs mt-2">{JSON.stringify(content, null, 2)}</pre>
+        )}
+      </div>
+    );
+  }
+
+  if (!html) {
+    return (
+      <div className={`rich-text-content prose prose-lg dark:prose-invert max-w-none ${className}`}>
+        <p className="text-red-500">Error rendering content. Please check the content format.</p>
+      </div>
+    );
+  }
 
   return (
     <div

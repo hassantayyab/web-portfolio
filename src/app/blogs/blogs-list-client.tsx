@@ -75,11 +75,11 @@ export function BlogsListClient({ initialBlogs }: BlogsListClientProps) {
     filtered = [...filtered].sort((a, b) => {
       switch (sortBy) {
         case 'latest':
-          return new Date(b.publishedAt || b.createdAt).getTime() - 
-                 new Date(a.publishedAt || a.createdAt).getTime();
+          return new Date(b.publishedAt || b.updatedAt).getTime() - 
+                 new Date(a.publishedAt || a.updatedAt).getTime();
         case 'oldest':
-          return new Date(a.publishedAt || a.createdAt).getTime() - 
-                 new Date(b.publishedAt || b.createdAt).getTime();
+          return new Date(a.publishedAt || a.updatedAt).getTime() - 
+                 new Date(b.publishedAt || b.updatedAt).getTime();
         case 'popular':
           return (b.views || 0) - (a.views || 0);
         default:
@@ -117,7 +117,7 @@ export function BlogsListClient({ initialBlogs }: BlogsListClientProps) {
           </div>
 
           <div className="max-w-4xl">
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
+            <h1 className="text-h1 font-bold tracking-tight mb-4">
               Blog
             </h1>
             <p className="text-lg text-muted-foreground">

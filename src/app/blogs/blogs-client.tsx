@@ -16,10 +16,11 @@ export default function BlogsClient({ blogs }: BlogsClientProps) {
       title='Blog'
       description='Thoughts on web development, design, and technology. Join me as I share insights and learnings from my journey.'
       maxWidth='6xl'
+      titleClassName='text-[40px]'
     >
       {/* Blogs Grid */}
       <div className='grid gap-4 sm:gap-5 md:gap-6 lg:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'>
-        {blogs.map((blog, index) => (
+        {blogs.map((blog) => (
           <motion.div key={blog.id} className='group relative'>
             <Link href={`/blogs/${blog.slug}`} className='block h-full cursor-pointer'>
               <div className='h-full flex flex-col p-4 sm:p-5 md:p-6 rounded-2xl border border-white/10 bg-white/2 backdrop-blur-sm hover:border-white/20 hover:bg-white/5 transition-all duration-300 relative overflow-hidden'>

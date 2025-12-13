@@ -16,7 +16,7 @@ export async function GET() {
       .order('publishedAt', { ascending: false })
       .limit(50);
 
-    const rss = generateRSS(blogs as Blog[] || [], baseUrl);
+    const rss = generateRSS((blogs as unknown as Blog[]) || [], baseUrl);
 
     return new NextResponse(rss, {
       headers: {

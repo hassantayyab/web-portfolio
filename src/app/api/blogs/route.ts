@@ -28,7 +28,7 @@ export async function GET(request: NextRequest) {
     let query = supabase.from('blogs').select('*');
 
     // Filter by status
-    query = query.eq('status', status);
+    query = query.eq('status', status as 'draft' | 'published');
 
     // Filter by featured
     if (featured) {

@@ -25,7 +25,7 @@ async function getBlogBySlug(slug: string): Promise<Blog | null> {
     return null;
   }
 
-  return data as Blog;
+  return data as unknown as Blog;
 }
 
 export async function generateMetadata({

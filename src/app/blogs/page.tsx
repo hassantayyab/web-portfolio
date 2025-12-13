@@ -43,7 +43,7 @@ async function getBlogs(): Promise<Blog[]> {
     return [];
   }
 
-  return (data as Blog[]) || [];
+  return (data as unknown as Blog[]) || [];
 }
 
 export default async function BlogsPage() {

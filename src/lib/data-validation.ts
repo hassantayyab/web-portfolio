@@ -75,7 +75,7 @@ export const blogSchema = z.object({
     .min(1, 'Slug is required')
     .max(200, 'Slug must be less than 200 characters')
     .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'Slug must be lowercase with hyphens only'),
-  content: z.record(z.unknown()), // Rich text JSON from editor
+  content: z.string(), // Markdown content from editor
   excerpt: z
     .string()
     .min(10, 'Excerpt must be at least 10 characters')
@@ -100,7 +100,7 @@ export const createBlogSchema = z.object({
     .min(1, 'Slug is required')
     .max(200, 'Slug must be less than 200 characters')
     .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'Slug must be lowercase with hyphens only'),
-  content: z.record(z.unknown()), // Rich text JSON from editor
+  content: z.string(), // Markdown content from editor
   excerpt: z
     .string()
     .min(10, 'Excerpt must be at least 10 characters')
@@ -122,7 +122,7 @@ export const updateBlogSchema = z.object({
     .max(200, 'Slug must be less than 200 characters')
     .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'Slug must be lowercase with hyphens only')
     .optional(),
-  content: z.record(z.unknown()).optional(),
+  content: z.string().optional(),
   excerpt: z
     .string()
     .min(10, 'Excerpt must be at least 10 characters')

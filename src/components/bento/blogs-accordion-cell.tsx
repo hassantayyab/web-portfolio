@@ -1,15 +1,14 @@
 'use client';
 
+import { Blog } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowUpRight, Calendar, ChevronDown, Clock } from 'lucide-react';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
-import { Blog } from '@/lib/types';
+import { useEffect, useState } from 'react';
 
 export function BlogsAccordionCell() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
-  const [loading, setLoading] = useState(true);
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
   // Fetch featured blogs
@@ -22,13 +21,12 @@ export function BlogsAccordionCell() {
     if (blogs.length > 0 && !expandedId) {
       setExpandedId(blogs[0].id);
     }
-  }, [blogs]);
+  }, [blogs, expandedId]);
 
   const fetchBlogs = async () => {
     try {
-      setLoading(true);
       const response = await fetch('/api/blogs?featured=true&limit=6&status=published');
-      
+
       if (!response.ok) {
         throw new Error('Failed to fetch blogs');
       }
@@ -38,8 +36,6 @@ export function BlogsAccordionCell() {
     } catch (error) {
       console.error('Error fetching blogs:', error);
       setBlogs([]);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -70,16 +66,7 @@ export function BlogsAccordionCell() {
 
       {/* Blogs Accordion */}
       <div className='flex-1 flex flex-col px-4 pb-4 sm:px-5 sm:pb-5 md:px-6 md:pb-6 pt-3 overflow-hidden'>
-        {loading ? (
-          <div className='flex items-center justify-center py-12'>
-            <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-primary'></div>
-          </div>
-        ) : blogs.length === 0 ? (
-          <div className='flex items-center justify-center py-12 text-muted-foreground'>
-            <p>No featured blogs available yet</p>
-          </div>
-        ) : (
-          blogs.map((blog, index) => {
+        {blogs?.map((blog, index) => {
           const isExpanded = expandedId === blog.id;
 
           return (
@@ -147,11 +134,13 @@ export function BlogsAccordionCell() {
                           <div className='flex items-center gap-1'>
                             <Calendar className='w-3 h-3 sm:w-3.5 sm:h-3.5' />
                             <span>
-                              {blog.publishedAt ? new Date(blog.publishedAt).toLocaleDateString('en-US', {
-                                month: 'short',
-                                day: 'numeric',
-                                year: 'numeric',
-                              }) : 'Not published'}
+                              {blog.publishedAt
+                                ? new Date(blog.publishedAt).toLocaleDateString('en-US', {
+                                    month: 'short',
+                                    day: 'numeric',
+                                    year: 'numeric',
+                                  })
+                                : 'Not published'}
                             </span>
                           </div>
                           <div className='flex items-center gap-1'>
@@ -178,7 +167,7 @@ export function BlogsAccordionCell() {
               </AnimatePresence>
             </motion.div>
           );
-        }))}
+        })}
       </div>
     </div>
   );
