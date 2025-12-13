@@ -63,7 +63,7 @@ export interface Blog {
   id: string;
   title: string;
   slug: string;
-  content: Record<string, unknown>; // Rich text JSON from editor (Tiptap/Lexical format)
+  content: string; // Markdown content
   excerpt: string;
   author: string;
   publishedAt: string | null;

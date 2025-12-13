@@ -13,6 +13,7 @@ export function Navbar() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     let ticking = false;
@@ -29,6 +30,22 @@ export function Navbar() {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Check admin authentication status
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const response = await fetch('/api/auth/session');
+        const data = await response.json();
+        setIsAdmin(data.authenticated === true);
+      } catch (error) {
+        console.error('Auth check error:', error);
+        setIsAdmin(false);
+      }
+    };
+
+    checkAuth();
   }, []);
 
   // Split name for styling (first name bold, last name italic)
@@ -86,6 +103,26 @@ export function Navbar() {
                 </Link>
               );
             })}
+            {isAdmin && (
+              <Link
+                href='/admin/blog-editor'
+                className={cn(
+                  'relative px-4 py-2 text-sm font-medium rounded-full transition-colors min-h-[44px] flex items-center cursor-pointer',
+                  pathname === '/admin/blog-editor' || pathname.startsWith('/admin/blog-editor/')
+                    ? 'text-foreground'
+                    : 'text-muted-foreground hover:text-foreground',
+                )}
+              >
+                {(pathname === '/admin/blog-editor' || pathname.startsWith('/admin/blog-editor/')) && (
+                  <motion.span
+                    layoutId='navbar-active'
+                    className='absolute inset-0 bg-white/15 rounded-full'
+                    transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
+                  />
+                )}
+                <span className='relative z-10'>Admin</span>
+              </Link>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -138,6 +175,20 @@ export function Navbar() {
                   </Link>
                 );
               })}
+              {isAdmin && (
+                <Link
+                  href='/admin/blog-editor'
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={cn(
+                    'flex items-center px-4 py-3.5 text-sm transition-colors min-h-[44px] cursor-pointer',
+                    pathname === '/admin/blog-editor' || pathname.startsWith('/admin/blog-editor/')
+                      ? 'text-foreground bg-white/10'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-white/5',
+                  )}
+                >
+                  Admin
+                </Link>
+              )}
             </motion.nav>
           )}
         </AnimatePresence>

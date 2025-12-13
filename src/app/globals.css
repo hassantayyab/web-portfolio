@@ -1,6 +1,12 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
+/* Tiptap Rich Text Editor Styles */
+@import '../components/blog/editor-styles.css';
+
+/* Rich Text Renderer Styles */
+@import '../components/blog/render-styles.css';
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
