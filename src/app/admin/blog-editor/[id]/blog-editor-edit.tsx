@@ -115,11 +115,17 @@ export function BlogEditorEdit({ blogId }: BlogEditorEditProps) {
 
     if (!response.ok) {
       const error = await response.json();
-      throw new Error(error.error || 'Upload failed');
+      const errorMessage = error.details 
+        ? `${error.error}: ${error.details}`
+        : error.error || 'Upload failed';
+      throw new Error(errorMessage);
     }
 
-    const { url } = await response.json();
-    return url;
+    const data = await response.json();
+    if (!data.url) {
+      throw new Error('Upload succeeded but no URL returned');
+    }
+    return data.url;
   };
 
   const handleSave = async (publishNow: boolean = false) => {
@@ -354,9 +360,11 @@ export function BlogEditorEdit({ blogId }: BlogEditorEditProps) {
             {/* Meta Info */}
             <div className="flex flex-wrap items-center gap-6 text-sm text-muted-foreground pt-4 border-t">
               <div className="flex items-center gap-2">
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-semibold">
-                  {metadata.author?.charAt(0).toUpperCase() || 'H'}
-                </div>
+                <img
+                  src="/hassan-black.PNG"
+                  alt={metadata.author || 'Author'}
+                  className="w-10 h-10 rounded-full object-cover"
+                />
                 <div>
                   <div className="font-medium text-foreground">{metadata.author}</div>
                   <div className="text-xs">Author</div>

@@ -12,7 +12,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
     const supabase = createServerSupabaseClient();
 
     // Increment the view count
-    const { error } = await supabase.rpc('increment_blog_views', {
+    const { error } = await (supabase.rpc as any)('increment_blog_views', {
       blog_id: id,
     });
 
@@ -32,7 +32,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
       return NextResponse.json({ error: 'Failed to fetch updated views' }, { status: 500 });
     }
 
-    return NextResponse.json({ views: blog?.views || 0 });
+    return NextResponse.json({ views: (blog as { views: number } | null)?.views || 0 });
   } catch (error) {
     console.error('View increment error:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });

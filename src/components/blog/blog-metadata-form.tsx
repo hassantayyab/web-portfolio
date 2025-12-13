@@ -53,7 +53,12 @@ export function BlogMetadataForm({
       onChange({ ...metadata, coverImage: url });
     } catch (error) {
       console.error('Cover image upload failed:', error);
-      alert('Failed to upload cover image. Please try again.');
+      const errorMessage = error instanceof Error 
+        ? error.message 
+        : typeof error === 'object' && error !== null && 'error' in error
+        ? String(error.error)
+        : 'Failed to upload cover image. Please try again.';
+      alert(`Upload failed: ${errorMessage}`);
     } finally {
       setIsUploadingCover(false);
     }

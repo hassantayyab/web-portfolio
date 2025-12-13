@@ -93,7 +93,7 @@ export async function POST(request: NextRequest) {
         }),
       };
 
-      const { data: updatedBlog, error } = await supabase
+      const { data: updatedBlog, error } = await (supabase as any)
         .from('blogs')
         .update(updateData)
         .eq('id', data.id)
@@ -152,7 +152,7 @@ export async function POST(request: NextRequest) {
         updatedAt: timestamp,
       };
 
-      const { data: newBlog, error } = await supabase
+      const { data: newBlog, error } = await (supabase as any)
         .from('blogs')
         .insert(insertData)
         .select()

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createServerSupabaseClient } from '@/lib/supabase';
 import { verifyAuthFromRequest } from '@/lib/auth';
 import { z } from 'zod';
+import type { Database } from '@/lib/database.types';
 
 const updateStatusSchema = z.object({
   id: z.string().uuid(),
@@ -43,11 +44,7 @@ export async function PATCH(request: NextRequest) {
     const timestamp = new Date().toISOString();
 
     // Update the blog status
-    const updateData: {
-      status: 'draft' | 'published';
-      updatedAt: string;
-      publishedAt?: string;
-    } = {
+    const updateData: any = {
       status,
       updatedAt: timestamp,
     };
@@ -57,7 +54,7 @@ export async function PATCH(request: NextRequest) {
       updateData.publishedAt = timestamp;
     }
 
-    const { data: updatedBlog, error } = await supabase
+    const { data: updatedBlog, error } = await (supabase as any)
       .from('blogs')
       .update(updateData)
       .eq('id', id)

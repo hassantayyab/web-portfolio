@@ -49,11 +49,7 @@ export function RichTextRenderer({ content, className = '' }: RichTextRendererPr
       console.warn('Content is plain text/markdown, converting to Tiptap format');
       // Convert markdown-like text to Tiptap JSON structure
       const lines = content.split('\n');
-      const nodes: Array<{
-        type: string;
-        attrs?: Record<string, unknown>;
-        content?: Array<{ type: string; text: string } | { type: string; attrs?: Record<string, unknown>; content?: Array<{ type: string; text: string }> }>;
-      }> = [];
+      const nodes: Array<Record<string, any>> = [];
       
       for (const line of lines) {
         const trimmed = line.trim();
@@ -116,21 +112,24 @@ export function RichTextRenderer({ content, className = '' }: RichTextRendererPr
     errorMessage = 'Invalid content format';
   }
 
-  // If content doesn't have type, wrap it
-  if (!normalizedContent.type) {
-    normalizedContent = {
-      type: 'doc',
-      content: Array.isArray(normalizedContent) ? normalizedContent : [normalizedContent],
-    };
-  }
-  
-  // Ensure it has content array
-  if (!normalizedContent.content || !Array.isArray(normalizedContent.content)) {
-    console.warn('Content missing content array, wrapping:', normalizedContent);
-    normalizedContent = {
-      type: 'doc',
-      content: [normalizedContent],
-    };
+  // Type guard: ensure normalizedContent is an object
+  if (typeof normalizedContent === 'object' && normalizedContent !== null) {
+    // If content doesn't have type, wrap it
+    if (!('type' in normalizedContent)) {
+      normalizedContent = {
+        type: 'doc',
+        content: Array.isArray(normalizedContent) ? normalizedContent : [normalizedContent],
+      } as Record<string, unknown>;
+    }
+    
+    // Ensure it has content array
+    if (!('content' in normalizedContent) || !Array.isArray(normalizedContent.content)) {
+      console.warn('Content missing content array, wrapping:', normalizedContent);
+      normalizedContent = {
+        type: 'doc',
+        content: [normalizedContent],
+      } as Record<string, unknown>;
+    }
   }
 
   // Generate HTML from Tiptap JSON (only if no error so far)

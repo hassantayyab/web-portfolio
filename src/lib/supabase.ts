@@ -116,7 +116,7 @@ export const db = {
      * Increment view count for a blog
      */
     async incrementViews(id: string) {
-      const { error } = await supabase.rpc('increment_blog_views', { blog_id: id });
+      const { error } = await (supabase.rpc as any)('increment_blog_views', { blog_id: id });
 
       if (error) {
         console.error('Error incrementing views:', error);

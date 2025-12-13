@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
     // Check if updating existing draft or creating new one
     if (data.id) {
       // Update existing draft
-      const { data: updatedBlog, error } = await supabase
+      const { data: updatedBlog, error } = await (supabase as any)
         .from('blogs')
         .update({
           title: data.title,
@@ -87,7 +87,7 @@ export async function POST(request: NextRequest) {
       });
     } else {
       // Create new draft
-      const { data: newBlog, error } = await supabase
+      const { data: newBlog, error } = await (supabase as any)
         .from('blogs')
         .insert({
           title: data.title,

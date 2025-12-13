@@ -40,14 +40,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Fetch published blogs from database
   const supabase = createServerSupabaseClient();
-  const { data: blogs } = await supabase
+  const { data: blogs } = await (supabase as any)
     .from('blogs')
     .select('slug, updatedAt, publishedAt')
     .eq('status', 'published')
     .order('publishedAt', { ascending: false });
 
   // Add blog article pages
-  const blogPages: MetadataRoute.Sitemap = (blogs || []).map((blog) => ({
+  const blogPages: MetadataRoute.Sitemap = (blogs || []).map((blog: any) => ({
     url: `${baseUrl}/blogs/${blog.slug}`,
     lastModified: new Date(blog.updatedAt || blog.publishedAt),
     changeFrequency: "monthly" as const,
