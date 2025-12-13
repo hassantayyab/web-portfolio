@@ -66,16 +66,74 @@ export const personalInfoSchema = z.object({
   avatarUrl: z.string().min(1).max(500),
 });
 
+// Complete blog post schema (from database)
 export const blogSchema = z.object({
-  id: z.string().min(1).max(100),
-  title: z.string().min(1).max(200),
-  description: z.string().min(1).max(500),
-  content: z.string().max(50000).optional(),
-  image: z.string().max(500).optional(),
-  category: z.string().min(1).max(100),
-  tags: z.array(z.string().max(50)).max(20),
-  publishedAt: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Date must be in YYYY-MM-DD format'),
-  readTime: z.string().min(1).max(50),
+  id: z.string().uuid(),
+  title: z.string().min(1, 'Title is required').max(200, 'Title must be less than 200 characters'),
+  slug: z
+    .string()
+    .min(1, 'Slug is required')
+    .max(200, 'Slug must be less than 200 characters')
+    .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'Slug must be lowercase with hyphens only'),
+  content: z.record(z.unknown()), // Rich text JSON from editor
+  excerpt: z
+    .string()
+    .min(10, 'Excerpt must be at least 10 characters')
+    .max(500, 'Excerpt must be less than 500 characters'),
+  author: z.string().min(1, 'Author is required').max(100, 'Author must be less than 100 characters'),
+  publishedAt: z.string().datetime().nullable(),
+  updatedAt: z.string().datetime(),
+  status: z.enum(['draft', 'published']),
+  coverImage: z.string().url('Cover image must be a valid URL').max(500).nullable(),
+  tags: z.array(z.string().min(1).max(50)).min(1, 'At least one tag is required').max(10, 'Maximum 10 tags allowed'),
+  readTime: z.number().int().positive('Read time must be a positive number'),
+  views: z.number().int().nonnegative('Views must be a non-negative number').default(0),
+  category: z.string().min(1).max(100).optional(),
+  featured: z.boolean().optional().default(false),
+});
+
+// Schema for creating a new blog post
+export const createBlogSchema = z.object({
+  title: z.string().min(1, 'Title is required').max(200, 'Title must be less than 200 characters'),
+  slug: z
+    .string()
+    .min(1, 'Slug is required')
+    .max(200, 'Slug must be less than 200 characters')
+    .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'Slug must be lowercase with hyphens only'),
+  content: z.record(z.unknown()), // Rich text JSON from editor
+  excerpt: z
+    .string()
+    .min(10, 'Excerpt must be at least 10 characters')
+    .max(500, 'Excerpt must be less than 500 characters'),
+  author: z.string().min(1, 'Author is required').max(100, 'Author must be less than 100 characters'),
+  status: z.enum(['draft', 'published']),
+  coverImage: z.string().url('Cover image must be a valid URL').max(500).nullable().optional(),
+  tags: z.array(z.string().min(1).max(50)).min(1, 'At least one tag is required').max(10, 'Maximum 10 tags allowed'),
+  category: z.string().min(1).max(100).optional(),
+  featured: z.boolean().optional().default(false),
+});
+
+// Schema for updating an existing blog post
+export const updateBlogSchema = z.object({
+  title: z.string().min(1, 'Title is required').max(200, 'Title must be less than 200 characters').optional(),
+  slug: z
+    .string()
+    .min(1, 'Slug is required')
+    .max(200, 'Slug must be less than 200 characters')
+    .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'Slug must be lowercase with hyphens only')
+    .optional(),
+  content: z.record(z.unknown()).optional(),
+  excerpt: z
+    .string()
+    .min(10, 'Excerpt must be at least 10 characters')
+    .max(500, 'Excerpt must be less than 500 characters')
+    .optional(),
+  author: z.string().min(1, 'Author is required').max(100, 'Author must be less than 100 characters').optional(),
+  status: z.enum(['draft', 'published']).optional(),
+  coverImage: z.string().url('Cover image must be a valid URL').max(500).nullable().optional(),
+  tags: z.array(z.string().min(1).max(50)).min(1, 'At least one tag is required').max(10, 'Maximum 10 tags allowed').optional(),
+  readTime: z.number().int().positive('Read time must be a positive number').optional(),
+  category: z.string().min(1).max(100).optional(),
   featured: z.boolean().optional(),
 });
 
@@ -87,7 +145,7 @@ export function validateData() {
   if (process.env.NODE_ENV === 'development') {
     // Import data dynamically to avoid circular dependencies
     import('./data').then(
-      ({ personalInfo, skills, projects, socialLinks, experiences, education, blogs }) => {
+      ({ personalInfo, skills, projects, socialLinks, experiences, education }) => {
         try {
           personalInfoSchema.parse(personalInfo);
           z.array(skillSchema).parse(skills);
@@ -95,7 +153,7 @@ export function validateData() {
           z.array(socialLinkSchema).parse(socialLinks);
           z.array(experienceSchema).parse(experiences);
           z.array(educationSchema).parse(education);
-          z.array(blogSchema).parse(blogs);
+          // Note: blogs validation removed as blogs are now stored in database
           // Data validation successful - no logging needed in production
         } catch (error) {
           if (error instanceof z.ZodError) {
