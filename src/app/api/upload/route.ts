@@ -56,6 +56,8 @@ export async function POST(request: NextRequest) {
     // Convert file to buffer
     const arrayBuffer = await file.arrayBuffer();
     let buffer = Buffer.from(arrayBuffer);
+    let contentType = file.type;
+    let finalFileExt = fileExt;
 
     // Optimize image using sharp (skip GIFs to preserve animation)
     if (file.type !== 'image/gif') {
@@ -63,9 +65,12 @@ export async function POST(request: NextRequest) {
         const image = sharp(buffer);
         const metadata = await image.metadata();
 
+        // Build the transformation pipeline
+        let pipeline = image;
+
         // Resize if image is too large
         if (metadata.width && metadata.width > MAX_WIDTH) {
-          image.resize(MAX_WIDTH, null, {
+          pipeline = pipeline.resize(MAX_WIDTH, null, {
             fit: 'inside',
             withoutEnlargement: true,
           });
@@ -73,12 +78,17 @@ export async function POST(request: NextRequest) {
 
         // Convert and optimize based on format
         if (file.type === 'image/png') {
-          buffer = await image.png({ quality: QUALITY }).toBuffer();
+          // PNG uses compressionLevel (0-9), not quality
+          buffer = Buffer.from(await pipeline.png({ compressionLevel: 9 }).toBuffer());
+          contentType = 'image/png';
         } else if (file.type === 'image/webp') {
-          buffer = await image.webp({ quality: QUALITY }).toBuffer();
+          buffer = Buffer.from(await pipeline.webp({ quality: QUALITY }).toBuffer());
+          contentType = 'image/webp';
         } else {
-          // Convert to JPEG for other formats
-          buffer = await image.jpeg({ quality: QUALITY }).toBuffer();
+          // Convert to JPEG for other formats (JPEG, etc.)
+          buffer = Buffer.from(await pipeline.jpeg({ quality: QUALITY }).toBuffer());
+          contentType = 'image/jpeg';
+          finalFileExt = 'jpg';
         }
       } catch (optimizeError) {
         console.error('Image optimization error:', optimizeError);
@@ -86,9 +96,13 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    // Update filename if extension changed
+    const finalFileName = finalFileExt !== fileExt ? `${nanoid()}.${finalFileExt}` : fileName;
+    const finalFilePath = `uploads/${finalFileName}`;
+
     // Upload to Supabase Storage
-    const { error } = await supabase.storage.from(STORAGE_BUCKET).upload(filePath, buffer, {
-      contentType: file.type,
+    const { error } = await supabase.storage.from(STORAGE_BUCKET).upload(finalFilePath, buffer, {
+      contentType,
       cacheControl: '3600',
       upsert: false,
     });
@@ -101,14 +115,14 @@ export async function POST(request: NextRequest) {
     // Get public URL
     const {
       data: { publicUrl },
-    } = supabase.storage.from(STORAGE_BUCKET).getPublicUrl(filePath);
+    } = supabase.storage.from(STORAGE_BUCKET).getPublicUrl(finalFilePath);
 
     return NextResponse.json({
       success: true,
       url: publicUrl,
-      fileName: fileName,
-      fileSize: file.size,
-      fileType: file.type,
+      fileName: finalFileName,
+      fileSize: buffer.length,
+      fileType: contentType,
     });
   } catch (error) {
     console.error('Upload error:', error);
