@@ -34,7 +34,7 @@ export const defaultMetadata: Metadata = {
   },
   description: siteConfig.description,
   keywords: [
-    'Full Stack Developer',
+    'Frontend Developer',
     'React Developer',
     'Angular Developer',
     'NestJS Developer',
