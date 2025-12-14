@@ -6,9 +6,9 @@ export const personalInfo: PersonalInfo = {
   email: 'hassandogar9@gmail.com',
   location: 'Munich, Germany',
   timezone: 'CET (UTC+1)',
-  bio: 'Frontend engineer skilled in Angular, React, and Next.js, with a strong background in UX design. I build clean, scalable web applications fast using AI-assisted development and a user-centered mindset. Passionate about crafting intuitive interfaces, smooth interactions, and delivering high-quality frontend experiences end-to-end.',
+  bio: 'Frontend engineer skilled in Angular, with a strong background in UX design. I build clean, scalable web applications fast using AI-assisted development and a user-centered mindset. Passionate about crafting intuitive interfaces, smooth interactions, and delivering high-quality frontend experiences end-to-end.',
   shortBio:
-    'Frontend engineer with a strong UX design background, building fast, intuitive web apps using AI-assisted development. Experienced in Angular, React, and Next.js.',
+    'Frontend engineer with a strong UX design background, building fast, intuitive web apps using AI-assisted development and a user-centered mindset.',
   availability: 'available',
   availabilityText: 'Open to new opportunities',
   resumeUrl:
