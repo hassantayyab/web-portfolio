@@ -46,10 +46,11 @@ export const socialLinks: SocialLink[] = [
 export const skills: Skill[] = [
   // Frontend
   { name: 'Angular', icon: 'angular', category: 'frontend' },
-  { name: 'React', icon: 'react', category: 'frontend' },
-  { name: 'Next.js', icon: 'nextjs', category: 'frontend' },
+  { name: 'NgRx', icon: 'ngrx', category: 'frontend' },
   { name: 'TypeScript', icon: 'typescript', category: 'frontend' },
   { name: 'Tailwind CSS', icon: 'tailwind', category: 'frontend' },
+  { name: 'React', icon: 'react', category: 'frontend' },
+  { name: 'Next.js', icon: 'nextjs', category: 'frontend' },
 
   // Backend
   { name: 'NestJS', icon: 'nestjs', category: 'backend' },
@@ -66,6 +67,11 @@ export const skills: Skill[] = [
   { name: 'Cursor', icon: 'cursor', category: 'tools' },
   //   { name: 'VS Code', icon: 'vscode', category: 'tools' },
   { name: 'Vercel', icon: 'vercel', category: 'tools' },
+
+  // Other
+  { name: 'UX Design', icon: 'ux-design', category: 'other' },
+  { name: 'AI-assisted development', icon: 'ai', category: 'other' },
+  { name: 'User-centered design', icon: 'user-centered', category: 'other' },
 ];
 
 export const projects: Project[] = [

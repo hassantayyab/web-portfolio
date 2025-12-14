@@ -8,6 +8,7 @@ export const getSkillIcon = (iconName: string): IconType => {
     nestjs: SimpleIcons.SiNestjs,
     react: SimpleIcons.SiReact,
     nextjs: SimpleIcons.SiNextdotjs,
+    ngrx: SimpleIcons.SiNgrx,
     typescript: SimpleIcons.SiTypescript,
     tailwind: SimpleIcons.SiTailwindcss,
     framer: SimpleIcons.SiFramer,
@@ -21,6 +22,8 @@ export const getSkillIcon = (iconName: string): IconType => {
     figma: SimpleIcons.SiFigma,
     vscode: SimpleIcons.SiCoder, // VS Code doesn't have specific icon, using Coder as fallback
     vercel: SimpleIcons.SiVercel,
+    'ux-design': SimpleIcons.SiFigma,
+    ai: SimpleIcons.SiOpenai,
   };
 
   // Convert icon name to lowercase and handle variations

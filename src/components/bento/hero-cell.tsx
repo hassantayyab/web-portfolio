@@ -8,7 +8,7 @@ import { useMemo } from 'react';
 
 export function HeroCell() {
   const words = useMemo(() => personalInfo.title.split(' '), []);
-  const viewableSkills = ['angular', 'nextjs', 'typescript', 'nestjs'];
+  const viewableSkills = ['angular', 'ngrx', 'tailwind', 'typescript', 'ux-design'];
   const displaySkills = useMemo(
     () => skills.filter((skill) => viewableSkills.includes(skill.icon)),
     [],
