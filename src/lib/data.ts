@@ -74,7 +74,7 @@ export const projects: Project[] = [
     title: 'Rosen Justice',
     description: 'AI-powered legal case management with automated billing and insights.',
     longDescription:
-      'Built a full-stack legal platform with AI case insights, automated time tracking, budget forecasting, and client comms to cut prep time by 40% and lift satisfaction by 85%.',
+      'Built a frontend legal platform with AI case insights, automated time tracking, budget forecasting, and client comms to cut prep time by 40% and lift satisfaction by 85%.',
     image: '/work/rosen-justice.png',
     technologies: ['React', 'Node.js', 'JavaScript', 'PostgreSQL', 'OpenAI API', 'Stripe'],
     liveUrl: 'https://rosenjustice.com/',

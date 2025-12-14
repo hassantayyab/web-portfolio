@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: `About | ${siteConfig.name}`,
     description:
-      'Learn more about my background, skills, experience, and what drives me as a full-stack developer.',
+      'Learn more about my background, skills, experience, and what drives me as a frontend engineer.',
     url: `${siteConfig.url}/about`,
     type: 'profile',
   },
