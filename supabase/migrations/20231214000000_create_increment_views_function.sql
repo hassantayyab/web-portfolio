@@ -15,3 +15,4 @@ $$;
 -- Grant execute permission to anon and authenticated users
 GRANT EXECUTE ON FUNCTION increment_blog_views(UUID) TO anon, authenticated;
 
+

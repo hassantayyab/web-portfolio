@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { ANIMATION_DELAYS, ANIMATION_DURATIONS } from '@/lib/constants';
 import { education, experiences, personalInfo, skills } from '@/lib/data';
 import { motion } from 'framer-motion';
-import { Calendar, MapPin } from 'lucide-react';
+import { ArrowUpRight, Calendar, MapPin } from 'lucide-react';
 import { useMemo } from 'react';
 
 export default function AboutPageClient() {
@@ -133,6 +133,7 @@ export default function AboutPageClient() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: ANIMATION_DURATIONS.SLOW, delay: ANIMATION_DELAYS.LONG }}
+        className='mb-12 sm:mb-14 md:mb-16'
       >
         <h2 className='text-h2 font-semibold mb-4 sm:mb-5 md:mb-6'>Education</h2>
 
@@ -157,6 +158,24 @@ export default function AboutPageClient() {
           ))}
         </div>
       </motion.section>
+
+      {/* CV/Resume Link */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: ANIMATION_DURATIONS.SLOW, delay: ANIMATION_DELAYS.LONG + 0.1 }}
+        className='flex justify-center'
+      >
+        <a
+          href={personalInfo.resumeUrl}
+          target='_blank'
+          rel='noopener noreferrer'
+          className='flex items-center gap-1.5 text-base text-primary group cursor-pointer'
+        >
+          <span>View Resume</span>
+          <ArrowUpRight className='w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform' />
+        </a>
+      </motion.div>
     </PageLayout>
   );
 }

@@ -42,6 +42,11 @@ export async function generateMetadata({
 
   const baseUrl = env.NEXT_PUBLIC_SITE_URL;
   const blogUrl = `${baseUrl}/blogs/${blog.slug}`;
+  
+  // Use cover image if available, otherwise use dynamic OG image
+  const ogImage = blog.coverImage 
+    ? blog.coverImage 
+    : `${baseUrl}/blogs/${blog.slug}/opengraph-image`;
 
   return {
     title: `${blog.title} | Hassan Tayyab`,
@@ -60,23 +65,23 @@ export async function generateMetadata({
       authors: [blog.author],
       url: blogUrl,
       siteName: 'Hassan Tayyab',
-      images: blog.coverImage ? [
+      images: [
         {
-          url: blog.coverImage,
+          url: ogImage,
           width: 1200,
           height: 630,
           alt: blog.title,
         }
-      ] : [],
+      ],
       tags: blog.tags,
     },
     twitter: {
       card: 'summary_large_image',
-      site: '@hassantayyab',
-      creator: '@hassantayyab',
+      site: '@htdogar',
+      creator: '@htdogar',
       title: blog.title,
       description: blog.excerpt || undefined,
-      images: blog.coverImage ? [blog.coverImage] : [],
+      images: [ogImage],
     },
   };
 }

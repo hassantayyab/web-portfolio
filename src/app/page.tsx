@@ -9,6 +9,7 @@ export const metadata: Metadata = {
     title: siteConfig.title,
     description: siteConfig.longDescription,
     url: siteConfig.url,
+    images: [siteConfig.ogImage],
   },
   alternates: {
     canonical: siteConfig.url,

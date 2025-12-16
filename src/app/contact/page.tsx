@@ -17,11 +17,13 @@ export const metadata: Metadata = {
     description: `Get in touch with ${siteConfig.name}. Whether you have a project in mind, want to collaborate, or just want to say hello.`,
     url: `${siteConfig.url}/contact`,
     type: "website",
+    images: [siteConfig.ogImage],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: `Contact | ${siteConfig.name}`,
     description: `Get in touch with ${siteConfig.name}.`,
+    images: [siteConfig.ogImage],
   },
   alternates: {
     canonical: `${siteConfig.url}/contact`,

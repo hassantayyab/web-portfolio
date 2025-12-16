@@ -22,11 +22,13 @@ export const metadata: Metadata = {
       'Learn more about my background, skills, experience, and what drives me as a frontend engineer.',
     url: `${siteConfig.url}/about`,
     type: 'profile',
+    images: [siteConfig.ogImage],
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: `About | ${siteConfig.name}`,
     description: 'Learn more about my background, skills, and experience.',
+    images: [siteConfig.ogImage],
   },
   alternates: {
     canonical: `${siteConfig.url}/about`,

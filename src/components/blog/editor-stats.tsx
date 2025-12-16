@@ -82,3 +82,4 @@ export function EditorStats({ editor }: EditorStatsProps) {
   );
 }
 
+

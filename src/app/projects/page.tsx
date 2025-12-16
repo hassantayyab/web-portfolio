@@ -23,11 +23,13 @@ export const metadata: Metadata = {
       'Explore my portfolio of web development projects, from full-stack applications to open source contributions.',
     url: `${siteConfig.url}/projects`,
     type: 'website',
+    images: [siteConfig.ogImage],
   },
   twitter: {
     card: 'summary_large_image',
     title: `Projects | ${siteConfig.name}`,
     description: 'Explore my portfolio of web development projects.',
+    images: [siteConfig.ogImage],
   },
   alternates: {
     canonical: `${siteConfig.url}/projects`,

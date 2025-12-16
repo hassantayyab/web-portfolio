@@ -16,7 +16,9 @@ export const siteConfig = {
   description: personalInfo.shortBio,
   longDescription: personalInfo.bio,
   url: baseUrl,
-  ogImage: `${baseUrl}/og.png`,
+  // Use static OG image if available, otherwise fall back to dynamic generation
+  ogImage: `${baseUrl}/og.png`, // Place your static OG image at /public/og.png (1200x630px)
+  // Alternative: Use dynamic OG image: `${baseUrl}/og?title=${encodeURIComponent(personalInfo.name)}&description=${encodeURIComponent(personalInfo.shortBio)}`,
   links: {
     twitter: getSocialLink('Twitter'),
     github: getSocialLink('GitHub'),
@@ -87,8 +89,8 @@ export const defaultMetadata: Metadata = {
     description: siteConfig.description,
     images: [siteConfig.ogImage],
     creator: siteConfig.links.twitter
-      ? siteConfig.links.twitter.replace('https://twitter.com/', '@')
-      : undefined,
+      ? siteConfig.links.twitter.replace(/https?:\/\/(www\.)?(twitter|x)\.com\//, '@')
+      : '@htdogar',
   },
   robots: {
     index: true,
