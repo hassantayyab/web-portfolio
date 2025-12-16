@@ -7,7 +7,7 @@ import BlogsClient from './blogs-client';
 const baseUrl = env.NEXT_PUBLIC_SITE_URL;
 
 export const metadata: Metadata = {
-  title: 'Blog | Hassan Tayyab',
+  title: 'Blogs',
   description:
     'Read my latest articles about web development, design, and technology. Insights on React, Next.js, TypeScript, and modern web development practices.',
   keywords: [
