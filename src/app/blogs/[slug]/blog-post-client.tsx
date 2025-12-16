@@ -32,7 +32,7 @@ export function BlogPostClient({ blog }: BlogPostClientProps) {
   const router = useRouter();
   const [views, setViews] = useState(blog.views || 0);
   const readingTime = calculateReadingTime(blog.content);
-  const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
+  const [shareUrl, setShareUrl] = useState('');
 
   // Increment view count
   useEffect(() => {
@@ -53,6 +53,27 @@ export function BlogPostClient({ blog }: BlogPostClientProps) {
 
     incrementViews();
   }, [blog.id]);
+
+  useEffect(() => {
+    setShareUrl(window.location.href);
+  }, []);
+
+  const handleShare = async () => {
+    const url = shareUrl || (typeof window !== 'undefined' ? window.location.href : '');
+    if (!url) return;
+
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: blog.title, url });
+        return;
+      }
+
+      await navigator.clipboard.writeText(url);
+    } catch (error) {
+      // User cancellation on native share can throw in some browsers.
+      console.error('Share failed:', error);
+    }
+  };
 
   return (
     <>
@@ -165,10 +186,15 @@ export function BlogPostClient({ blog }: BlogPostClientProps) {
                 Back to All Blogs
               </Button>
 
-              <div className='flex items-center gap-2'>
-                <Share2 className='h-4 w-4 text-muted-foreground' />
-                <span className='text-sm text-muted-foreground'>Share this article</span>
-              </div>
+              <Button
+                variant='ghost'
+                onClick={handleShare}
+                className='gap-2 text-muted-foreground'
+                aria-label='Share this article'
+              >
+                <Share2 className='h-4 w-4' />
+                <span className='text-sm'>Share this article</span>
+              </Button>
             </div>
           </footer>
         </article>

@@ -14,6 +14,7 @@ interface ShareButtonsProps {
 
 export function ShareButtons({ title, url, className }: ShareButtonsProps) {
   const [copied, setCopied] = useState(false);
+  const isReady = Boolean(url);
 
   const shareLinks = {
     twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`,
@@ -23,6 +24,7 @@ export function ShareButtons({ title, url, className }: ShareButtonsProps) {
 
   const copyToClipboard = async () => {
     try {
+      if (!isReady) return;
       await navigator.clipboard.writeText(url);
       setCopied(true);
       toast.success('Link copied to clipboard');
@@ -34,6 +36,7 @@ export function ShareButtons({ title, url, className }: ShareButtonsProps) {
   };
 
   const openShareWindow = (shareUrl: string) => {
+    if (!isReady) return;
     window.open(shareUrl, '_blank', 'width=600,height=400');
   };
 
@@ -47,6 +50,7 @@ export function ShareButtons({ title, url, className }: ShareButtonsProps) {
         onClick={() => openShareWindow(shareLinks.twitter)}
         className="gap-2"
         aria-label="Share on Twitter"
+        disabled={!isReady}
       >
         <Twitter className="w-4 h-4" />
         <span className="hidden sm:inline">Twitter</span>
@@ -58,6 +62,7 @@ export function ShareButtons({ title, url, className }: ShareButtonsProps) {
         onClick={() => openShareWindow(shareLinks.linkedin)}
         className="gap-2"
         aria-label="Share on LinkedIn"
+        disabled={!isReady}
       >
         <Linkedin className="w-4 h-4" />
         <span className="hidden sm:inline">LinkedIn</span>
@@ -69,6 +74,7 @@ export function ShareButtons({ title, url, className }: ShareButtonsProps) {
         onClick={() => openShareWindow(shareLinks.facebook)}
         className="gap-2"
         aria-label="Share on Facebook"
+        disabled={!isReady}
       >
         <Facebook className="w-4 h-4" />
         <span className="hidden sm:inline">Facebook</span>
@@ -80,6 +86,7 @@ export function ShareButtons({ title, url, className }: ShareButtonsProps) {
         onClick={copyToClipboard}
         className="gap-2"
         aria-label="Copy link"
+        disabled={!isReady}
       >
         {copied ? (
           <>
