@@ -15,6 +15,8 @@ interface BlogPostClientProps {
   blog: Blog;
 }
 
+const SHARE_SECTION_ID = 'article-share';
+
 function calculateReadingTime(content: string | unknown): number {
   // Only calculate for markdown strings, ignore old JSON format
   const contentStr = typeof content === 'string' ? content : '';
@@ -58,21 +60,9 @@ export function BlogPostClient({ blog }: BlogPostClientProps) {
     setShareUrl(window.location.href);
   }, []);
 
-  const handleShare = async () => {
-    const url = shareUrl || (typeof window !== 'undefined' ? window.location.href : '');
-    if (!url) return;
-
-    try {
-      if (navigator.share) {
-        await navigator.share({ title: blog.title, url });
-        return;
-      }
-
-      await navigator.clipboard.writeText(url);
-    } catch (error) {
-      // User cancellation on native share can throw in some browsers.
-      console.error('Share failed:', error);
-    }
+  const scrollToShareSection = () => {
+    const el = document.getElementById(SHARE_SECTION_ID);
+    el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   return (
@@ -169,7 +159,13 @@ export function BlogPostClient({ blog }: BlogPostClientProps) {
             )}
 
             {/* Share Buttons */}
-            <ShareButtons title={blog.title} url={shareUrl} />
+            <div
+              id={SHARE_SECTION_ID}
+              // Account for the fixed navbar so the section isn't hidden after scroll
+              style={{ scrollMarginTop: '15rem' }}
+            >
+              <ShareButtons title={blog.title} url={shareUrl} />
+            </div>
           </header>
 
           {/* Divider */}
@@ -188,9 +184,9 @@ export function BlogPostClient({ blog }: BlogPostClientProps) {
 
               <Button
                 variant='ghost'
-                onClick={handleShare}
+                onClick={scrollToShareSection}
                 className='gap-2 text-muted-foreground'
-                aria-label='Share this article'
+                aria-label='Scroll to share section'
               >
                 <Share2 className='h-4 w-4' />
                 <span className='text-sm'>Share this article</span>
