@@ -18,9 +18,9 @@ export function SkillsCell() {
         transition={{ duration: 0.3 }}
         className='mb-2 md:mb-3'
       >
-        <h3 className='text-sm md:text-sm font-medium text-muted-foreground uppercase tracking-wider'>
+        <h2 className='text-sm md:text-sm font-medium text-muted-foreground uppercase tracking-wider'>
           Tech Stack
-        </h3>
+        </h2>
       </motion.div>
 
       {/* Skills grid */}

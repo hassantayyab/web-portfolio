@@ -32,9 +32,9 @@ export function ContactCell() {
 
         <div className='relative z-10 text-center'>
           {/* Text */}
-          <motion.h3 className='text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold mb-3'>
+          <motion.h2 className='text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold mb-3'>
             Let&apos;s work together
-          </motion.h3>
+          </motion.h2>
 
           <motion.p className='text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground wrap-break-word'>
             {personalInfo.email}

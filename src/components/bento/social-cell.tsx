@@ -22,6 +22,8 @@ export function SocialCell() {
       <div className='flex items-center gap-2 sm:gap-3 md:gap-4 flex-wrap'>
         {socialLinks.map((link, index) => {
           const Icon = iconMap[link.icon] || ExternalLink;
+          const accessibleName =
+            link.name || (typeof link.icon === 'string' ? link.icon.toUpperCase() : 'Social link');
 
           return (
             <motion.a
@@ -29,18 +31,23 @@ export function SocialCell() {
               href={link.url}
               target='_blank'
               rel='noopener noreferrer'
+              aria-label={accessibleName}
               className={cn(
                 'flex items-center gap-2 sm:gap-2.5 px-3 sm:px-4 md:px-5 lg:px-6 py-2.5 sm:py-3 md:py-3.5 rounded-xl min-h-[44px]',
                 'bg-white/5 border border-white/15 transition-all duration-300 cursor-pointer',
                 'hover:bg-white/10 hover:border-white/25 hover:shadow-lg group',
               )}
             >
-              <Icon className='w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground group-hover:text-primary transition-colors' />
+              <Icon
+                className='w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground group-hover:text-primary transition-colors'
+                aria-hidden='true'
+              />
               {link.name && (
                 <span className='text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors tracking-wider'>
                   {link.name}
                 </span>
               )}
+              {!link.name && <span className='sr-only'>{accessibleName}</span>}
             </motion.a>
           );
         })}

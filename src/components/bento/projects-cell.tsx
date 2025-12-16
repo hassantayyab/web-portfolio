@@ -44,9 +44,9 @@ export function ProjectsCell() {
         transition={{ duration: 0.3 }}
         className='flex items-center justify-between px-4 pt-4 sm:px-5 sm:pt-5 md:px-6 md:pt-6 pb-0'
       >
-        <h3 className='text-sm font-medium text-muted-foreground uppercase tracking-wider'>
+        <h2 className='text-sm font-medium text-muted-foreground uppercase tracking-wider'>
           Featured Projects
-        </h3>
+        </h2>
         <Link
           href='/projects'
           className='flex items-center gap-1 text-sm text-primary group min-h-[44px] justify-end'
