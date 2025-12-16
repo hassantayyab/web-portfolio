@@ -18,7 +18,7 @@ export const siteConfig = {
   url: baseUrl,
   // Use static OG image if available, otherwise fall back to dynamic generation
   ogImage: `${baseUrl}/og.png`, // Place your static OG image at /public/og.png (1200x630px)
-  // Alternative: Use dynamic OG image: `${baseUrl}/og?title=${encodeURIComponent(personalInfo.name)}&description=${encodeURIComponent(personalInfo.shortBio)}`,
+  // NOTE: We intentionally do NOT use a dynamic OG route. Shares should always use /public/og.png.
   links: {
     twitter: getSocialLink('Twitter'),
     github: getSocialLink('GitHub'),

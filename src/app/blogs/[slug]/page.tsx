@@ -1,9 +1,9 @@
+import { env } from '@/lib/env';
+import { createServerSupabaseClient } from '@/lib/supabase';
+import { Blog } from '@/lib/types';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { createServerSupabaseClient } from '@/lib/supabase';
 import { BlogPostClient } from './blog-post-client';
-import { Blog } from '@/lib/types';
-import { env } from '@/lib/env';
 
 interface BlogPostPageProps {
   params: Promise<{
@@ -28,9 +28,7 @@ async function getBlogBySlug(slug: string): Promise<Blog | null> {
   return data as unknown as Blog;
 }
 
-export async function generateMetadata({
-  params,
-}: BlogPostPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
   const blog = await getBlogBySlug(slug);
 
@@ -42,11 +40,10 @@ export async function generateMetadata({
 
   const baseUrl = env.NEXT_PUBLIC_SITE_URL;
   const blogUrl = `${baseUrl}/blogs/${blog.slug}`;
-  
-  // Use cover image if available, otherwise use dynamic OG image
-  const ogImage = blog.coverImage 
-    ? blog.coverImage 
-    : `${baseUrl}/blogs/${blog.slug}/opengraph-image`;
+
+  // Prefer the blog cover image for shares; otherwise fall back to the site-wide static OG image
+  const ogImage =
+    blog.coverImage && blog.coverImage.trim().length > 0 ? blog.coverImage : `${baseUrl}/og.png`;
 
   return {
     title: `${blog.title} | Hassan Tayyab`,
@@ -71,7 +68,7 @@ export async function generateMetadata({
           width: 1200,
           height: 630,
           alt: blog.title,
-        }
+        },
       ],
       tags: blog.tags,
     },
@@ -103,7 +100,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     '@type': 'BlogPosting',
     headline: blog.title,
     description: blog.excerpt,
-    image: blog.coverImage || undefined,
+    image:
+      blog.coverImage && blog.coverImage.trim().length > 0 ? blog.coverImage : `${baseUrl}/og.png`,
     datePublished: blog.publishedAt || undefined,
     dateModified: blog.updatedAt,
     author: {
@@ -129,7 +127,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   return (
     <>
       <script
-        type="application/ld+json"
+        type='application/ld+json'
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <BlogPostClient blog={blog} />
