@@ -6,6 +6,10 @@ import BlogsClient from './blogs-client';
 
 const baseUrl = env.NEXT_PUBLIC_SITE_URL;
 
+// Ensure the blogs list is always fresh (don't statically cache at build time).
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export const metadata: Metadata = {
   title: 'Blogs',
   description:
