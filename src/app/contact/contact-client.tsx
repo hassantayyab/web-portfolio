@@ -20,7 +20,7 @@ export default function ContactPageClient() {
   return (
     <PageLayout
       title='Get in Touch'
-      description="Have a project in mind or just want to say hello? Fill out the form below and I'll get back to you as soon as possible."
+      description="Want to get in touch? Fill out the form below and I'll get back to you as soon as possible."
       maxWidth='4xl'
     >
       {/* Contact Info */}
