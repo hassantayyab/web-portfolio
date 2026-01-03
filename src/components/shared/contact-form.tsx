@@ -169,7 +169,7 @@ export function ContactForm() {
         <Textarea
           id='message'
           placeholder='Tell me about your project or just say hello...'
-          rows={6}
+          rows={14}
           {...register('message')}
           className='bg-white/5 border-white/15 focus:border-primary resize-none text-sm sm:text-base'
         />

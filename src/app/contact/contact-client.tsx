@@ -1,6 +1,6 @@
 'use client';
 
-import { ContactForm } from '@/components/shared/contact-form';
+import { ContactMethods } from '@/components/contact/contact-methods';
 import { PageLayout } from '@/components/shared/page-layout';
 import { personalInfo, socialLinks } from '@/lib/data';
 import { cn } from '@/lib/utils';
@@ -20,8 +20,8 @@ export default function ContactPageClient() {
   return (
     <PageLayout
       title='Get in Touch'
-      description="Want to get in touch? Fill out the form below and I'll get back to you as soon as possible."
-      maxWidth='4xl'
+      description='Send me a message or schedule a meeting - whatever works best for you.'
+      maxWidth='7xl'
     >
       {/* Contact Info */}
       <motion.div
@@ -38,7 +38,7 @@ export default function ContactPageClient() {
               </h3>
               <a
                 href={`mailto:${personalInfo.email}`}
-                className='text-xl md:text-2xl text-primary hover:underline'
+                className='text-xl md:text-2xl text-primary hover:underline underline-offset-4'
               >
                 {personalInfo.email}
               </a>
@@ -78,9 +78,9 @@ export default function ContactPageClient() {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.3, delay: 0.15 + index * 0.05 }}
                   className={cn(
-                    'flex items-center gap-2 px-4 py-3 rounded-xl min-h-[44px]',
+                    'flex items-center gap-2 px-4 py-3 rounded-md min-h-[44px]',
                     'bg-white/5 border border-white/15 transition-all duration-300 cursor-pointer',
-                    'hover:bg-white/10 hover:border-white/25 hover:shadow-lg hover:scale-105 group',
+                    'hover:bg-white/10 hover:border-white/25 hover:shadow-lg group',
                   )}
                 >
                   {Icon && (
@@ -98,15 +98,8 @@ export default function ContactPageClient() {
         </div>
       </motion.div>
 
-      {/* Contact Form */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-        className='bg-card/50 border border-white/10 rounded-2xl p-6 md:p-8 backdrop-blur-sm'
-      >
-        <ContactForm />
-      </motion.div>
+      {/* Contact Methods - Form & Calendly */}
+      <ContactMethods />
     </PageLayout>
   );
 }

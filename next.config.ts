@@ -63,15 +63,15 @@ const nextConfig: NextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval'", // 'unsafe-eval' needed for Next.js dev mode
-              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://assets.calendly.com", // 'unsafe-eval' needed for Next.js dev mode
+              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://assets.calendly.com",
               "font-src 'self' https://fonts.gstatic.com data:",
               "img-src 'self' data: https: blob:",
-              "connect-src 'self' https://api.resend.com",
+              "connect-src 'self' https://api.resend.com https://calendly.com",
               "frame-ancestors 'self'",
               "base-uri 'self'",
               "form-action 'self'",
-              "frame-src 'self'",
+              "frame-src 'self' https://calendly.com",
               "object-src 'none'",
               'upgrade-insecure-requests',
             ].join('; '),

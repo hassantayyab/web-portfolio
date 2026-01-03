@@ -15,7 +15,7 @@ export default function BlogsClient({ blogs }: BlogsClientProps) {
     <PageLayout
       title='Blog'
       description='Thoughts on web development, design, and technology. Join me as I share insights and learnings from my journey.'
-      maxWidth='6xl'
+      maxWidth='7xl'
       titleClassName='text-[40px]'
     >
       {/* Blogs Grid */}
