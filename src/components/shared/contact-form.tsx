@@ -7,7 +7,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { FORM_CONSTANTS } from '@/lib/constants';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { motion } from 'framer-motion';
-import { CheckCircle, Loader2, Send } from 'lucide-react';
 import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -185,22 +184,7 @@ export function ContactForm() {
         className='w-full md:w-auto px-8 py-3 h-auto min-h-[44px]'
         aria-label={isSubmitting ? 'Sending message' : isSuccess ? 'Message sent' : 'Send message'}
       >
-        {isSubmitting ? (
-          <>
-            <Loader2 className='w-4 h-4 mr-2 animate-spin' aria-hidden='true' />
-            <span>Sending...</span>
-          </>
-        ) : isSuccess ? (
-          <>
-            <CheckCircle className='w-4 h-4 mr-2' aria-hidden='true' />
-            <span>Sent!</span>
-          </>
-        ) : (
-          <>
-            <Send className='w-4 h-4 mr-2' aria-hidden='true' />
-            <span>Send Message</span>
-          </>
-        )}
+        {isSubmitting ? 'Sending...' : isSuccess ? 'Message Sent!' : 'Send Message'}
       </Button>
     </motion.form>
   );
