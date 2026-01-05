@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   openGraph: {
     title: `${siteConfig.name} | ${siteConfig.title}`,
-    description: siteConfig.longDescription,
+    description: siteConfig.description,
     url: siteConfig.url,
     images: [siteConfig.ogImage],
   },
