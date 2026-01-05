@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import HomePageClient from './home-page';
 
 export const metadata: Metadata = {
-  title: siteConfig.title,
+  title: `${siteConfig.name} | ${siteConfig.title}`,
   description: siteConfig.description,
   openGraph: {
     title: `${siteConfig.name} | ${siteConfig.title}`,
