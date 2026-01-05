@@ -60,6 +60,9 @@ export default async function Image({ params }: { params: Promise<{ slug: string
 
   const baseUrl = env.NEXT_PUBLIC_SITE_URL;
 
+  // Use cover image if available, otherwise create a branded background
+  const hasCoverImage = blog.coverImage && blog.coverImage.trim().length > 0;
+
   return new ImageResponse(
     (
       <div
@@ -67,139 +70,152 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           height: '100%',
           width: '100%',
           display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'flex-start',
-          justifyContent: 'space-between',
-          backgroundColor: '#0a0a0a',
-          padding: '60px 80px',
+          position: 'relative',
           fontFamily: 'system-ui, -apple-system, sans-serif',
         }}
       >
-        {/* Header with author info */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '16px',
-          }}
-        >
+        {/* Background: Cover Image or Fallback */}
+        {hasCoverImage && blog.coverImage ? (
           <img
-            src={`${baseUrl}/hassan-black.PNG`}
-            alt='Hassan Tayyab'
-            width='60'
-            height='60'
+            src={blog.coverImage}
+            alt={blog.title}
             style={{
-              borderRadius: '50%',
-              border: '3px solid #c4af1c',
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
             }}
           />
+        ) : (
+          <div
+            style={{
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            }}
+          />
+        )}
+
+        {/* Dark overlay for text readability */}
+        <div
+          style={{
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            background: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%)',
+          }}
+        />
+
+        {/* Content */}
+        <div
+          style={{
+            position: 'relative',
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-end',
+            padding: '60px 80px',
+          }}
+        >
+          {/* Bottom section with CTA */}
           <div
             style={{
               display: 'flex',
               flexDirection: 'column',
+              gap: '24px',
+              backgroundColor: 'rgba(0, 0, 0, 0.85)',
+              padding: '40px',
+              borderRadius: '16px',
+              backdropFilter: 'blur(10px)',
             }}
           >
-            <div
-              style={{
-                fontSize: 24,
-                fontWeight: 600,
-                color: '#ffffff',
-              }}
-            >
-              Hassan Tayyab
-            </div>
-            <div
-              style={{
-                fontSize: 18,
-                color: '#888888',
-              }}
-            >
-              {blog.author}
-            </div>
-          </div>
-        </div>
+            {/* Title & Meta */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <h2
+                style={{
+                  fontSize: blog.title.length > 60 ? 38 : 48,
+                  fontWeight: 700,
+                  color: '#ffffff',
+                  lineHeight: 1.2,
+                  margin: 0,
+                }}
+              >
+                {blog.title}
+              </h2>
 
-        {/* Blog title */}
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '20px',
-            maxWidth: '100%',
-          }}
-        >
-          <h1
-            style={{
-              fontSize: blog.title.length > 60 ? 52 : 64,
-              fontWeight: 700,
-              color: '#ffffff',
-              lineHeight: 1.2,
-              margin: 0,
-              maxWidth: '1040px',
-            }}
-          >
-            {blog.title}
-          </h1>
-
-          {/* Category badge */}
-          {blog.category && (
-            <div
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                padding: '8px 16px',
-                backgroundColor: '#c4af1c',
-                color: '#000000',
-                fontSize: 18,
-                fontWeight: 600,
-                borderRadius: '6px',
-              }}
-            >
-              {blog.category}
-            </div>
-          )}
-        </div>
-
-        {/* Footer with CTA */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            width: '100%',
-          }}
-        >
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '30px',
-              fontSize: 20,
-              color: '#888888',
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              📖 {blog.readTime} min read
-            </div>
-            {blog.tags && blog.tags.length > 0 && (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                🏷️ {blog.tags.slice(0, 3).join(', ')}
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '20px',
+                  fontSize: 18,
+                  color: '#cccccc',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  📖 {blog.readTime} min read
+                </div>
+                {blog.category && (
+                  <div
+                    style={{
+                      padding: '4px 12px',
+                      backgroundColor: '#c4af1c',
+                      color: '#000000',
+                      fontSize: 16,
+                      fontWeight: 600,
+                      borderRadius: '6px',
+                    }}
+                  >
+                    {blog.category}
+                  </div>
+                )}
               </div>
-            )}
-          </div>
+            </div>
 
-          {/* Call-to-action */}
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              fontSize: 28,
-              fontWeight: 600,
-              color: '#c4af1c',
-            }}
-          >
-            Read the full article →
+            {/* CTA */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                borderTop: '2px solid rgba(196, 175, 28, 0.3)',
+                paddingTop: '24px',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <img
+                  src={`${baseUrl}/hassan-black.PNG`}
+                  alt='Hassan Tayyab'
+                  width='50'
+                  height='50'
+                  style={{
+                    borderRadius: '50%',
+                    border: '2px solid #c4af1c',
+                  }}
+                />
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                  <div style={{ fontSize: 18, fontWeight: 600, color: '#ffffff' }}>
+                    Hassan Tayyab
+                  </div>
+                  <div style={{ fontSize: 14, color: '#aaaaaa' }}>hassantayyab.com</div>
+                </div>
+              </div>
+
+              <div
+                style={{
+                  fontSize: 32,
+                  fontWeight: 700,
+                  color: '#c4af1c',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '12px',
+                }}
+              >
+                Read the full article →
+              </div>
+            </div>
           </div>
         </div>
       </div>
