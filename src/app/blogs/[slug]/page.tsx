@@ -41,9 +41,8 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   const baseUrl = env.NEXT_PUBLIC_SITE_URL;
   const blogUrl = `${baseUrl}/blogs/${blog.slug}`;
 
-  // Prefer the blog cover image for shares; otherwise fall back to the site-wide static OG image
-  const ogImage =
-    blog.coverImage && blog.coverImage.trim().length > 0 ? blog.coverImage : `${baseUrl}/og.png`;
+  // Use custom cover image if provided, otherwise Next.js will use our dynamic OG image generator
+  const hasCustomCover = blog.coverImage && blog.coverImage.trim().length > 0;
 
   return {
     title: `${blog.title} | Hassan Tayyab`,
@@ -62,14 +61,17 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       authors: [blog.author],
       url: blogUrl,
       siteName: 'Hassan Tayyab',
-      images: [
-        {
-          url: ogImage,
-          width: 1200,
-          height: 630,
-          alt: blog.title,
-        },
-      ],
+      // Only set custom image if provided; otherwise Next.js uses opengraph-image.tsx
+      ...(hasCustomCover && {
+        images: [
+          {
+            url: blog.coverImage,
+            width: 1200,
+            height: 630,
+            alt: blog.title,
+          },
+        ],
+      }),
       tags: blog.tags,
     },
     twitter: {
@@ -78,7 +80,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       creator: '@htdogar',
       title: blog.title,
       description: blog.excerpt || undefined,
-      images: [ogImage],
+      // Twitter will also use the OG image automatically
     },
   };
 }
