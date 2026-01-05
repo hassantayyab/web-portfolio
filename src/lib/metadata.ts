@@ -12,7 +12,7 @@ const getSocialLink = (name: string) => {
 
 export const siteConfig = {
   name: personalInfo.name,
-  title: `${personalInfo.name} | ${personalInfo.title} | AI-assisted development`,
+  title: `${personalInfo.name} | ${personalInfo.title}`,
   description: personalInfo.shortBio,
   longDescription: personalInfo.bio,
   url: baseUrl,
