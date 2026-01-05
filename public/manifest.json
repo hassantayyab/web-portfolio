@@ -1,7 +1,7 @@
 {
-  "name": "Hassan Tayyab - Frontend Engineer Portfolio",
+  "name": "Hassan Tayyab - Angular Engineer Portfolio",
   "short_name": "Hassan Tayyab",
-  "description": "Frontend engineer with a strong UX design background, building fast, intuitive web apps using AI-assisted development and a user-centered mindset.",
+  "description": "Angular engineer with a strong UX design background, building fast, intuitive web apps using AI-assisted development and a user-centered mindset.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0a0a0a",
@@ -25,4 +25,3 @@
   "lang": "en-US",
   "dir": "ltr"
 }
-

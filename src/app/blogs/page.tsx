@@ -37,7 +37,7 @@ export const metadata: Metadata = {
         url: `${baseUrl}/og.png`,
         width: 1200,
         height: 630,
-        alt: 'Hassan Tayyab - Frontend Engineer',
+        alt: 'Hassan Tayyab - Angular Engineer',
       },
     ],
   },

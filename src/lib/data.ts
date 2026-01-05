@@ -2,7 +2,7 @@ import { Blog, Education, Experience, PersonalInfo, Project, Skill, SocialLink }
 
 export const personalInfo: PersonalInfo = {
   name: 'Hassan Tayyab',
-  title: 'Frontend Engineer',
+  title: 'Angular Engineer',
   email: 'hassandogar9@gmail.com',
   location: 'Munich, Germany',
   timezone: 'CET (UTC+1)',
