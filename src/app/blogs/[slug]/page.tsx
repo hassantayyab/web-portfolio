@@ -41,10 +41,8 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   const baseUrl = env.NEXT_PUBLIC_SITE_URL;
   const blogUrl = `${baseUrl}/blogs/${blog.slug}`;
 
-  // Use custom cover image if provided, otherwise Next.js will use our dynamic OG image generator
-  const customCoverImage =
-    blog.coverImage && blog.coverImage.trim().length > 0 ? blog.coverImage : null;
-
+  // Always use dynamic OG image generator (opengraph-image.tsx) with CTA
+  // Note: coverImage field can still be used in blog post content, just not for OG sharing
   return {
     title: `${blog.title} | Hassan Tayyab`,
     description: blog.excerpt || `Read ${blog.title} by ${blog.author}`,
@@ -62,19 +60,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       authors: [blog.author],
       url: blogUrl,
       siteName: 'Hassan Tayyab',
-      // Only set custom image if provided; otherwise Next.js uses opengraph-image.tsx
-      ...(customCoverImage
-        ? {
-            images: [
-              {
-                url: customCoverImage,
-                width: 1200,
-                height: 630,
-                alt: blog.title,
-              },
-            ],
-          }
-        : {}),
+      // Omit images property to let Next.js use opengraph-image.tsx automatically
       tags: blog.tags,
     },
     twitter: {
@@ -83,7 +69,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       creator: '@htdogar',
       title: blog.title,
       description: blog.excerpt || undefined,
-      // Twitter will also use the OG image automatically
+      // Twitter will also use the dynamic OG image automatically
     },
   };
 }
