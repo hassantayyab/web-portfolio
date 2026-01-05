@@ -8,7 +8,7 @@ export const personalInfo: PersonalInfo = {
   timezone: 'CET (UTC+1)',
   bio: 'Frontend engineer skilled in Angular, with a strong background in UX design. I build clean, scalable web applications fast using AI-assisted development and a user-centered mindset. Passionate about crafting intuitive interfaces, smooth interactions, and delivering high-quality frontend experiences end-to-end.',
   shortBio:
-    'Frontend engineer with a strong UX design background, building fast, intuitive web apps using AI-assisted development and a user-centered mindset.',
+    'Angular engineer with a strong UX design background, building fast, intuitive web apps using AI-assisted development and a user-centered mindset.',
   availability: 'available',
   availabilityText: 'Open to new opportunities',
   resumeUrl:

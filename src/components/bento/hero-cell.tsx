@@ -116,7 +116,7 @@ export function HeroCell() {
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 0.5 }}
         transition={{ duration: 1, delay: 0.5 }}
-        className='absolute -right-20 -bottom-20 w-60 h-60 rounded-full bg-primary/20 blur-3xl'
+        className='absolute -right-20 -bottom-20 w-60 h-60 rounded-full bg-primary/10 blur-3xl'
       />
     </div>
   );
