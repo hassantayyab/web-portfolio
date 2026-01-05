@@ -113,6 +113,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       '@type': 'Person',
       name: 'Hassan Tayyab',
       url: baseUrl,
+      image: {
+        '@type': 'ImageObject',
+        url: `${baseUrl}/hassan-black.PNG`,
+      },
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
@@ -120,8 +124,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     },
     keywords: blog.tags.join(', '),
     articleSection: blog.category || 'Technology',
-    wordCount: JSON.stringify(blog.content).split(/\s+/).length,
+    wordCount: blog.content.split(/\s+/).filter(Boolean).length,
     timeRequired: `PT${blog.readTime}M`,
+  };
+
+  // BreadcrumbList schema for Google rich results
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: baseUrl },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: `${baseUrl}/blogs` },
+      { '@type': 'ListItem', position: 3, name: blog.title, item: blogUrl },
+    ],
   };
 
   return (
@@ -129,6 +144,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <script
         type='application/ld+json'
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <BlogPostClient blog={blog} />
     </>

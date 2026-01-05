@@ -65,6 +65,9 @@ export const defaultMetadata: Metadata = {
   publisher: personalInfo.name,
   alternates: {
     canonical: baseUrl,
+    types: {
+      'application/rss+xml': `${baseUrl}/blogs/rss.xml`,
+    },
   },
   openGraph: {
     type: 'website',
@@ -104,9 +107,8 @@ export const defaultMetadata: Metadata = {
     },
   },
   verification: {
-    // Add your verification codes here
-    // google: "your-google-verification-code",
-    // yandex: "your-yandex-verification-code",
+    google: 'i2gLpOTvcIQcy1C9b2qr84wcvLXxejzKcyRsf3lyJPg',
+    // Add Bing verification code here when available:
     // bing: "your-bing-verification-code",
   },
   category: 'Technology',
