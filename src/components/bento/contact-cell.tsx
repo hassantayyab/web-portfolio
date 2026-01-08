@@ -42,7 +42,7 @@ export function ContactCell() {
         </div>
 
         {/* Enhanced corner decoration */}
-        <div className='absolute top-0 right-0 w-24 h-24 bg-primary/20 rounded-bl-full opacity-60 group-hover:opacity-80 transition-opacity blur-lg' />
+        <div className='absolute top-0 right-0 w-24 h-24 bg-primary/20 rounded-bl-full opacity-60 group-hover:opacity-80 transition-opacity' />
       </div>
     </Link>
   );
