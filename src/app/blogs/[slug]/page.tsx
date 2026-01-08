@@ -46,7 +46,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     blog.coverImage && blog.coverImage.trim().length > 0 ? blog.coverImage : `${baseUrl}/og.png`;
 
   return {
-    title: `${blog.title} | Hassan Tayyab`,
+    title: blog.title,
     description: blog.excerpt || `Read ${blog.title} by ${blog.author}`,
     authors: [{ name: blog.author }],
     keywords: blog.tags,
