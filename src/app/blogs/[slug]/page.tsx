@@ -54,7 +54,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       canonical: blogUrl,
     },
     openGraph: {
-      title: blog.title,
+      title: `${blog.title} | Hassan Tayyab`,
       description: blog.excerpt || undefined,
       type: 'article',
       publishedTime: blog.publishedAt || undefined,
