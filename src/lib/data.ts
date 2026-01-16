@@ -85,7 +85,6 @@ export const projects: Project[] = [
     technologies: ['React', 'Node.js', 'JavaScript', 'PostgreSQL', 'OpenAI API', 'Stripe'],
     liveUrl: 'https://rosenjustice.com/',
     year: '2024',
-    featured: true,
   },
   {
     id: 'launchister',
@@ -117,7 +116,6 @@ export const projects: Project[] = [
     ],
     liveUrl: 'https://launchkit.help/',
     year: '2025',
-    featured: true,
   },
   {
     id: 'orderflow',
@@ -190,7 +188,6 @@ export const projects: Project[] = [
     ],
     liveUrl: 'https://www.openprocessventures.com/',
     year: '2023',
-    featured: true,
   },
   {
     id: 'workforce-management',
@@ -218,6 +215,18 @@ export const projects: Project[] = [
     ],
     liveUrl: 'https://www.kuiqlee.com/',
     year: '2025',
+    featured: true,
+  },
+  {
+    id: 'angular-ai-kit',
+    title: 'Angular AI Kit',
+    description: 'Component library for building AI chat interfaces in Angular applications.',
+    longDescription:
+      'Built a comprehensive Angular component library for AI interfaces with chat components, customizable styling, streaming responses, and integration guides. Provides reusable components and services for building AI-powered features in Angular applications with TypeScript and modern Angular patterns.',
+    image: '/work/angular-ai-kit.png',
+    technologies: ['Angular', 'TypeScript', 'RxJS', 'Vercel'],
+    liveUrl: 'https://angular-ai-kit.vercel.app/',
+    year: '2026',
     featured: true,
   },
 ];
