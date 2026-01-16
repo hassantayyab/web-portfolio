@@ -202,6 +202,24 @@ export const projects: Project[] = [
     technologies: ['Figma', 'Adobe Creative Suite', 'Miro', 'UserTesting', 'Principle', 'InVision'],
     year: '2024',
   },
+  {
+    id: 'kuiqlee',
+    title: 'Kuiqlee',
+    description: 'AI-powered Chrome extension that transforms webpages into digestible summaries.',
+    longDescription:
+      'Built a Chrome extension with AI-powered content summarization that generates 5 different summary formats (TLDR, Detailed, ELI15, Concepts, Actions) in under 10 seconds. Features persistent local storage, privacy-first design with no data collection, and educational focus for students and professionals.',
+    image: '/work/kuiqlee.png',
+    technologies: [
+      'Chrome Extension API',
+      'JavaScript',
+      'TypeScript',
+      'AI/ML',
+      'Local Storage API',
+    ],
+    liveUrl: 'https://www.kuiqlee.com/',
+    year: '2025',
+    featured: true,
+  },
 ];
 
 export const experiences: Experience[] = [
