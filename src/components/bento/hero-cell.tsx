@@ -119,16 +119,13 @@ export function HeroCell() {
                 transition={
                   prefersReducedMotion ? undefined : { duration: 0.3, delay: 0.45 + index * FAST_DELAYS.STAGGER }
                 }
-                whileHover={prefersReducedMotion ? undefined : { scale: 1.05, y: -2 }}
-                className='group flex items-center gap-1.5 px-2 py-1.5 sm:px-2.5 sm:py-1.5 md:px-3 md:py-2 rounded-lg bg-white/5 border border-white/15 hover:bg-white/10 hover:border-white/25 hover:shadow-md transition-all duration-300 min-h-[36px]'
+                className='flex items-center gap-1.5 border border-white/15 px-2 py-1.5 sm:px-2.5 sm:py-1.5 md:px-3 md:py-2 rounded-lg bg-white/5 min-h-[36px]'
               >
                 <IconComponent
-                  className='w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-muted-foreground group-hover:text-foreground transition-colors shrink-0'
+                  className='w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-muted-foreground shrink-0'
                   aria-hidden='true'
                 />
-                <span className='text-sm md:text-sm text-muted-foreground/80 group-hover:text-foreground transition-colors font-medium'>
-                  {skill.name}
-                </span>
+                <span className='text-sm md:text-sm text-muted-foreground/80 font-medium'>{skill.name}</span>
               </motion.div>
             );
           })}
