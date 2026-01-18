@@ -8,10 +8,23 @@ import { ArrowUpRight, Calendar, ChevronDown, Clock } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
+// Skeleton loading component for blog items
+function BlogSkeleton() {
+  return (
+    <div className='py-3 sm:py-3.5 border-b border-white/10 last:border-b-0 animate-pulse'>
+      <div className='flex items-center justify-between'>
+        <div className='h-4 bg-white/10 rounded w-3/4' />
+        <div className='h-4 w-4 bg-white/10 rounded' />
+      </div>
+    </div>
+  );
+}
+
 export function BlogsAccordionCell() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [hasInitialized, setHasInitialized] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   // Fetch featured blogs
   useEffect(() => {
@@ -27,6 +40,7 @@ export function BlogsAccordionCell() {
   }, [blogs, hasInitialized]);
 
   const fetchBlogs = async () => {
+    setIsLoading(true);
     try {
       const response = await fetch('/api/blogs?featured=true&limit=6&status=published');
 
@@ -36,9 +50,11 @@ export function BlogsAccordionCell() {
 
       const data = await response.json();
       setBlogs(data.blogs || []);
-    } catch (error) {
-      console.error('Error fetching blogs:', error);
+    } catch {
+      // Silently fail - empty state will be shown
       setBlogs([]);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -73,7 +89,25 @@ export function BlogsAccordionCell() {
 
       {/* Blogs Accordion - scrollable area */}
       <div className='overflow-y-auto px-4 pb-4 sm:px-5 sm:pb-5 md:px-6 md:pb-6'>
-        {blogs?.map((blog, index) => {
+        {/* Loading skeletons */}
+        {isLoading && (
+          <>
+            <BlogSkeleton />
+            <BlogSkeleton />
+            <BlogSkeleton />
+            <BlogSkeleton />
+          </>
+        )}
+
+        {/* Empty state */}
+        {!isLoading && blogs.length === 0 && (
+          <p className='text-sm text-muted-foreground text-center py-8'>
+            No blogs available yet.
+          </p>
+        )}
+
+        {/* Blog items */}
+        {!isLoading && blogs?.map((blog, index) => {
           const isExpanded = expandedId === blog.id;
 
           return (
@@ -91,6 +125,8 @@ export function BlogsAccordionCell() {
                   'w-full flex items-center justify-between py-3 sm:py-3.5 text-left group transition-colors min-h-[48px] cursor-pointer',
                   isExpanded ? 'text-foreground' : 'text-muted-foreground hover:text-foreground',
                 )}
+                aria-expanded={isExpanded}
+                aria-controls={`blog-content-${blog.id}`}
               >
                 <span
                   className={cn(
@@ -105,65 +141,73 @@ export function BlogsAccordionCell() {
                     'w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 shrink-0',
                     isExpanded && 'rotate-180',
                   )}
+                  aria-hidden='true'
                 />
               </button>
 
-              {/* Expanded Content */}
-              <AnimatePresence mode='wait'>
-                {isExpanded && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.3, ease: 'easeInOut' }}
-                    className='overflow-hidden'
-                  >
-                    <div className='pb-4 space-y-3'>
-                      {/* Blog Card */}
-                      <div className='relative rounded-xl overflow-hidden bg-linear-to-br from-primary/10 via-primary/5 to-transparent border border-white/10 p-3 sm:p-4'>
-                        {/* Category Badge */}
-                        <div className='mb-2'>
-                          <span className='inline-block text-sm px-2 py-0.5 sm:py-1 rounded-full bg-primary/20 text-primary font-medium'>
-                            {blog.category}
-                          </span>
-                        </div>
+              {/* Expanded Content - uses grid-template-rows for performant animation */}
+              <div
+                id={`blog-content-${blog.id}`}
+                className='grid transition-[grid-template-rows] duration-300 ease-out'
+                style={{ gridTemplateRows: isExpanded ? '1fr' : '0fr' }}
+              >
+                <div className='overflow-hidden'>
+                  <AnimatePresence mode='wait'>
+                    {isExpanded && (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3, ease: 'easeOut' }}
+                      >
+                        <div className='pb-4 space-y-3'>
+                          {/* Blog Card */}
+                          <div className='relative rounded-xl overflow-hidden bg-linear-to-br from-primary/10 via-primary/5 to-transparent border border-white/10 p-3 sm:p-4'>
+                            {/* Category Badge */}
+                            <div className='mb-2'>
+                              <span className='inline-block text-sm px-2 py-0.5 sm:py-1 rounded-full bg-primary/20 text-primary font-medium'>
+                                {blog.category}
+                              </span>
+                            </div>
 
-                        {/* Description */}
-                        <p className='text-sm text-muted-foreground/90 line-clamp-3 sm:line-clamp-4 md:line-clamp-6 mb-3'>
-                          {blog.excerpt}
-                        </p>
+                            {/* Description */}
+                            <p className='text-sm text-muted-foreground/90 line-clamp-3 sm:line-clamp-4 md:line-clamp-6 mb-3'>
+                              {blog.excerpt}
+                            </p>
 
-                        {/* Meta Info */}
-                        <div className='flex items-center gap-2 sm:gap-3 text-sm text-muted-foreground/70 flex-wrap'>
-                          <div className='flex items-center gap-1'>
-                            <Calendar className='w-3 h-3 sm:w-3.5 sm:h-3.5' />
-                            <span>
-                              {blog.publishedAt
-                                ? new Date(blog.publishedAt).toLocaleDateString('en-US', {
-                                    month: 'short',
-                                    day: 'numeric',
-                                    year: 'numeric',
-                                  })
-                                : 'Not published'}
-                            </span>
+                            {/* Meta Info */}
+                            <div className='flex items-center gap-2 sm:gap-3 text-sm text-muted-foreground/70 flex-wrap'>
+                              <div className='flex items-center gap-1'>
+                                <Calendar className='w-3 h-3 sm:w-3.5 sm:h-3.5' aria-hidden='true' />
+                                <span>
+                                  {blog.publishedAt
+                                    ? new Date(blog.publishedAt).toLocaleDateString('en-US', {
+                                        month: 'short',
+                                        day: 'numeric',
+                                        year: 'numeric',
+                                      })
+                                    : 'Not published'}
+                                </span>
+                              </div>
+                              <div className='flex items-center gap-1'>
+                                <Clock className='w-3 h-3 sm:w-3.5 sm:h-3.5' aria-hidden='true' />
+                                <span>{blog.readTime} min read</span>
+                              </div>
+                            </div>
+
+                            {/* Tags */}
+                            <div className='flex flex-wrap gap-1.5 mt-3'>
+                              {blog.tags.slice(0, 3).map((tag) => (
+                                <Chip key={tag}>{tag}</Chip>
+                              ))}
+                            </div>
                           </div>
-                          <div className='flex items-center gap-1'>
-                            <Clock className='w-3 h-3 sm:w-3.5 sm:h-3.5' />
-                            <span>{blog.readTime} min read</span>
-                          </div>
                         </div>
-
-                        {/* Tags */}
-                        <div className='flex flex-wrap gap-1.5 mt-3'>
-                          {blog.tags.slice(0, 3).map((tag) => (
-                            <Chip key={tag}>{tag}</Chip>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </div>
             </motion.div>
           );
         })}

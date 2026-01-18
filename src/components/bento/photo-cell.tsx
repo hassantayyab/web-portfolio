@@ -17,10 +17,10 @@ export function PhotoCell() {
         {/* Placeholder gradient background */}
         <div className='absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/20' />
 
-        {/* Image - uncomment when you have an actual avatar */}
+        {/* Profile photo */}
         <Image
           src={personalInfo.avatarUrl}
-          alt={personalInfo.name}
+          alt={`Portrait photo of ${personalInfo.name}, ${personalInfo.title}`}
           fill
           className='object-cover object-center grayscale'
           priority

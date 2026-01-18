@@ -118,11 +118,15 @@ export function ContactForm() {
           <Input
             id='name'
             placeholder='John Doe'
+            aria-describedby={errors.name ? 'name-error' : undefined}
+            aria-invalid={errors.name ? 'true' : undefined}
             {...register('name')}
             className='bg-white/5 border-white/15 focus:border-primary min-h-[44px] text-sm sm:text-base'
           />
           {errors.name && (
-            <p className='text-sm text-destructive font-medium'>{errors.name.message}</p>
+            <p id='name-error' role='alert' className='text-sm text-destructive font-medium'>
+              {errors.name.message}
+            </p>
           )}
         </div>
 
@@ -135,11 +139,15 @@ export function ContactForm() {
             id='email'
             type='email'
             placeholder='john@example.com'
+            aria-describedby={errors.email ? 'email-error' : undefined}
+            aria-invalid={errors.email ? 'true' : undefined}
             {...register('email')}
             className='bg-white/5 border-white/15 focus:border-primary min-h-[44px] text-sm sm:text-base'
           />
           {errors.email && (
-            <p className='text-sm text-destructive font-medium'>{errors.email.message}</p>
+            <p id='email-error' role='alert' className='text-sm text-destructive font-medium'>
+              {errors.email.message}
+            </p>
           )}
         </div>
       </div>
@@ -152,11 +160,15 @@ export function ContactForm() {
         <Input
           id='subject'
           placeholder="What's this about?"
+          aria-describedby={errors.subject ? 'subject-error' : undefined}
+          aria-invalid={errors.subject ? 'true' : undefined}
           {...register('subject')}
           className='bg-white/5 border-white/15 focus:border-primary min-h-[44px] text-sm sm:text-base'
         />
         {errors.subject && (
-          <p className='text-sm text-destructive font-medium'>{errors.subject.message}</p>
+          <p id='subject-error' role='alert' className='text-sm text-destructive font-medium'>
+            {errors.subject.message}
+          </p>
         )}
       </div>
 
@@ -169,11 +181,15 @@ export function ContactForm() {
           id='message'
           placeholder='Tell me about your project or just say hello...'
           rows={14}
+          aria-describedby={errors.message ? 'message-error' : undefined}
+          aria-invalid={errors.message ? 'true' : undefined}
           {...register('message')}
           className='bg-white/5 border-white/15 focus:border-primary resize-none text-sm sm:text-base'
         />
         {errors.message && (
-          <p className='text-sm text-destructive font-medium'>{errors.message.message}</p>
+          <p id='message-error' role='alert' className='text-sm text-destructive font-medium'>
+            {errors.message.message}
+          </p>
         )}
       </div>
 

@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     canonical: `${baseUrl}/blogs`,
   },
   openGraph: {
-    title: 'Blog | Hassan Tayyab',
+    title: 'Blogs | Hassan Tayyab',
     description: 'Read my latest articles about web development, design, and technology.',
     url: `${baseUrl}/blogs`,
     siteName: 'Hassan Tayyab',
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     site: '@htdogar',
     creator: '@htdogar',
-    title: 'Blog | Hassan Tayyab',
+    title: 'Blogs | Hassan Tayyab',
     description: 'Read my latest articles about web development, design, and technology.',
     images: [`${baseUrl}/og.png`],
   },

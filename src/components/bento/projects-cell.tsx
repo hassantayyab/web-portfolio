@@ -101,51 +101,57 @@ export function ProjectsCell() {
                 />
               </button>
 
-              {/* Expanded Content */}
-              <AnimatePresence mode='wait'>
-                {isExpanded && (
-                  <motion.div
-                    id={`project-content-${project.id}`}
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: ANIMATION_DURATIONS.NORMAL, ease: 'easeInOut' }}
-                    className='overflow-hidden'
-                  >
-                    <div className='pb-4 space-y-3'>
-                      {/* Project Card */}
-                      <div className='relative rounded-xl overflow-hidden bg-linear-to-br from-primary/10 via-primary/5 to-transparent border border-white/15 p-3 sm:p-4 md:p-5'>
-                        {/* Year Badge */}
-                        <div className='mb-2'>
-                          <div className='flex items-center gap-1.5'>
-                            <Calendar className='w-3 h-3 sm:w-3.5 sm:h-3.5 text-primary' />
-                            <span className='text-sm text-primary font-medium'>{project.year}</span>
+              {/* Expanded Content - uses grid-template-rows for performant animation */}
+              <div
+                id={`project-content-${project.id}`}
+                className='grid transition-[grid-template-rows] duration-300 ease-out'
+                style={{ gridTemplateRows: isExpanded ? '1fr' : '0fr' }}
+              >
+                <div className='overflow-hidden'>
+                  <AnimatePresence mode='wait'>
+                    {isExpanded && (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: ANIMATION_DURATIONS.NORMAL, ease: 'easeOut' }}
+                      >
+                        <div className='pb-4 space-y-3'>
+                          {/* Project Card */}
+                          <div className='relative rounded-xl overflow-hidden bg-linear-to-br from-primary/10 via-primary/5 to-transparent border border-white/15 p-3 sm:p-4 md:p-5'>
+                            {/* Year Badge */}
+                            <div className='mb-2'>
+                              <div className='flex items-center gap-1.5'>
+                                <Calendar className='w-3 h-3 sm:w-3.5 sm:h-3.5 text-primary' aria-hidden='true' />
+                                <span className='text-sm text-primary font-medium'>{project.year}</span>
+                              </div>
+                            </div>
+
+                            {/* Description */}
+                            <p className='text-sm text-muted-foreground/90 line-clamp-2 sm:truncate mb-3'>
+                              {project.description}
+                            </p>
+
+                            {/* Technologies */}
+                            <div className='flex flex-wrap gap-1.5 mt-3'>
+                              {project.technologies
+                                .slice(0, PROJECT_LIMITS.TECH_PREVIEW)
+                                .map((tech) => (
+                                  <Chip key={tech}>{tech}</Chip>
+                                ))}
+                              {project.technologies.length > PROJECT_LIMITS.TECH_PREVIEW && (
+                                <Chip variant='primary'>
+                                  +{project.technologies.length - PROJECT_LIMITS.TECH_PREVIEW}
+                                </Chip>
+                              )}
+                            </div>
                           </div>
                         </div>
-
-                        {/* Description */}
-                        <p className='text-sm text-muted-foreground/90 line-clamp-2 sm:truncate mb-3'>
-                          {project.description}
-                        </p>
-
-                        {/* Technologies */}
-                        <div className='flex flex-wrap gap-1.5 mt-3'>
-                          {project.technologies
-                            .slice(0, PROJECT_LIMITS.TECH_PREVIEW)
-                            .map((tech) => (
-                              <Chip key={tech}>{tech}</Chip>
-                            ))}
-                          {project.technologies.length > PROJECT_LIMITS.TECH_PREVIEW && (
-                            <Chip variant='primary'>
-                              +{project.technologies.length - PROJECT_LIMITS.TECH_PREVIEW}
-                            </Chip>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </div>
             </motion.div>
           );
         })}

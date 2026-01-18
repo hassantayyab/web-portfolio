@@ -58,7 +58,7 @@
   --secondary-foreground: oklch(0.9 0 0);
 
   --muted: oklch(0.2 0.01 270);
-  --muted-foreground: oklch(0.7 0 0); /* Improved contrast from 0.6 to 0.7 */
+  --muted-foreground: oklch(0.75 0 0); /* Improved contrast for WCAG AA compliance */
 
   --accent: oklch(0.25 0.03 270);
   --accent-foreground: oklch(0.95 0 0);
@@ -72,6 +72,21 @@
   /* Custom glow colors */
   --glow: oklch(0.75 0.15 100);
   --glow-muted: oklch(0.55 0.1 100);
+
+  /* Border opacity scale - use these for consistency:
+   * white/10 - subtle borders (dividers, secondary elements)
+   * white/15 - default borders (cards, inputs, containers)
+   * white/25 - hover/focus borders (interactive states)
+   */
+
+  /* Z-index scale - use these for layering:
+   * z-10  - elevated cards, dropdowns
+   * z-20  - tooltips, popovers
+   * z-30  - cursor effects (cursor-glow)
+   * z-40  - sticky elements
+   * z-50  - navigation (navbar)
+   * z-100 - skip-to-content, modals
+   */
 }
 
 @layer base {
@@ -281,21 +296,22 @@
   }
 }
 
+/* Exponential ease-out for natural deceleration: cubic-bezier(0.16, 1, 0.3, 1) */
 .animate-float {
-  animation: float 3s ease-in-out infinite;
+  animation: float 3s cubic-bezier(0.37, 0, 0.63, 1) infinite;
 }
 
 .animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
+  animation: pulse-glow 2s cubic-bezier(0.37, 0, 0.63, 1) infinite;
 }
 
 .animate-shimmer {
   background: linear-gradient(
     90deg,
     transparent 0%,
-    oklch(0.75 0.15 100 / 0.1) 50%,
+    var(--glow, oklch(0.75 0.15 100)) / 0.1 50%,
     transparent 100%
   );
   background-size: 200% 100%;
-  animation: shimmer 2s infinite;
+  animation: shimmer 2s linear infinite;
 }

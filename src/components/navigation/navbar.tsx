@@ -39,8 +39,8 @@ export function Navbar() {
         const response = await fetch('/api/auth/session');
         const data = await response.json();
         setIsAdmin(data.authenticated === true);
-      } catch (error) {
-        console.error('Auth check error:', error);
+      } catch {
+        // Silently fail - user will not see admin link
         setIsAdmin(false);
       }
     };
@@ -64,8 +64,8 @@ export function Navbar() {
       >
         <nav
           className={cn(
-            'mx-4 md:mx-5 flex items-center justify-between px-4 md:px-6 py-3 rounded-2xl border border-white/15 backdrop-blur-xl transition-all duration-300',
-            isScrolled ? 'bg-background/80 shadow-lg shadow-black/20' : 'bg-background/50',
+            'mx-4 md:mx-5 flex items-center justify-between px-4 md:px-6 py-3 rounded-2xl border border-white/15 backdrop-blur-md transition-all duration-300',
+            isScrolled ? 'bg-background/85 shadow-lg shadow-black/20' : 'bg-background/60',
           )}
           aria-label='Main navigation'
         >
@@ -125,21 +125,21 @@ export function Navbar() {
             )}
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button - min 44x44px touch target for accessibility */}
           <div className='flex md:hidden items-center gap-2'>
             <Button
               variant='ghost'
               size='icon'
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className='h-9 w-9 rounded-full'
+              className='h-11 w-11 min-h-[44px] min-w-[44px] rounded-full'
               aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isMobileMenuOpen}
               aria-controls='mobile-menu'
             >
               {isMobileMenuOpen ? (
-                <X className='w-4 h-4' aria-hidden='true' />
+                <X className='w-5 h-5' aria-hidden='true' />
               ) : (
-                <Menu className='w-4 h-4' aria-hidden='true' />
+                <Menu className='w-5 h-5' aria-hidden='true' />
               )}
             </Button>
           </div>
@@ -150,11 +150,11 @@ export function Navbar() {
           {isMobileMenuOpen && (
             <motion.nav
               id='mobile-menu'
-              initial={{ opacity: 0, y: -10, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -10, scale: 0.95 }}
-              transition={{ duration: 0.2 }}
-              className='mx-4 mt-2 py-2 rounded-2xl border border-white/15 bg-background/90 backdrop-blur-xl shadow-xl md:hidden'
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.2, ease: 'easeOut' }}
+              className='mx-4 mt-2 py-2 rounded-2xl border border-white/15 bg-background/90 backdrop-blur-md shadow-xl md:hidden'
               aria-label='Mobile navigation'
             >
               {navigationItems.map((item) => {

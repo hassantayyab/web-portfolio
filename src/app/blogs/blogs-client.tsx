@@ -13,7 +13,7 @@ interface BlogsClientProps {
 export default function BlogsClient({ blogs }: BlogsClientProps) {
   return (
     <PageLayout
-      title='Blog'
+      title='Blogs'
       description='Thoughts on web development, design, and technology. Join me as I share insights and learnings from my journey.'
       maxWidth='7xl'
       titleClassName='text-[40px]'

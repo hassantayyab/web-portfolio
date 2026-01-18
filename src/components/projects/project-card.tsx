@@ -19,13 +19,26 @@ export const ProjectCard = memo(function ProjectCard({
   index,
   onClick,
 }: ProjectCardProps) {
+  // Handle keyboard activation (Enter or Space)
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onClick();
+    }
+  };
+
   return (
     <motion.article
       onClick={onClick}
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+      role='button'
+      aria-label={`View details for ${project.title}`}
       className={cn(
         'group relative flex flex-col rounded-2xl overflow-hidden cursor-pointer',
         'bg-card/50 border border-white/15 backdrop-blur-sm',
         'hover:border-white/25 hover:bg-card/70 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
       )}
     >
       {/* Project image/placeholder */}
@@ -53,17 +66,25 @@ export const ProjectCard = memo(function ProjectCard({
         {/* Subtle pattern overlay */}
         <div className='absolute inset-0 opacity-25 bg-grid-white/[0.08]' />
 
-        {/* Hover overlay */}
-        <div className='absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3'>
+        {/* Action overlay - visible on hover, focus-within, and touch */}
+        <div
+          className={cn(
+            'absolute inset-0 bg-black/50 transition-opacity duration-300 flex items-center justify-center gap-3',
+            'opacity-0 group-hover:opacity-100 group-focus-within:opacity-100',
+            // Touch devices: always show if has links
+            (project.liveUrl || project.githubUrl) && 'md:opacity-0 touch-action-manipulation',
+          )}
+        >
           {project.liveUrl && (
             <motion.a
               href={project.liveUrl}
               target='_blank'
               rel='noopener noreferrer'
               onClick={(e) => e.stopPropagation()}
+              onKeyDown={(e) => e.stopPropagation()}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className='w-11 h-11 sm:w-10 sm:h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
+              className='w-11 h-11 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
               aria-label={`View ${project.title} live demo`}
             >
               <ExternalLink className='w-5 h-5' aria-hidden='true' />
@@ -75,9 +96,10 @@ export const ProjectCard = memo(function ProjectCard({
               target='_blank'
               rel='noopener noreferrer'
               onClick={(e) => e.stopPropagation()}
+              onKeyDown={(e) => e.stopPropagation()}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className='w-11 h-11 sm:w-10 sm:h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
+              className='w-11 h-11 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
               aria-label={`View ${project.title} source code on GitHub`}
             >
               <Github className='w-5 h-5' aria-hidden='true' />
@@ -100,7 +122,7 @@ export const ProjectCard = memo(function ProjectCard({
         {/* Year badge */}
         <div className='absolute top-2 sm:top-3 right-2 sm:right-3'>
           <Badge variant='outline' className='bg-black/30 backdrop-blur-sm border-white/15 text-sm'>
-            <Calendar className='w-3 h-3 mr-1' />
+            <Calendar className='w-3 h-3 mr-1' aria-hidden='true' />
             {project.year}
           </Badge>
         </div>
