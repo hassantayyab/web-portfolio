@@ -126,7 +126,7 @@ export function ProjectsCell() {
                         </div>
 
                         {/* Description */}
-                        <p className='text-sm text-muted-foreground/90 line-clamp-2 sm:line-clamp-3 mb-3'>
+                        <p className='text-sm text-muted-foreground/90 line-clamp-2 sm:truncate mb-3'>
                           {project.description}
                         </p>
 

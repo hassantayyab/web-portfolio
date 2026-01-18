@@ -75,9 +75,9 @@ export const BENTO_SPANS = {
  * Project display limits
  */
 export const PROJECT_LIMITS = {
-  FEATURED_ON_HOME: 4,
+  FEATURED_ON_HOME: 3,
   FEATURED_IN_ACCORDION: 6,
-  TECH_PREVIEW: 4,
+  TECH_PREVIEW: 3,
 } as const;
 
 /**
