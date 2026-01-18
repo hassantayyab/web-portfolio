@@ -10,18 +10,20 @@ import { useEffect, useState } from 'react';
 export function BlogsAccordionCell() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [hasInitialized, setHasInitialized] = useState(false);
 
   // Fetch featured blogs
   useEffect(() => {
     fetchBlogs();
   }, []);
 
-  // Set first blog as expanded when blogs load
+  // Set first blog as expanded only on initial load
   useEffect(() => {
-    if (blogs.length > 0 && !expandedId) {
+    if (blogs.length > 0 && !hasInitialized) {
       setExpandedId(blogs[0].id);
+      setHasInitialized(true);
     }
-  }, [blogs, expandedId]);
+  }, [blogs, hasInitialized]);
 
   const fetchBlogs = async () => {
     try {
@@ -50,14 +52,14 @@ export function BlogsAccordionCell() {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
-        className='flex items-center justify-between px-4 pt-4 sm:px-5 sm:pt-5 md:px-6 md:pt-6 pb-3'
+        className='flex items-center justify-between px-4 pt-4 sm:px-5 sm:pt-5 md:px-6 md:pt-6 pb-2'
       >
         <h2 className='text-sm font-medium text-muted-foreground uppercase tracking-wider'>
           Featured Blogs
         </h2>
         <Link
           href='/blogs'
-          className='flex items-center gap-1 text-sm text-primary group min-h-[44px] justify-end cursor-pointer'
+          className='flex items-center gap-1 text-sm text-primary group cursor-pointer'
           aria-label='View all blogs'
         >
           <span className='hidden sm:inline'>View All</span>
