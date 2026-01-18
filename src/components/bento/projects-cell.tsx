@@ -36,13 +36,13 @@ export function ProjectsCell() {
   }
 
   return (
-    <div className='relative min-h-[400px] md:min-h-0 h-full flex flex-col overflow-hidden'>
+    <div className='grid grid-rows-[auto_1fr] min-h-[400px] md:min-h-0 h-full'>
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
-        className='flex items-center justify-between px-4 pt-4 sm:px-5 sm:pt-5 md:px-6 md:pt-6 pb-0'
+        className='flex items-center justify-between px-4 pt-4 sm:px-5 sm:pt-5 md:px-6 md:pt-6 pb-3'
       >
         <h2 className='text-sm font-medium text-muted-foreground uppercase tracking-wider'>
           Featured Projects
@@ -60,8 +60,8 @@ export function ProjectsCell() {
         </Link>
       </motion.div>
 
-      {/* Projects Accordion */}
-      <div className='flex-1 flex flex-col px-4 pb-4 sm:px-5 sm:pb-5 md:px-6 md:pb-6 pt-3 overflow-hidden'>
+      {/* Projects Accordion - scrollable area */}
+      <div className='overflow-y-auto px-4 pb-4 sm:px-5 sm:pb-5 md:px-6 md:pb-6'>
         {featuredProjects.map((project, index) => {
           const isExpanded = expandedId === project.id;
 
@@ -71,10 +71,7 @@ export function ProjectsCell() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: index * 0.05 }}
-              className={cn(
-                'border-b border-white/15 last:border-b-0',
-                isExpanded ? 'flex-1 min-h-0' : 'flex-none',
-              )}
+              className='border-b border-white/15 last:border-b-0'
             >
               {/* Project Header - Always Visible */}
               <button

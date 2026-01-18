@@ -17,9 +17,9 @@ const iconMap: Record<string, IconType> = {
 
 export function SocialCell() {
   return (
-    <div className='relative min-h-[120px] md:min-h-0 h-full flex flex-col justify-center p-4 sm:p-6 md:p-8 overflow-hidden'>
+    <div className='grid h-full overflow-y-auto'>
       {/* Social links - Horizontal layout */}
-      <div className='flex items-center gap-2 sm:gap-3 md:gap-4 flex-wrap'>
+      <div className='flex items-center justify-start gap-2 sm:gap-3 md:gap-4 flex-wrap p-4 sm:p-6 md:p-8'>
         {socialLinks.map((link, index) => {
           const Icon = iconMap[link.icon] || ExternalLink;
           const accessibleName =
@@ -33,7 +33,7 @@ export function SocialCell() {
               rel='noopener noreferrer'
               aria-label={accessibleName}
               className={cn(
-                'flex items-center gap-2 sm:gap-2.5 px-3 sm:px-4 md:px-5 lg:px-6 py-2.5 sm:py-3 md:py-3.5 rounded-md min-h-[44px]',
+                'flex items-center gap-2 sm:gap-2.5 px-3 sm:px-4 md:px-5 lg:px-6 py-2.5 sm:py-3 md:py-3.5 rounded-md',
                 'bg-white/5 border border-white/15 transition-all duration-300 cursor-pointer',
                 'hover:bg-white/10 hover:border-white/25 hover:shadow-lg group',
               )}

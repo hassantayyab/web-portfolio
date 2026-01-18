@@ -44,13 +44,13 @@ export function BlogsAccordionCell() {
   };
 
   return (
-    <div className='relative min-h-[400px] md:min-h-0 h-full flex flex-col overflow-hidden'>
+    <div className='grid grid-rows-[auto_1fr] min-h-[400px] md:min-h-0 h-full'>
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
-        className='flex items-center justify-between px-4 pt-4 sm:px-5 sm:pt-5 md:px-6 md:pt-6 pb-0'
+        className='flex items-center justify-between px-4 pt-4 sm:px-5 sm:pt-5 md:px-6 md:pt-6 pb-3'
       >
         <h2 className='text-sm font-medium text-muted-foreground uppercase tracking-wider'>
           Featured Blogs
@@ -68,8 +68,8 @@ export function BlogsAccordionCell() {
         </Link>
       </motion.div>
 
-      {/* Blogs Accordion */}
-      <div className='flex-1 flex flex-col px-4 pb-4 sm:px-5 sm:pb-5 md:px-6 md:pb-6 pt-3 overflow-hidden'>
+      {/* Blogs Accordion - scrollable area */}
+      <div className='overflow-y-auto px-4 pb-4 sm:px-5 sm:pb-5 md:px-6 md:pb-6'>
         {blogs?.map((blog, index) => {
           const isExpanded = expandedId === blog.id;
 
@@ -79,10 +79,7 @@ export function BlogsAccordionCell() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: index * 0.05 }}
-              className={cn(
-                'border-b border-white/10 last:border-b-0',
-                isExpanded ? 'flex-1 min-h-0' : 'flex-none',
-              )}
+              className='border-b border-white/10 last:border-b-0'
             >
               {/* Blog Header - Always Visible */}
               <button

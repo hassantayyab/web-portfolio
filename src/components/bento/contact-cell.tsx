@@ -11,7 +11,7 @@ export function ContactCell() {
     <Link href='/contact'>
       <div
         className={cn(
-          'relative min-h-[250px] md:min-h-0 h-full w-full flex flex-col justify-center items-center p-6 md:p-8 overflow-hidden cursor-pointer text-left',
+          'relative min-h-[250px] md:min-h-0 h-full w-full flex flex-col justify-center items-center p-6 md:p-8 overflow-y-auto cursor-pointer text-left',
           'group transition-all duration-300',
           'shadow-lg shadow-primary/10 group-hover:shadow-xl group-hover:shadow-primary/20 group-hover:scale-[1.01]',
         )}

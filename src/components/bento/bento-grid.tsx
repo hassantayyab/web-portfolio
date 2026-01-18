@@ -65,7 +65,7 @@ export const BentoCell = memo(function BentoCell({
   return (
     <div
       className={cn(
-        'bento-cell group',
+        'bento-cell group overflow-hidden',
         colSpanClasses[colSpan],
         rowSpanClasses[rowSpan],
         className,
