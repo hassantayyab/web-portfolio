@@ -1,5 +1,6 @@
 'use client';
 
+import { Chip } from '@/components/ui/chip';
 import { Blog } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -153,14 +154,9 @@ export function BlogsAccordionCell() {
                         </div>
 
                         {/* Tags */}
-                        <div className='flex flex-wrap gap-1 mt-3'>
+                        <div className='flex flex-wrap gap-1.5 mt-3'>
                           {blog.tags.slice(0, 3).map((tag) => (
-                            <span
-                              key={tag}
-                              className='text-xs sm:text-sm px-2 py-0.5 rounded-full bg-white/5 text-muted-foreground/70 border border-white/5'
-                            >
-                              {tag}
-                            </span>
+                            <Chip key={tag}>{tag}</Chip>
                           ))}
                         </div>
                       </div>

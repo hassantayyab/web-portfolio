@@ -1,5 +1,6 @@
 'use client';
 
+import { Chip } from '@/components/ui/chip';
 import { ANIMATION_DURATIONS, PROJECT_LIMITS } from '@/lib/constants';
 import { projects } from '@/lib/data';
 import { cn } from '@/lib/utils';
@@ -128,21 +129,16 @@ export function ProjectsCell() {
                         </p>
 
                         {/* Technologies */}
-                        <div className='flex flex-wrap gap-1 sm:gap-1.5 mt-3'>
+                        <div className='flex flex-wrap gap-1.5 mt-3'>
                           {project.technologies
                             .slice(0, PROJECT_LIMITS.TECH_PREVIEW)
                             .map((tech) => (
-                              <span
-                                key={tech}
-                                className='text-xs sm:text-sm px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-white/5 text-muted-foreground/80 border border-white/10 hover:bg-white/10 hover:border-white/15 transition-colors'
-                              >
-                                {tech}
-                              </span>
+                              <Chip key={tech}>{tech}</Chip>
                             ))}
                           {project.technologies.length > PROJECT_LIMITS.TECH_PREVIEW && (
-                            <span className='text-sm px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-primary/10 text-primary/90 border border-primary/25'>
+                            <Chip variant='primary'>
                               +{project.technologies.length - PROJECT_LIMITS.TECH_PREVIEW}
-                            </span>
+                            </Chip>
                           )}
                         </div>
                       </div>
